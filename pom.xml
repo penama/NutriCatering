@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.service</groupId>
-	<artifactId>catering</artifactId>
+	<artifactId>NutriCatering</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>catering</name>
 	<description>Catering</description>
@@ -33,6 +33,13 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+
+		<!-- JUnit Jupiter Engine for writing and executing JUnit 5 tests -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
