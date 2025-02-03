@@ -29,10 +29,18 @@ public class CustomerService extends BaseService {
     public List<CustomerDto> getCustomers() throws Exception {
         List<CustomerEntity> customerEntities = iQueryCustomerRepository.queryCustomers();
         List<CustomerDto> customerDtos = new ArrayList<>();
+        System.out.println( customerEntities.size() );
         for (CustomerEntity customerEntity : customerEntities) {
             customerDtos.add( CustomerUtil.customerEntityToCustomerDto(customerEntity) );
         }
         return customerDtos;
+    }
+
+    public CustomerDto getCustomer(  String id ) throws Exception {
+        CustomerEntity customerEntity = iQueryCustomerRepository.queryCustomer( id );
+        if ( customerEntity == null )
+            return null;
+        return CustomerUtil.customerEntityToCustomerDto(customerEntity);
     }
 
 }

@@ -38,8 +38,6 @@ public class CustomerRepositoryTests {
         Assert.notNull( customerSaved, "Customer not null" );
         Assert.notNull( customerSaved.getId(), "ID Customer not null" );
         Assert.isTrue( nombre.equals( customerSaved.getName() ), "Name is equal" );
-
-
     }
 
     @Test

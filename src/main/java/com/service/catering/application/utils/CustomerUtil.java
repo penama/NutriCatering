@@ -1,6 +1,7 @@
 package com.service.catering.application.utils;
 
 
+import com.service.catering.application.exceptions.FieldNullException;
 import com.service.catering.application.model.customer.CustomerDto;
 import com.service.catering.domain.model.CustomerEntity;
 
@@ -18,7 +19,7 @@ public class CustomerUtil {
         return customerEntity;
     }
 
-    public static CustomerDto customerEntityToCustomerDto(CustomerEntity customerEntity ){
+    public static CustomerDto customerEntityToCustomerDto(CustomerEntity customerEntity ) throws FieldNullException {
         CustomerDto customerDto = new CustomerDto();
         customerDto.setId(customerEntity.getId() );
         customerDto.setName(customerEntity.getName() );

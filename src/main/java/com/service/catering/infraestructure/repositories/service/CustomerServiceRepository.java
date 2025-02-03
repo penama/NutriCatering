@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -26,5 +27,12 @@ public class CustomerServiceRepository implements IQueryCustomerRepository {
     @Override
     public List<CustomerEntity> queryCustomers() {
         return repository.findAll();
+    }
+
+    @Override
+    public CustomerEntity queryCustomer(String id) {
+        Optional<CustomerEntity> byId = repository.findById(id);
+        System.out.println( "presente: " + byId.isPresent() );
+        return ( byId.isPresent() ? byId.get() : null );
     }
 }
