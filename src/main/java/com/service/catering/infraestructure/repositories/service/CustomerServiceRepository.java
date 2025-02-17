@@ -32,7 +32,7 @@ public class CustomerServiceRepository implements IQueryCustomerRepository {
     @Override
     public CustomerEntity queryCustomer(String id) {
         Optional<CustomerEntity> byId = repository.findById(id);
-        System.out.println( "presente: " + byId.isPresent() );
+//        System.out.println( "presente: " + byId.isPresent() );
         return ( byId.isPresent() ? byId.get() : null );
     }
 }

@@ -9,15 +9,13 @@ import lombok.*;
 import org.springframework.validation.annotation.Validated;
 
 @Getter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Validated
 public class CustomerDto {
 
     private String id;
-    private String name;
-    private String address;
+    public String name;
+    public String address;
     private String phone;
     private String birtDate;
     private String createdDate;
