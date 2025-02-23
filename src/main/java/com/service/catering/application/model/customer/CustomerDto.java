@@ -13,13 +13,13 @@ import org.springframework.validation.annotation.Validated;
 @AllArgsConstructor
 public class CustomerDto {
 
-    private String id;
+    public String id;
     public String name;
     public String address;
-    private String phone;
-    private String birtDate;
-    private String createdDate;
-    private String status;
+    public String phone;
+    public String birtDate;
+    public String createdDate;
+    public String status;
 
     public void setId( String id ) {
         this.id = id;

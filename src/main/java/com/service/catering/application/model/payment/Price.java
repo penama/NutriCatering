@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class Price {
 
-    private float amount;
-    private String currency;
+    public float amount;
+    public String currency;
 
 }

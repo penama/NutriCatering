@@ -5,13 +5,13 @@ import lombok.Getter;
 @Getter
 public class PaymentMethodDto {
 
-    private String id;
-    private String name;
-    private String label;
-    private String description;
-    private String type;
-    private String status;
-    private String createdDate;
+    public String id;
+    public String name;
+    public String label;
+    public String description;
+    public String type;
+    public String status;
+    public String createdDate;
 
     public void setId( String id ){
 //        if ( id == null || id.trim().isEmpty() )

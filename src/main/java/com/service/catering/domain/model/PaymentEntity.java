@@ -15,7 +15,7 @@ public class PaymentEntity {
 
     @ManyToOne
     @JoinColumn(name = "paymentMethodId", referencedColumnName = "id")
-    private PaymentMethodEntity paymentMethodEntity;
+    public PaymentMethodEntity paymentMethodEntity;
 
     public float amount;
     public String currency;
