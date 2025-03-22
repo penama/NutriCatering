@@ -37,24 +37,24 @@ public class PaymentServiceRepositoryTest {
     @Test
     public void test(){
         PaymentMethodEntity paymentMethodEntityMock = new PaymentMethodEntity();
-        paymentMethodEntityMock.id = UUID.randomUUID().toString();
-        paymentMethodEntityMock.createdDate = "18/02/2025";
-        paymentMethodEntityMock.status = PaymentMethodStatus.ACTIVE.name();
+        paymentMethodEntityMock.setId(UUID.randomUUID().toString());
+        paymentMethodEntityMock.setCreatedDate("18/02/2025");
+        paymentMethodEntityMock.setStatus(PaymentMethodStatus.ACTIVE.name());
 
         PaymentEntity paymentEntityMock = new PaymentEntity();
         paymentEntityMock.id = UUID.randomUUID().toString();
-        paymentEntityMock.createdDate = "19/02/2025";
-        paymentEntityMock.orderId = UUID.randomUUID().toString();
-        paymentEntityMock.amount = 100f;
-        paymentEntityMock.status = PaymentStatus.PAID.name();
-        paymentEntityMock.currency = "BOB";
+        paymentEntityMock.setCreatedDate("19/02/2025");
+        paymentEntityMock.setOrderId(UUID.randomUUID().toString());
+        paymentEntityMock.setAmount(100f);
+        paymentEntityMock.setStatus(PaymentStatus.PAID.name());
+        paymentEntityMock.setCurrency("BOB");
 
         PaymentEntity paymentEntity = new PaymentEntity();
-        paymentEntity.orderId = UUID.randomUUID().toString();
-        paymentEntity.amount = 100f;
-        paymentEntity.status = PaymentStatus.PAID.name();
-        paymentEntity.currency = "BOB";
-        paymentEntity.paymentMethodEntity = paymentMethodEntityMock;
+        paymentEntity.setOrderId(UUID.randomUUID().toString());
+        paymentEntity.setAmount(100f);
+        paymentEntity.setStatus(PaymentStatus.PAID.name());
+        paymentEntity.setCurrency("BOB");
+        paymentEntity.setPaymentMethodEntity(paymentMethodEntityMock);
 
         List<PaymentEntity> listEntityMock = new ArrayList<>();
         listEntityMock.add( paymentEntityMock );
@@ -73,7 +73,7 @@ public class PaymentServiceRepositoryTest {
         Assertions.assertNotNull( listResult, "listado not null" );
         Assertions.assertEquals( paymentEntityMock, listResult.getFirst() , "objeto de la lista es igual al mock" );
 
-        List<PaymentEntity> listResult2 = paymentServiceRepository.queryPaymentsByOrderId( paymentEntity.orderId );
+        List<PaymentEntity> listResult2 = paymentServiceRepository.queryPaymentsByOrderId(paymentEntity.getOrderId());
         Assertions.assertNotNull( listResult2, "listado not null" );
         Assertions.assertEquals( paymentEntityMock, listResult.getFirst() , "objeto de la lista es igual al mock" );
 

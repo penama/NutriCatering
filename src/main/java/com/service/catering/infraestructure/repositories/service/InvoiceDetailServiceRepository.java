@@ -19,8 +19,8 @@ public class InvoiceDetailServiceRepository implements IQueryInvoiceDetailReposi
     public InvoiceDetailRepository repository;
 
     public void newInvoice(InvoiceDetailEntity invoiceDetailEntity) throws Exception{
-        invoiceDetailEntity.setId(UUID.randomUUID().toString());
-        invoiceDetailEntity.setCreatedDate(DateFormat.toDate());
+        invoiceDetailEntity.id = UUID.randomUUID().toString();
+        invoiceDetailEntity.createdDate = DateFormat.toDate();
         repository.save(invoiceDetailEntity);
     }
 
@@ -37,8 +37,8 @@ public class InvoiceDetailServiceRepository implements IQueryInvoiceDetailReposi
 
     @Override
     public void generateInvoiceDetail(InvoiceDetailEntity invoiceDetailEntity) throws Exception {
-        invoiceDetailEntity.setId(UUID.randomUUID().toString());
-        invoiceDetailEntity.setCreatedDate(DateFormat.toDate());
+        invoiceDetailEntity.id = UUID.randomUUID().toString();
+        invoiceDetailEntity.createdDate = DateFormat.toDate();
         repository.save(invoiceDetailEntity);
     }
 }

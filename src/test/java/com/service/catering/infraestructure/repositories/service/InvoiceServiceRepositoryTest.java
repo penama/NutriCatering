@@ -1,8 +1,6 @@
 package com.service.catering.infraestructure.repositories.service;
 
-import com.service.catering.application.model.order.OrderStatus;
 import com.service.catering.domain.model.InvoiceEntity;
-import com.service.catering.domain.model.OrderEntity;
 import com.service.catering.infraestructure.repositories.interfaces.InvoiceRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,19 +30,19 @@ public class InvoiceServiceRepositoryTest {
     @Test
     public void test(){
         InvoiceEntity invoiceEntityMock = new InvoiceEntity();
-        invoiceEntityMock.contractId = UUID.randomUUID().toString();
-        invoiceEntityMock.id = UUID.randomUUID().toString();
-        invoiceEntityMock.paymentId = UUID.randomUUID().toString();
-        invoiceEntityMock.createdDate = "17/02/2025";
-        invoiceEntityMock.status = "ACTIVO";
-        invoiceEntityMock.period = "022025";
-        invoiceEntityMock.total = 100f;
+        invoiceEntityMock.setContractId(UUID.randomUUID().toString());
+        invoiceEntityMock.setId(UUID.randomUUID().toString());
+        invoiceEntityMock.setPaymentId(UUID.randomUUID().toString());
+        invoiceEntityMock.setCreatedDate("17/02/2025");
+        invoiceEntityMock.setStatus("ACTIVO");
+        invoiceEntityMock.setPeriod("022025");
+        invoiceEntityMock.setTotal(100f);
 
         InvoiceEntity invoiceEntity = new InvoiceEntity();
-        invoiceEntity.contractId = UUID.randomUUID().toString();
-        invoiceEntity.status = "ACTIVO";
-        invoiceEntity.period = "022025";
-        invoiceEntity.total = 100f;
+        invoiceEntity.setContractId(UUID.randomUUID().toString());
+        invoiceEntity.setStatus("ACTIVO");
+        invoiceEntity.setPeriod("022025");
+        invoiceEntity.setTotal(100f);
 
         List<InvoiceEntity> listInvoiceMock = new ArrayList<>();
         listInvoiceMock.add( invoiceEntityMock );
@@ -73,7 +71,7 @@ public class InvoiceServiceRepositoryTest {
         // listar por payment
         List<InvoiceEntity> listResult2 = null;
         try {
-            listResult2 = invoiceServiceRepository.queryInvoiceByPayment( invoiceEntityMock.paymentId );
+            listResult2 = invoiceServiceRepository.queryInvoiceByPayment(invoiceEntityMock.getPaymentId());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

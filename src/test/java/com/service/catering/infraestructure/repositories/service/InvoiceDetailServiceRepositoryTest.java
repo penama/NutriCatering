@@ -1,7 +1,6 @@
 package com.service.catering.infraestructure.repositories.service;
 
 import com.service.catering.domain.model.InvoiceDetailEntity;
-import com.service.catering.domain.model.InvoiceEntity;
 import com.service.catering.infraestructure.repositories.interfaces.InvoiceDetailRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,18 +31,18 @@ public class InvoiceDetailServiceRepositoryTest {
     @Test
     public void test(){
         InvoiceDetailEntity invoiceDetailEntityMock = new InvoiceDetailEntity();
-        invoiceDetailEntityMock.invoiceId = UUID.randomUUID().toString();
-        invoiceDetailEntityMock.amount = 100f;
-        invoiceDetailEntityMock.id = UUID.randomUUID().toString();
-        invoiceDetailEntityMock.createdDate = "17/02/2025";
-        invoiceDetailEntityMock.unitPrice = 100f;
-        invoiceDetailEntityMock.description = "-";
+        invoiceDetailEntityMock.setInvoiceId(UUID.randomUUID().toString());
+        invoiceDetailEntityMock.setAmount(100f);
+        invoiceDetailEntityMock.setId(UUID.randomUUID().toString());
+        invoiceDetailEntityMock.setCreatedDate("17/02/2025");
+        invoiceDetailEntityMock.setUnitPrice(100f);
+        invoiceDetailEntityMock.setDescription("-");
 
         InvoiceDetailEntity invoiceDetailEntity = new InvoiceDetailEntity();
-        invoiceDetailEntity.amount = 100f;
-        invoiceDetailEntity.createdDate = "17/02/2025";
-        invoiceDetailEntity.unitPrice = 100f;
-        invoiceDetailEntity.description = "-";
+        invoiceDetailEntity.setAmount(100f);
+        invoiceDetailEntity.setCreatedDate("17/02/2025");
+        invoiceDetailEntity.setUnitPrice(100f);
+        invoiceDetailEntity.setDescription("-");
 
         List<InvoiceDetailEntity> listInvoiceDetailMock = new ArrayList<>();
         listInvoiceDetailMock.add( invoiceDetailEntityMock );
@@ -72,7 +71,7 @@ public class InvoiceDetailServiceRepositoryTest {
         // listar por payment
         List<InvoiceDetailEntity> listResult2 = null;
         try {
-            listResult2 = invoiceDetailServiceRepository.queryInvoiceDetailByInvoice( invoiceDetailEntityMock.invoiceId );
+            listResult2 = invoiceDetailServiceRepository.queryInvoiceDetailByInvoice(invoiceDetailEntityMock.getInvoiceId());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

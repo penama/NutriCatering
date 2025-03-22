@@ -3,7 +3,6 @@ package com.service.catering.infraestructure.repositories.service;
 import com.service.catering.application.model.order.OrderStatus;
 import com.service.catering.domain.model.OrderEntity;
 import com.service.catering.infraestructure.repositories.interfaces.OrderRepository;
-import org.hibernate.mapping.Any;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,19 +30,19 @@ public class OrderServiceRepositoryTest {
     @Test
     public void test(){
         OrderEntity orderEntityMock = new OrderEntity();
-        orderEntityMock.id = UUID.randomUUID().toString();
-        orderEntityMock.createdDate = "16/02/2025";
-        orderEntityMock.status = OrderStatus.PAID.name();
-        orderEntityMock.contractId = UUID.randomUUID().toString();
-        orderEntityMock.amount = 50;
-        orderEntityMock.description = "contrato";
+        orderEntityMock.setId(UUID.randomUUID().toString());
+        orderEntityMock.setCreatedDate("16/02/2025");
+        orderEntityMock.setStatus(OrderStatus.PAID.name());
+        orderEntityMock.setContractId(UUID.randomUUID().toString());
+        orderEntityMock.setAmount(50);
+        orderEntityMock.setDescription("contrato");
 
         OrderEntity orderEntity = new OrderEntity();
-        orderEntity.createdDate = "16/02/2025";
-        orderEntity.status = OrderStatus.PAID.name();
-        orderEntity.contractId = UUID.randomUUID().toString();
-        orderEntity.amount = 50;
-        orderEntity.description = "contrato";
+        orderEntity.setCreatedDate("16/02/2025");
+        orderEntity.setStatus(OrderStatus.PAID.name());
+        orderEntity.setContractId(UUID.randomUUID().toString());
+        orderEntity.setAmount(50);
+        orderEntity.setDescription("contrato");
 
         List<OrderEntity> listOrderMock = new ArrayList<>();
         listOrderMock.add( orderEntityMock );
@@ -60,7 +59,7 @@ public class OrderServiceRepositoryTest {
             throw new RuntimeException(e);
         }
         // por id
-        OrderEntity orderResult = orderServiceRepository.queryOrder( orderEntityMock.id );
+        OrderEntity orderResult = orderServiceRepository.queryOrder(orderEntityMock.getId());
         Assertions.assertNotNull( orderResult, "listado no es nulo" );
         Assertions.assertEquals( orderEntityMock, orderResult, "Objeto igual" );
         // listar
@@ -69,7 +68,7 @@ public class OrderServiceRepositoryTest {
         Assertions.assertEquals( orderEntityMock, listResult.getFirst(), "Objeto igual" );
 
         // listar por contrato
-        List<OrderEntity> listResult2 = orderServiceRepository.queryOrders( orderEntityMock.contractId );
+        List<OrderEntity> listResult2 = orderServiceRepository.queryOrders(orderEntityMock.getContractId());
         Assertions.assertNotNull( listResult2, "listado no es nulo" );
         Assertions.assertEquals( orderEntityMock, listResult2.getFirst(), "Objeto igual" );
 

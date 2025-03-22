@@ -5,7 +5,6 @@ import com.service.catering.application.model.payment.*;
 import com.service.catering.application.service.interfaces.IBillerDataServiceUpdateData;
 import com.service.catering.application.service.interfaces.IInvoiceServiceGenerate;
 import com.service.catering.application.service.interfaces.IOrderServiceUpdateStatus;
-import com.service.catering.application.utils.OrderUtil;
 import com.service.catering.application.utils.PaymentUtil;
 import com.service.catering.domain.model.PaymentEntity;
 import com.service.catering.domain.model.PaymentMethodEntity;
@@ -52,20 +51,20 @@ public class PaymentServiceTest {
     public void testNewPayment() throws Exception{
 
         PaymentMethodEntity paymentMethodEntity = new PaymentMethodEntity();
-        paymentMethodEntity.id = UUID.randomUUID().toString();
-        paymentMethodEntity.label = "Qr";
-        paymentMethodEntity.descripcion = "Qr";
-        paymentMethodEntity.name = "Qr";
-        paymentMethodEntity.createdDate = "22/02/2025";
+        paymentMethodEntity.setId(UUID.randomUUID().toString());
+        paymentMethodEntity.setLabel("Qr");
+        paymentMethodEntity.setDescripcion("Qr");
+        paymentMethodEntity.setName("Qr");
+        paymentMethodEntity.setCreatedDate("22/02/2025");
 
         PaymentEntity paymentEntity = new PaymentEntity();
         paymentEntity.id = UUID.randomUUID().toString();
-        paymentEntity.paymentMethodEntity = paymentMethodEntity;
-        paymentEntity.amount = 10;
-        paymentEntity.currency = "BOB";
-        paymentEntity.orderId = UUID.randomUUID().toString();
-        paymentEntity.status = PaymentStatus.PAID.name();
-        paymentEntity.createdDate = "22/02/2025";
+        paymentEntity.setPaymentMethodEntity(paymentMethodEntity);
+        paymentEntity.setAmount(10);
+        paymentEntity.setCurrency("BOB");
+        paymentEntity.setOrderId(UUID.randomUUID().toString());
+        paymentEntity.setStatus(PaymentStatus.PAID.name());
+        paymentEntity.setCreatedDate("22/02/2025");
 
         PaymentMethod paymentMethod = new PaymentMethod();
         paymentMethod.id = UUID.randomUUID().toString();
@@ -119,20 +118,20 @@ public class PaymentServiceTest {
     public void testGetPayments(){
 
         PaymentMethodEntity paymentMethodEntity = new PaymentMethodEntity();
-        paymentMethodEntity.id = UUID.randomUUID().toString();
-        paymentMethodEntity.label = "Qr";
-        paymentMethodEntity.descripcion = "Qr";
-        paymentMethodEntity.name = "Qr";
-        paymentMethodEntity.createdDate = "22/02/2025";
+        paymentMethodEntity.setId(UUID.randomUUID().toString());
+        paymentMethodEntity.setLabel("Qr");
+        paymentMethodEntity.setDescripcion("Qr");
+        paymentMethodEntity.setName("Qr");
+        paymentMethodEntity.setCreatedDate("22/02/2025");
 
         PaymentEntity paymentEntity = new PaymentEntity();
         paymentEntity.id = UUID.randomUUID().toString();
-        paymentEntity.paymentMethodEntity = paymentMethodEntity;
-        paymentEntity.amount = 10;
-        paymentEntity.currency = "BOB";
-        paymentEntity.orderId = UUID.randomUUID().toString();
-        paymentEntity.status = PaymentStatus.PAID.name();
-        paymentEntity.createdDate = "22/02/2025";
+        paymentEntity.setPaymentMethodEntity(paymentMethodEntity);
+        paymentEntity.setAmount(10);
+        paymentEntity.setCurrency("BOB");
+        paymentEntity.setOrderId(UUID.randomUUID().toString());
+        paymentEntity.setStatus(PaymentStatus.PAID.name());
+        paymentEntity.setCreatedDate("22/02/2025");
 
         PaymentMethod paymentMethod = new PaymentMethod();
         paymentMethod.id = UUID.randomUUID().toString();
@@ -190,20 +189,20 @@ public class PaymentServiceTest {
     public void testGetPaymentsByOrder(){
 
         PaymentMethodEntity paymentMethodEntity = new PaymentMethodEntity();
-        paymentMethodEntity.id = UUID.randomUUID().toString();
-        paymentMethodEntity.label = "Qr";
-        paymentMethodEntity.descripcion = "Qr";
-        paymentMethodEntity.name = "Qr";
-        paymentMethodEntity.createdDate = "22/02/2025";
+        paymentMethodEntity.setId(UUID.randomUUID().toString());
+        paymentMethodEntity.setLabel("Qr");
+        paymentMethodEntity.setDescripcion("Qr");
+        paymentMethodEntity.setName("Qr");
+        paymentMethodEntity.setCreatedDate("22/02/2025");
 
         PaymentEntity paymentEntity = new PaymentEntity();
         paymentEntity.id = UUID.randomUUID().toString();
-        paymentEntity.paymentMethodEntity = paymentMethodEntity;
-        paymentEntity.amount = 10;
-        paymentEntity.currency = "BOB";
-        paymentEntity.orderId = UUID.randomUUID().toString();
-        paymentEntity.status = PaymentStatus.PAID.name();
-        paymentEntity.createdDate = "22/02/2025";
+        paymentEntity.setPaymentMethodEntity(paymentMethodEntity);
+        paymentEntity.setAmount(10);
+        paymentEntity.setCurrency("BOB");
+        paymentEntity.setOrderId(UUID.randomUUID().toString());
+        paymentEntity.setStatus(PaymentStatus.PAID.name());
+        paymentEntity.setCreatedDate("22/02/2025");
 
         PaymentMethod paymentMethod = new PaymentMethod();
         paymentMethod.id = UUID.randomUUID().toString();

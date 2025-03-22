@@ -22,16 +22,16 @@ public class InvoiceUtilTest {
     @Test
     public void testInvoiceDtoToInvoiceEntity(){
         InvoiceEntity invoiceEntity = new InvoiceEntity();
-        invoiceEntity.id = UUID.randomUUID().toString();
-        invoiceEntity.total = 100;
-        invoiceEntity.createdDate = "22/02/2025";
+        invoiceEntity.setId(UUID.randomUUID().toString());
+        invoiceEntity.setTotal(100);
+        invoiceEntity.setCreatedDate("22/02/2025");
 
         InvoiceDetailEntity invoiceDetailEntity = new InvoiceDetailEntity();
-        invoiceDetailEntity.id = UUID.randomUUID().toString();
-        invoiceDetailEntity.invoiceId = invoiceEntity.id;
-        invoiceDetailEntity.unitPrice = 10;
-        invoiceDetailEntity.amount = 10;
-        invoiceDetailEntity.concepts = "algo de algo";
+        invoiceDetailEntity.setId(UUID.randomUUID().toString());
+        invoiceDetailEntity.setInvoiceId(invoiceEntity.getId());
+        invoiceDetailEntity.setUnitPrice(10);
+        invoiceDetailEntity.setAmount(10);
+        invoiceDetailEntity.setConcepts("algo de algo");
 
         InvoiceDto invoiceDto = new InvoiceDto();
         invoiceDto.id = UUID.randomUUID().toString();
@@ -51,22 +51,22 @@ public class InvoiceUtilTest {
         InvoiceEntity invoiceEntityResult = InvoiceUtil.InvoiceDtoToInvoiceEntity( invoiceDto );
 
         Assertions.assertNotNull( invoiceEntityResult );
-        Assertions.assertEquals( invoiceEntityResult.id, invoiceDto.id );
+        Assertions.assertEquals(invoiceEntityResult.getId(), invoiceDto.id );
     }
 
     @Test
     public void testInvoiceDetailEntityToInvoiceDetail(){
         InvoiceEntity invoiceEntity = new InvoiceEntity();
-        invoiceEntity.id = UUID.randomUUID().toString();
-        invoiceEntity.total = 100;
-        invoiceEntity.createdDate = "22/02/2025";
+        invoiceEntity.setId(UUID.randomUUID().toString());
+        invoiceEntity.setTotal(100);
+        invoiceEntity.setCreatedDate("22/02/2025");
 
         InvoiceDetailEntity invoiceDetailEntity = new InvoiceDetailEntity();
-        invoiceDetailEntity.id = UUID.randomUUID().toString();
-        invoiceDetailEntity.invoiceId = invoiceEntity.id;
-        invoiceDetailEntity.unitPrice = 10;
-        invoiceDetailEntity.amount = 10;
-        invoiceDetailEntity.concepts = "algo de algo";
+        invoiceDetailEntity.setId(UUID.randomUUID().toString());
+        invoiceDetailEntity.setInvoiceId(invoiceEntity.getId());
+        invoiceDetailEntity.setUnitPrice(10);
+        invoiceDetailEntity.setAmount(10);
+        invoiceDetailEntity.setConcepts("algo de algo");
 
         InvoiceDto invoiceDto = new InvoiceDto();
         invoiceDto.id = UUID.randomUUID().toString();
@@ -85,6 +85,6 @@ public class InvoiceUtilTest {
         InvoiceDto invoiceDtoResult = InvoiceUtil.InvoiceEntityToInvoiceDto( invoiceEntity );
 
         Assertions.assertNotNull( invoiceDtoResult );
-        Assertions.assertEquals( invoiceDtoResult.id, invoiceEntity.id );
+        Assertions.assertEquals( invoiceDtoResult.id, invoiceEntity.getId());
     }
 }

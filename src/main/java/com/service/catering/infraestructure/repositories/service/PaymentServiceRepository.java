@@ -24,14 +24,14 @@ public class PaymentServiceRepository implements IQueryPaymentRepository {
     public PaymentMethodRepository paymentMethodRepository;
 
     public void newPayment(PaymentEntity paymentEntity ) throws Exception{
-        paymentEntity.setId(UUID.randomUUID().toString());
-        paymentEntity.setCreatedDate(DateFormat.toDate());
-        Optional<PaymentMethodEntity> optionalPaymentMethodEntity = paymentMethodRepository.findById( paymentEntity.getPaymentMethodEntity().getId() );
+        paymentEntity.id = UUID.randomUUID().toString();
+        paymentEntity.createdDate = DateFormat.toDate();
+        Optional<PaymentMethodEntity> optionalPaymentMethodEntity = paymentMethodRepository.findById( paymentEntity.paymentMethodEntity.id );
         PaymentMethodEntity paymentMethodEntity = null;
         if ( !optionalPaymentMethodEntity.isPresent() )
             throw new Exception("PaymentMethod not exist");
         paymentMethodEntity = optionalPaymentMethodEntity.get();
-        paymentEntity.setPaymentMethodEntity(  paymentMethodEntity  );
+        paymentEntity.paymentMethodEntity = paymentMethodEntity;
         repository.save(paymentEntity);
     }
 

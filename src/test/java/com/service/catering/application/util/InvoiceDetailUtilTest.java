@@ -1,13 +1,7 @@
 package com.service.catering.application.util;
 
-import com.service.catering.application.model.contract.CateringPlan;
-import com.service.catering.application.model.contract.ContractDto;
-import com.service.catering.application.model.contract.ContractStatus;
-import com.service.catering.application.model.contract.Customer;
 import com.service.catering.application.model.invoice.InvoiceDetail;
-import com.service.catering.application.utils.ContractUtil;
 import com.service.catering.application.utils.InvoiceDetailUtil;
-import com.service.catering.domain.model.ContractEntity;
 import com.service.catering.domain.model.InvoiceDetailEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,9 +20,9 @@ public class InvoiceDetailUtilTest {
     @Test
     public void testInvoiceDetailToInvoiceDetailEntity(){
         InvoiceDetailEntity invoiceDetailEntity = new InvoiceDetailEntity();
-        invoiceDetailEntity.id = UUID.randomUUID().toString();
-        invoiceDetailEntity.invoiceId = UUID.randomUUID().toString();
-        invoiceDetailEntity.createdDate = "22/02/2025";
+        invoiceDetailEntity.setId(UUID.randomUUID().toString());
+        invoiceDetailEntity.setInvoiceId(UUID.randomUUID().toString());
+        invoiceDetailEntity.setCreatedDate("22/02/2025");
 
         InvoiceDetail invoiceDetail = new InvoiceDetail();
         invoiceDetail.id = UUID.randomUUID().toString();
@@ -37,15 +31,15 @@ public class InvoiceDetailUtilTest {
         InvoiceDetailEntity invoiceDetailEntityResult = InvoiceDetailUtil.InvoiceDetailToInvoiceDetailEntity( invoiceDetail );
 
         Assertions.assertNotNull( invoiceDetailEntityResult );
-        Assertions.assertEquals( invoiceDetailEntityResult.id, invoiceDetail.id );
+        Assertions.assertEquals(invoiceDetailEntityResult.getId(), invoiceDetail.id );
     }
 
     @Test
     public void testInvoiceDetailEntityToInvoiceDetail(){
         InvoiceDetailEntity invoiceDetailEntity = new InvoiceDetailEntity();
-        invoiceDetailEntity.id = UUID.randomUUID().toString();
-        invoiceDetailEntity.invoiceId = UUID.randomUUID().toString();
-        invoiceDetailEntity.createdDate = "22/02/2025";
+        invoiceDetailEntity.setId(UUID.randomUUID().toString());
+        invoiceDetailEntity.setInvoiceId(UUID.randomUUID().toString());
+        invoiceDetailEntity.setCreatedDate("22/02/2025");
 
         InvoiceDetail invoiceDetail = new InvoiceDetail();
         invoiceDetail.id = UUID.randomUUID().toString();
@@ -53,6 +47,6 @@ public class InvoiceDetailUtilTest {
         InvoiceDetail invoiceDetailResult = InvoiceDetailUtil.InvoiceDetailEntityToInvoiceDetail( invoiceDetailEntity );
 
         Assertions.assertNotNull( invoiceDetailResult );
-        Assertions.assertEquals( invoiceDetailResult.id, invoiceDetailEntity.id );
+        Assertions.assertEquals( invoiceDetailResult.id, invoiceDetailEntity.getId());
     }
 }

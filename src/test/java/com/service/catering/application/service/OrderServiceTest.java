@@ -21,7 +21,6 @@ import org.springframework.context.ApplicationEventPublisher;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -63,12 +62,12 @@ public class OrderServiceTest {
         orderDto.creationDate = "22/02/2025";
 
         OrderEntity orderEntityMock = new OrderEntity();
-        orderEntityMock.id = UUID.randomUUID().toString();
-        orderEntityMock.contractId = UUID.randomUUID().toString();
-        orderEntityMock.amount = 100;
-        orderEntityMock.status = OrderStatus.PAID.name();
-        orderEntityMock.description = "Catering";
-        orderEntityMock.createdDate = "22/02/2025";
+        orderEntityMock.setId(UUID.randomUUID().toString());
+        orderEntityMock.setContractId(UUID.randomUUID().toString());
+        orderEntityMock.setAmount(100);
+        orderEntityMock.setStatus(OrderStatus.PAID.name());
+        orderEntityMock.setDescription("Catering");
+        orderEntityMock.setCreatedDate("22/02/2025");
 
         // Simulación de métodos estáticos con mockStatic()
         try (MockedStatic<OrderUtil> mockedStatic = mockStatic(OrderUtil.class)) {
@@ -103,12 +102,12 @@ public class OrderServiceTest {
         orderDto.creationDate = "22/02/2025";
 
         OrderEntity orderEntityMock = new OrderEntity();
-        orderEntityMock.id = UUID.randomUUID().toString();
-        orderEntityMock.contractId = contract.id;
-        orderEntityMock.amount = 100;
-        orderEntityMock.status = OrderStatus.PAID.name();
-        orderEntityMock.description = "Catering";
-        orderEntityMock.createdDate = "22/02/2025";
+        orderEntityMock.setId(UUID.randomUUID().toString());
+        orderEntityMock.setContractId(contract.id);
+        orderEntityMock.setAmount(100);
+        orderEntityMock.setStatus(OrderStatus.PAID.name());
+        orderEntityMock.setDescription("Catering");
+        orderEntityMock.setCreatedDate("22/02/2025");
 
         List<OrderEntity> expectedDtoList = Arrays.asList(orderEntityMock);
 
@@ -152,12 +151,12 @@ public class OrderServiceTest {
         orderDto.creationDate = "22/02/2025";
 
         OrderEntity orderEntityMock = new OrderEntity();
-        orderEntityMock.id = UUID.randomUUID().toString();
-        orderEntityMock.contractId = contract.id;
-        orderEntityMock.amount = 100;
-        orderEntityMock.status = OrderStatus.PAID.name();
-        orderEntityMock.description = "Catering";
-        orderEntityMock.createdDate = "22/02/2025";
+        orderEntityMock.setId(UUID.randomUUID().toString());
+        orderEntityMock.setContractId(contract.id);
+        orderEntityMock.setAmount(100);
+        orderEntityMock.setStatus(OrderStatus.PAID.name());
+        orderEntityMock.setDescription("Catering");
+        orderEntityMock.setCreatedDate("22/02/2025");
 
         List<OrderEntity> expectedDtoList = Arrays.asList(orderEntityMock);
 
@@ -201,28 +200,28 @@ public class OrderServiceTest {
         orderDto.creationDate = "22/02/2025";
 
         OrderEntity orderEntityMock = new OrderEntity();
-        orderEntityMock.id = UUID.randomUUID().toString();
-        orderEntityMock.contractId = contract.id;
-        orderEntityMock.amount = 100f;
-        orderEntityMock.status = OrderStatus.PAID.name();
-        orderEntityMock.description = "Catering";
-        orderEntityMock.createdDate = "22/02/2025";
+        orderEntityMock.setId(UUID.randomUUID().toString());
+        orderEntityMock.setContractId(contract.id);
+        orderEntityMock.setAmount(100f);
+        orderEntityMock.setStatus(OrderStatus.PAID.name());
+        orderEntityMock.setDescription("Catering");
+        orderEntityMock.setCreatedDate("22/02/2025");
 
         PaymentMethodEntity paymentMethodEntity = new PaymentMethodEntity();
-        paymentMethodEntity.id = UUID.randomUUID().toString();
-        paymentMethodEntity.status = PaymentMethodStatus.ACTIVE.name();
-        paymentMethodEntity.name = "QR";
-        paymentMethodEntity.createdDate = "22/02/2025";
-        paymentMethodEntity.descripcion = "QR";
-        paymentMethodEntity.label = "QR";
+        paymentMethodEntity.setId(UUID.randomUUID().toString());
+        paymentMethodEntity.setStatus(PaymentMethodStatus.ACTIVE.name());
+        paymentMethodEntity.setName("QR");
+        paymentMethodEntity.setCreatedDate("22/02/2025");
+        paymentMethodEntity.setDescripcion("QR");
+        paymentMethodEntity.setLabel("QR");
 
         PaymentEntity paymentEntity = new PaymentEntity();
-        paymentEntity.paymentMethodEntity = paymentMethodEntity;
-        paymentEntity.orderId = UUID.randomUUID().toString();
-        paymentEntity.currency = "BOB";
+        paymentEntity.setPaymentMethodEntity(paymentMethodEntity);
+        paymentEntity.setOrderId(UUID.randomUUID().toString());
+        paymentEntity.setCurrency("BOB");
         paymentEntity.id = UUID.randomUUID().toString();
-        paymentEntity.amount = 100f;
-        paymentEntity.createdDate = "22/02/2025";
+        paymentEntity.setAmount(100f);
+        paymentEntity.setCreatedDate("22/02/2025");
 
         List<PaymentEntity> listPaymentEntityMock = Arrays.asList( paymentEntity );
         List<OrderEntity> expectedDtoList = Arrays.asList(orderEntityMock);
@@ -255,28 +254,28 @@ public class OrderServiceTest {
         orderDto.creationDate = "22/02/2025";
 
         OrderEntity orderEntityMock = new OrderEntity();
-        orderEntityMock.id = UUID.randomUUID().toString();
-        orderEntityMock.contractId = contract.id;
-        orderEntityMock.amount = 100f;
-        orderEntityMock.status = OrderStatus.PAID.name();
-        orderEntityMock.description = "Catering";
-        orderEntityMock.createdDate = "22/02/2025";
+        orderEntityMock.setId(UUID.randomUUID().toString());
+        orderEntityMock.setContractId(contract.id);
+        orderEntityMock.setAmount(100f);
+        orderEntityMock.setStatus(OrderStatus.PAID.name());
+        orderEntityMock.setDescription("Catering");
+        orderEntityMock.setCreatedDate("22/02/2025");
 
         PaymentMethodEntity paymentMethodEntity = new PaymentMethodEntity();
-        paymentMethodEntity.id = UUID.randomUUID().toString();
-        paymentMethodEntity.status = PaymentMethodStatus.ACTIVE.name();
-        paymentMethodEntity.name = "QR";
-        paymentMethodEntity.createdDate = "22/02/2025";
-        paymentMethodEntity.descripcion = "QR";
-        paymentMethodEntity.label = "QR";
+        paymentMethodEntity.setId(UUID.randomUUID().toString());
+        paymentMethodEntity.setStatus(PaymentMethodStatus.ACTIVE.name());
+        paymentMethodEntity.setName("QR");
+        paymentMethodEntity.setCreatedDate("22/02/2025");
+        paymentMethodEntity.setDescripcion("QR");
+        paymentMethodEntity.setLabel("QR");
 
         PaymentEntity paymentEntity = new PaymentEntity();
-        paymentEntity.paymentMethodEntity = paymentMethodEntity;
-        paymentEntity.orderId = UUID.randomUUID().toString();
-        paymentEntity.currency = "BOB";
+        paymentEntity.setPaymentMethodEntity(paymentMethodEntity);
+        paymentEntity.setOrderId(UUID.randomUUID().toString());
+        paymentEntity.setCurrency("BOB");
         paymentEntity.id = UUID.randomUUID().toString();
-        paymentEntity.amount = 30f;
-        paymentEntity.createdDate = "22/02/2025";
+        paymentEntity.setAmount(30f);
+        paymentEntity.setCreatedDate("22/02/2025");
 
         List<PaymentEntity> listPaymentEntityMock = Arrays.asList( paymentEntity );
         List<OrderEntity> expectedDtoList = Arrays.asList(orderEntityMock);
@@ -287,7 +286,7 @@ public class OrderServiceTest {
         when(iQueryOrderRepository.queryOrder(Mockito.any( String.class ))).thenReturn( orderEntityMock );
 
         try {
-            orderService.actualizarStatus( orderEntityMock.id );
+            orderService.actualizarStatus(orderEntityMock.getId());
         } catch (Exception e) {
             e.printStackTrace();
         }

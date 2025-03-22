@@ -3,7 +3,6 @@ package com.service.catering.infraestructure.repositories.service;
 import com.service.catering.application.model.customer.CustomerStatus;
 import com.service.catering.domain.model.CustomerEntity;
 import com.service.catering.infraestructure.repositories.interfaces.CustomerRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -38,22 +37,22 @@ public class CustomerServiceRepositoryTest {
         String phone = "78787878";
 
         CustomerEntity customerEntityMock = new CustomerEntity();
-        customerEntityMock.id = UUID.randomUUID().toString();
-        customerEntityMock.name = nombre;
-        customerEntityMock.address = address;
-        customerEntityMock.birtDate = birtDate;
-        customerEntityMock.phone = phone;
-        customerEntityMock.status = CustomerStatus.ACTIVE.name();
-        customerEntityMock.createdDate = "16/02/2025";
+        customerEntityMock.setId(UUID.randomUUID().toString());
+        customerEntityMock.setName(nombre);
+        customerEntityMock.setAddress(address);
+        customerEntityMock.setBirtDate(birtDate);
+        customerEntityMock.setPhone(phone);
+        customerEntityMock.setStatus(CustomerStatus.ACTIVE.name());
+        customerEntityMock.setCreatedDate("16/02/2025");
 
         List<CustomerEntity> listCustomer = new ArrayList<>();
         listCustomer.add( customerEntityMock );
 
         CustomerEntity customerEntity = new CustomerEntity();
-        customerEntity.name = nombre;
-        customerEntity.address = address;
-        customerEntity.birtDate = birtDate;
-        customerEntity.phone = phone;
+        customerEntity.setName(nombre);
+        customerEntity.setAddress(address);
+        customerEntity.setBirtDate(birtDate);
+        customerEntity.setPhone(phone);
 
         Mockito.when( customerRepository.save( Mockito.any( CustomerEntity.class ) ) ).thenReturn( customerEntityMock );
         Mockito.when( customerRepository.findAll() ).thenReturn( listCustomer );
@@ -69,7 +68,7 @@ public class CustomerServiceRepositoryTest {
         assertNotNull( listEntityResult, "Listado no es nulo" );
         assertEquals( customerEntityMock, listEntityResult.getFirst() , "Datos del Mock son los mismos");
 
-        CustomerEntity customerEntityResult = customerServiceRepository.queryCustomer( customerEntityMock.id );
+        CustomerEntity customerEntityResult = customerServiceRepository.queryCustomer(customerEntityMock.getId());
 
         assertNotNull( customerEntityResult, "Customer no es nulo..." );
         assertEquals( customerEntityMock, customerEntityResult, "objetos iguales..." );

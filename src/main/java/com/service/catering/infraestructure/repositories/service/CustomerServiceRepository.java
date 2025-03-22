@@ -18,8 +18,8 @@ public class CustomerServiceRepository implements IQueryCustomerRepository {
     public CustomerRepository repository;
 
     public void newCustomer(CustomerEntity customerEntity ) throws Exception{
-        customerEntity.setId(UUID.randomUUID().toString());
-        customerEntity.setCreatedDate(DateFormat.toDate());
+        customerEntity.id = UUID.randomUUID().toString();
+        customerEntity.createdDate = DateFormat.toDate();
         repository.save(customerEntity);
     }
 

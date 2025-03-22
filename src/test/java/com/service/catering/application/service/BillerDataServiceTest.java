@@ -43,12 +43,12 @@ public class BillerDataServiceTest {
         customer.id = UUID.randomUUID().toString();
 
         BillerDataEntity billerDataEntityMock = new BillerDataEntity();
-        billerDataEntityMock.id = UUID.randomUUID().toString();
-        billerDataEntityMock.createdDate = "19/02/2025";
-        billerDataEntityMock.nit = "35235";
-        billerDataEntityMock.email = "test@test.com";
-        billerDataEntityMock.socialReazon = "prueba";
-        billerDataEntityMock.customerId = UUID.randomUUID().toString();
+        billerDataEntityMock.setId(UUID.randomUUID().toString());
+        billerDataEntityMock.setCreatedDate("19/02/2025");
+        billerDataEntityMock.setNit("35235");
+        billerDataEntityMock.setEmail("test@test.com");
+        billerDataEntityMock.setSocialReazon("prueba");
+        billerDataEntityMock.setCustomerId(UUID.randomUUID().toString());
 
         BillerDataDto billerDataDtoMock = new BillerDataDto();
         billerDataDtoMock.id = UUID.randomUUID().toString();
@@ -87,16 +87,16 @@ public class BillerDataServiceTest {
         customer.id = UUID.randomUUID().toString();
 
         BillerDataEntity entity1 = new BillerDataEntity();
-        entity1.nit = "35235";
-        entity1.email = "test@test.com";
-        entity1.socialReazon = "prueba";
-        entity1.customerId = UUID.randomUUID().toString();
+        entity1.setNit("35235");
+        entity1.setEmail("test@test.com");
+        entity1.setSocialReazon("prueba");
+        entity1.setCustomerId(UUID.randomUUID().toString());
 
         BillerDataEntity entity2 = new BillerDataEntity();
-        entity2.nit = "35235";
-        entity2.email = "test@test.com";
-        entity2.socialReazon = "prueba";
-        entity2.customerId = UUID.randomUUID().toString();
+        entity2.setNit("35235");
+        entity2.setEmail("test@test.com");
+        entity2.setSocialReazon("prueba");
+        entity2.setCustomerId(UUID.randomUUID().toString());
 
         List<BillerDataEntity> entityList = Arrays.asList(entity1, entity2);
 
@@ -154,16 +154,16 @@ public class BillerDataServiceTest {
         customer.id = UUID.randomUUID().toString();
 
         BillerDataEntity entity1 = new BillerDataEntity();
-        entity1.nit = "35235";
-        entity1.email = "test@test.com";
-        entity1.socialReazon = "prueba";
-        entity1.customerId = UUID.randomUUID().toString();
+        entity1.setNit("35235");
+        entity1.setEmail("test@test.com");
+        entity1.setSocialReazon("prueba");
+        entity1.setCustomerId(UUID.randomUUID().toString());
 
         BillerDataEntity entity2 = new BillerDataEntity();
-        entity2.nit = "35235";
-        entity2.email = "test@test.com";
-        entity2.socialReazon = "prueba";
-        entity2.customerId = UUID.randomUUID().toString();
+        entity2.setNit("35235");
+        entity2.setEmail("test@test.com");
+        entity2.setSocialReazon("prueba");
+        entity2.setCustomerId(UUID.randomUUID().toString());
 
         List<BillerDataEntity> entityList = Arrays.asList(entity1, entity2);
 
@@ -193,7 +193,7 @@ public class BillerDataServiceTest {
             // Llamar al método a probar
             List<BillerDataDto> result = null;
             try {
-                result = billerDataService.getBillerDataByCustomerId( entity1.customerId );
+                result = billerDataService.getBillerDataByCustomerId(entity1.getCustomerId());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -202,7 +202,7 @@ public class BillerDataServiceTest {
             assertEquals(2, result.size());
             assertEquals(expectedDtoList, result); // Comparar listas
             // Verificar interacciones con los mocks
-            verify(iQueryBillerDataRepository, times(1)).queryBillerDataCustomerId( entity1.customerId );
+            verify(iQueryBillerDataRepository, times(1)).queryBillerDataCustomerId(entity1.getCustomerId());
             mockedStatic.verify(() -> BillerDataUtil.billerDataEntityToBillerDataDto(entity1), times(1));
             mockedStatic.verify(() -> BillerDataUtil.billerDataEntityToBillerDataDto(entity2), times(1));
         }
@@ -215,16 +215,16 @@ public class BillerDataServiceTest {
         customer.id = UUID.randomUUID().toString();
 
         BillerDataEntity entity1 = new BillerDataEntity();
-        entity1.nit = "35235";
-        entity1.email = "test@test.com";
-        entity1.socialReazon = "prueba";
-        entity1.customerId = UUID.randomUUID().toString();
+        entity1.setNit("35235");
+        entity1.setEmail("test@test.com");
+        entity1.setSocialReazon("prueba");
+        entity1.setCustomerId(UUID.randomUUID().toString());
 
         BillerDataEntity entity2 = new BillerDataEntity();
-        entity2.nit = "35235";
-        entity2.email = "test@test.com";
-        entity2.socialReazon = "prueba";
-        entity2.customerId = UUID.randomUUID().toString();
+        entity2.setNit("35235");
+        entity2.setEmail("test@test.com");
+        entity2.setSocialReazon("prueba");
+        entity2.setCustomerId(UUID.randomUUID().toString());
 
         List<BillerDataEntity> entityList = Arrays.asList(entity1, entity2);
 

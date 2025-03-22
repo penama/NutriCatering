@@ -2,20 +2,13 @@ package com.service.catering.application.util;
 
 import com.service.catering.application.model.billerdata.BillerDataDto;
 import com.service.catering.application.model.billerdata.Customer;
-import com.service.catering.application.model.contract.CateringPlan;
-import com.service.catering.application.model.contract.ContractDto;
-import com.service.catering.application.model.contract.ContractStatus;
 import com.service.catering.application.utils.BillerDataUtil;
-import com.service.catering.application.utils.ContractUtil;
 import com.service.catering.domain.model.BillerDataEntity;
-import com.service.catering.domain.model.ContractEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.UUID;
 
 public class BillerDataUtilTest {
@@ -32,10 +25,10 @@ public class BillerDataUtilTest {
         customer.id = UUID.randomUUID().toString();
 
         BillerDataEntity billerDataEntity = new BillerDataEntity();
-        billerDataEntity.nit = "35235";
-        billerDataEntity.email = "test@test.com";
-        billerDataEntity.socialReazon = "prueba";
-        billerDataEntity.customerId = UUID.randomUUID().toString();
+        billerDataEntity.setNit("35235");
+        billerDataEntity.setEmail("test@test.com");
+        billerDataEntity.setSocialReazon("prueba");
+        billerDataEntity.setCustomerId(UUID.randomUUID().toString());
 
 
         BillerDataDto billerDataDto = new BillerDataDto();
@@ -49,7 +42,7 @@ public class BillerDataUtilTest {
         BillerDataEntity billerDataEntityResult = BillerDataUtil.BillerDataDtoTobillerDataEntity( billerDataDto );
 
         Assertions.assertNotNull( billerDataEntityResult );
-        Assertions.assertEquals( billerDataEntityResult.id, billerDataDto.id );
+        Assertions.assertEquals(billerDataEntityResult.getId(), billerDataDto.id );
     }
 
     @Test
@@ -59,10 +52,10 @@ public class BillerDataUtilTest {
         customer.id = UUID.randomUUID().toString();
 
         BillerDataEntity billerDataEntity = new BillerDataEntity();
-        billerDataEntity.nit = "35235";
-        billerDataEntity.email = "test@test.com";
-        billerDataEntity.socialReazon = "prueba";
-        billerDataEntity.customerId = UUID.randomUUID().toString();
+        billerDataEntity.setNit("35235");
+        billerDataEntity.setEmail("test@test.com");
+        billerDataEntity.setSocialReazon("prueba");
+        billerDataEntity.setCustomerId(UUID.randomUUID().toString());
 
 
         BillerDataDto billerDataDto = new BillerDataDto();
@@ -77,7 +70,7 @@ public class BillerDataUtilTest {
         BillerDataDto  billerDataDtoResult = BillerDataUtil.billerDataEntityToBillerDataDto( billerDataEntity );
 
         Assertions.assertNotNull( billerDataDtoResult );
-        Assertions.assertEquals( billerDataDtoResult.id, billerDataEntity.id );
+        Assertions.assertEquals( billerDataDtoResult.id, billerDataEntity.getId());
     }
 
 }

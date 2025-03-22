@@ -1,8 +1,6 @@
 package com.service.catering.application.service;
 
-import com.service.catering.application.model.customer.CustomerDto;
 import com.service.catering.application.model.paymentmethod.PaymentMethodDto;
-import com.service.catering.application.utils.CustomerUtil;
 import com.service.catering.application.utils.PaymentMethodUtil;
 import com.service.catering.domain.model.PaymentMethodEntity;
 import com.service.catering.infraestructure.event.command.CommandEntitysEvent;
@@ -40,8 +38,8 @@ public class PaymentMethodServiceTest {
     @Test
     public void testNewPaymentMethod() throws  Exception{
         PaymentMethodEntity paymentMethodEntity = new PaymentMethodEntity();
-        paymentMethodEntity.id = UUID.randomUUID().toString();
-        paymentMethodEntity.name = "QR";
+        paymentMethodEntity.setId(UUID.randomUUID().toString());
+        paymentMethodEntity.setName("QR");
 
         PaymentMethodDto paymentMethodDto = new PaymentMethodDto();
         paymentMethodDto.id = UUID.randomUUID().toString();
@@ -57,8 +55,8 @@ public class PaymentMethodServiceTest {
     @Test
     public void testGetPaymentMethods() throws  Exception{
         PaymentMethodEntity paymentMethodEntity = new PaymentMethodEntity();
-        paymentMethodEntity.id = UUID.randomUUID().toString();
-        paymentMethodEntity.name = "QR";
+        paymentMethodEntity.setId(UUID.randomUUID().toString());
+        paymentMethodEntity.setName("QR");
 
         PaymentMethodDto paymentMethodDto = new PaymentMethodDto();
         paymentMethodDto.id = UUID.randomUUID().toString();

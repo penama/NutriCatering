@@ -32,13 +32,13 @@ public class PaymentMethodServiceRepositoryTest {
         String name = "QR";
 
         PaymentMethodEntity paymentMethodEntityMock = new PaymentMethodEntity();
-        paymentMethodEntityMock.id = UUID.randomUUID().toString();
-        paymentMethodEntityMock.name = name;
-        paymentMethodEntityMock.status = PaymentMethodStatus.ACTIVE.name();
-        paymentMethodEntityMock.createdDate = "16/02/2025";
+        paymentMethodEntityMock.setId(UUID.randomUUID().toString());
+        paymentMethodEntityMock.setName(name);
+        paymentMethodEntityMock.setStatus(PaymentMethodStatus.ACTIVE.name());
+        paymentMethodEntityMock.setCreatedDate("16/02/2025");
 
         PaymentMethodEntity paymentMethodEntity = new PaymentMethodEntity();
-        paymentMethodEntity.name = name;
+        paymentMethodEntity.setName(name);
 
         List<PaymentMethodEntity> listEntityMock = new ArrayList<>();
         listEntityMock.add( paymentMethodEntityMock );

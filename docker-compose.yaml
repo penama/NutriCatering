@@ -1,0 +1,51 @@
+services:
+
+  data-postgres-nutricenter:
+    image: postgres:15.2
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=NutriCenter
+    volumes:
+      - data-postgres-nutricenter:/var/lib/postgresql/data
+    networks:
+      - nutricenter-net
+    env_file:
+      - .env
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "postgres", "-d", "postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s  
+
+  apinutricenter:
+    image: augustomarco/nutricenterv4
+    ports:
+      - 8080:8090
+    environment:
+      - AMDB_HOST=data-postgres-nutricenter
+      - AMDB_PORT=${AMDB_PORT}
+      - AMDB_NAME=${AMDB_NAME}
+      - AMDB_USERNAME=${AMDB_USERNAME}
+      - AMDB_PASSWORD=${AMDB_PASSWORD}
+    depends_on:
+      data-postgres-nutricenter:
+        condition: service_healthy
+    networks:
+      - nutricenter-net
+    env_file:
+      - .env
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080" ]
+      interval: 15s
+      timeout: 60s
+      retries: 3
+      start_period: 1s    
+
+volumes:
+  data-postgres-nutricenter:
+networks:
+  nutricenter-net:

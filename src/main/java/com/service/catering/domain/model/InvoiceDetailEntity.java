@@ -20,5 +20,4 @@ public class InvoiceDetailEntity {
     public String currency;
     public String invoiceId;
     public String createdDate;
-
 }

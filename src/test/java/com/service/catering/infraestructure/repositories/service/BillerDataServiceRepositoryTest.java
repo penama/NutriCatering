@@ -29,18 +29,18 @@ public class BillerDataServiceRepositoryTest {
     @Test
     public void test(){
         BillerDataEntity billerDataEntityMock = new BillerDataEntity();
-        billerDataEntityMock.id = UUID.randomUUID().toString();
-        billerDataEntityMock.createdDate = "17/02/2025";
-        billerDataEntityMock.customerId = UUID.randomUUID().toString();
-        billerDataEntityMock.nit = "2352345";
-        billerDataEntityMock.email = "test@test.com";
-        billerDataEntityMock.socialReazon = "Juan de los Palores.";
+        billerDataEntityMock.setId(UUID.randomUUID().toString());
+        billerDataEntityMock.setCreatedDate("17/02/2025");
+        billerDataEntityMock.setCustomerId(UUID.randomUUID().toString());
+        billerDataEntityMock.setNit("2352345");
+        billerDataEntityMock.setEmail("test@test.com");
+        billerDataEntityMock.setSocialReazon("Juan de los Palores.");
 
         BillerDataEntity billerDataEntity = new BillerDataEntity();
-        billerDataEntity.customerId = UUID.randomUUID().toString();
-        billerDataEntity.nit = "2352345";
-        billerDataEntity.email = "test@test.com";
-        billerDataEntity.socialReazon = "Juan de los Palores.";
+        billerDataEntity.setCustomerId(UUID.randomUUID().toString());
+        billerDataEntity.setNit("2352345");
+        billerDataEntity.setEmail("test@test.com");
+        billerDataEntity.setSocialReazon("Juan de los Palores.");
 
 
         List<BillerDataEntity> listBillerDataMock = new ArrayList<>();
@@ -63,7 +63,7 @@ public class BillerDataServiceRepositoryTest {
         Assertions.assertEquals( billerDataEntityMock, listResult.getFirst(), "Objeto igual" );
 
         // listar por contrato
-        List<BillerDataEntity> listResult2 = billerDataServiceRepository.queryBillerDataCustomerId( billerDataEntityMock.customerId );
+        List<BillerDataEntity> listResult2 = billerDataServiceRepository.queryBillerDataCustomerId(billerDataEntityMock.getCustomerId());
         Assertions.assertNotNull( listResult2, "listado no es nulo" );
         Assertions.assertEquals( billerDataEntityMock, listResult2.getFirst(), "Objeto igual" );
 

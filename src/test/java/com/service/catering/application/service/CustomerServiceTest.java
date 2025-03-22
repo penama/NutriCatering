@@ -3,7 +3,6 @@ package com.service.catering.application.service;
 import com.service.catering.application.model.customer.CustomerDto;
 import com.service.catering.application.model.customer.CustomerStatus;
 import com.service.catering.application.utils.CustomerUtil;
-import com.service.catering.application.utils.InvoiceUtil;
 import com.service.catering.domain.model.CustomerEntity;
 import com.service.catering.infraestructure.event.command.CommandEntitysEvent;
 import com.service.catering.infraestructure.event.querys.IQueryCustomerRepository;
@@ -44,9 +43,9 @@ public class CustomerServiceTest {
         customerDto.status = CustomerStatus.ACTIVE.name();
 
         CustomerEntity customerEntity = new CustomerEntity();
-        customerEntity.id = UUID.randomUUID().toString();
-        customerEntity.name = "Changos";
-        customerEntity.status = CustomerStatus.ACTIVE.name();
+        customerEntity.setId(UUID.randomUUID().toString());
+        customerEntity.setName("Changos");
+        customerEntity.setStatus(CustomerStatus.ACTIVE.name());
 
         // Simulación de métodos estáticos con mockStatic()
         try (MockedStatic<CustomerUtil> mockedStatic = mockStatic(CustomerUtil.class)) {
@@ -65,9 +64,9 @@ public class CustomerServiceTest {
         customerDto.status = CustomerStatus.ACTIVE.name();
 
         CustomerEntity customerEntity = new CustomerEntity();
-        customerEntity.id = UUID.randomUUID().toString();
-        customerEntity.name = "Changos";
-        customerEntity.status = CustomerStatus.ACTIVE.name();
+        customerEntity.setId(UUID.randomUUID().toString());
+        customerEntity.setName("Changos");
+        customerEntity.setStatus(CustomerStatus.ACTIVE.name());
 
         List<CustomerEntity> customerEntityList = Arrays.asList( customerEntity );
         when(iQueryCustomerRepository.queryCustomers()).thenReturn( customerEntityList );
@@ -91,9 +90,9 @@ public class CustomerServiceTest {
         customerDto.status = CustomerStatus.ACTIVE.name();
 
         CustomerEntity customerEntity = new CustomerEntity();
-        customerEntity.id = UUID.randomUUID().toString();
-        customerEntity.name = "Changos";
-        customerEntity.status = CustomerStatus.ACTIVE.name();
+        customerEntity.setId(UUID.randomUUID().toString());
+        customerEntity.setName("Changos");
+        customerEntity.setStatus(CustomerStatus.ACTIVE.name());
 
 //        List<CustomerEntity> customerEntityList = Arrays.asList( customerEntity );
         when(iQueryCustomerRepository.queryCustomer(Mockito.anyString() )).thenReturn( customerEntity );
@@ -101,7 +100,7 @@ public class CustomerServiceTest {
         // Simulación de métodos estáticos con mockStatic()
         try (MockedStatic<CustomerUtil> mockedStatic = mockStatic(CustomerUtil.class)) {
             mockedStatic.when(() -> CustomerUtil.customerEntityToCustomerDto(customerEntity)).thenReturn(customerDto);
-            CustomerDto customerResult = customerService.getCustomer( customerEntity.id );
+            CustomerDto customerResult = customerService.getCustomer(customerEntity.getId());
             Assertions.assertNotNull( customerResult );
         }
     }
@@ -115,9 +114,9 @@ public class CustomerServiceTest {
         customerDto.status = CustomerStatus.ACTIVE.name();
 
         CustomerEntity customerEntity = new CustomerEntity();
-        customerEntity.id = UUID.randomUUID().toString();
-        customerEntity.name = "Changos";
-        customerEntity.status = CustomerStatus.ACTIVE.name();
+        customerEntity.setId(UUID.randomUUID().toString());
+        customerEntity.setName("Changos");
+        customerEntity.setStatus(CustomerStatus.ACTIVE.name());
 
 //        List<CustomerEntity> customerEntityList = Arrays.asList( customerEntity );
         when(iQueryCustomerRepository.queryCustomer(Mockito.anyString() )).thenReturn( null );
@@ -125,7 +124,7 @@ public class CustomerServiceTest {
         // Simulación de métodos estáticos con mockStatic()
         try (MockedStatic<CustomerUtil> mockedStatic = mockStatic(CustomerUtil.class)) {
             mockedStatic.when(() -> CustomerUtil.customerEntityToCustomerDto(customerEntity)).thenReturn(customerDto);
-            CustomerDto customerResult = customerService.getCustomer( customerEntity.id );
+            CustomerDto customerResult = customerService.getCustomer(customerEntity.getId());
             Assertions.assertNull( customerResult );
         }
     }
