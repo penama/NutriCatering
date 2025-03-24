@@ -4,6 +4,15 @@ WORKDIR /app
 
 COPY target/NutriCatering-0.0.1-SNAPSHOT.jar app.jar
 
-EXPOSE 8080
+ENV SERVER_PORT=8090
+ENV SPRING_PROFILES_ACTIVE=dev
+ENV AMDB_HOST=localhost
+ENV AMDB_PORT=5432
+ENV AMDB_NAME=NutriCenter
+ENV AMDB_USERNAME=postgres
+ENV AMDB_PASSWORD=postgres
+ENV AMDB_DDL_AUTO=create
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+EXPOSE ${SERVER_PORT}
+
+ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=${SPRING_PROFILES_ACTIVE}", "-Dserver.port=${SERVER_PORT}", "app.jar"]

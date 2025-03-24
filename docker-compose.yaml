@@ -1,51 +1,56 @@
 services:
-
-  data-postgres-nutricenter:
-    image: postgres:15.2
-    ports:
-      - 5432:5432
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=NutriCenter
-    volumes:
-      - data-postgres-nutricenter:/var/lib/postgresql/data
-    networks:
-      - nutricenter-net
-    env_file:
-      - .env
-    healthcheck:
-      test: [ "CMD", "pg_isready", "-U", "postgres", "-d", "postgres" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 30s  
-
   apinutricenter:
-    image: augustomarco/nutricenterv4
+    image: augustomarco/nutricenter:v1.0.5
     ports:
-      - 8080:8090
+      - 8080:8080
     environment:
       - AMDB_HOST=data-postgres-nutricenter
       - AMDB_PORT=${AMDB_PORT}
       - AMDB_NAME=${AMDB_NAME}
       - AMDB_USERNAME=${AMDB_USERNAME}
       - AMDB_PASSWORD=${AMDB_PASSWORD}
+      - AMDB_DDL_AUTO=${AMDB_DDL_AUTO}
+      - SERVER_PORT=${SERVER_PORT}
+      - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE}
     depends_on:
-      data-postgres-nutricenter:
-        condition: service_healthy
+      - data-postgres-nutricenter
     networks:
       - nutricenter-net
     env_file:
       - .env
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8080" ]
+      test: [ "CMD", "curl", "-f", "http://localhost:${SERVER_PORT}" ]
       interval: 15s
-      timeout: 60s
+      timeout: 10s
       retries: 3
-      start_period: 1s    
+      start_period: 30s
+
+  data-postgres-nutricenter:
+    #image: postgres:latest
+    build:
+      context: .
+      dockerfile: Dockerfile_db
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=${AMDB_USERNAME}
+      - POSTGRES_PASSWORD=${AMDB_PASSWORD}
+      - POSTGRES_DB=${AMDB_NAME}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - nutricenter-net
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "${AMDB_USERNAME}", "-d", "${AMDB_NAME}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    env_file:
+      - .env
 
 volumes:
-  data-postgres-nutricenter:
+  db_data:
+
 networks:
   nutricenter-net:
