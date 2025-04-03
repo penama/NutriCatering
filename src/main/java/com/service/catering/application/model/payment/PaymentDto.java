@@ -5,13 +5,13 @@ import lombok.Data;
 @Data
 public class PaymentDto {
 
-    private String id;
-    private String createdDate;
-    private String status;
+    public String id;
+    public String createdDate;
+    public String status;
 //    private Invoice invoice;
-    private PaymentMethod paymentMethod;
-    private Price price;
-    private Order order;
-    private BillingInvoice billingInvoice;
+    public PaymentMethod paymentMethod;
+    public Price price;
+    public Order order;
+    public BillingInvoice billingInvoice;
 
 }

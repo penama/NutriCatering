@@ -37,7 +37,7 @@ public class OrderService extends BaseService implements IOrderServiceUpdateStat
 
     public void newOrder(OrderDto orderDto) throws Exception {
         OrderEntity orderEntity = OrderUtil.orderDtoToOrderEntity( orderDto );
-        orderEntity.setStatus(OrderStatus.UNPAID.name());
+        orderEntity.status = OrderStatus.UNPAID.name();
         commandHandler( this, orderEntity );
     }
 

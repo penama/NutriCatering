@@ -8,7 +8,7 @@ public class PaymentMethodUtil {
 
     public static PaymentMethodEntity paymentMethodDtoToPaymentMethodEntity(PaymentMethodDto paymentMethodDto){
         PaymentMethodEntity paymentMethodEntity = new PaymentMethodEntity();
-//        paymentEntity.setId( "" );
+        paymentMethodEntity.setId( paymentMethodDto.id );
         paymentMethodEntity.setName(paymentMethodDto.getName() );
         paymentMethodEntity.setLabel( paymentMethodDto.getLabel() );
         paymentMethodEntity.setDescripcion( paymentMethodDto.getDescription() );

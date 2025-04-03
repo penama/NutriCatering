@@ -1,0 +1,11 @@
+FROM postgres:latest
+
+ENV POSTGRES_USER=nutricenter
+ENV POSTGRES_PASSWORD=nutr1c3nt3r
+ENV POSTGRES_DB=NutriCenter
+
+RUN mkdir -p /docker-entrypoint-initdb.d
+
+COPY nutricenter_script.sql /docker-entrypoint-initdb.d/
+
+EXPOSE 5432

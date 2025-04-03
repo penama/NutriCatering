@@ -7,5 +7,6 @@ import java.util.List;
 public interface IQueryCustomerRepository {
 
     public List<CustomerEntity> queryCustomers();
+    public CustomerEntity queryCustomer( String id );
 
 }

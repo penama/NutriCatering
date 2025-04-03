@@ -18,8 +18,8 @@ public class InvoiceServiceRepository implements IQueryInvoiceRepository , IGene
     public InvoiceRepository repository;
 
     public void newInvoice(InvoiceEntity invoiceEntity) throws Exception{
-        invoiceEntity.setId(UUID.randomUUID().toString());
-        invoiceEntity.setCreatedDate(DateFormat.toDate());
+        invoiceEntity.id = UUID.randomUUID().toString();
+        invoiceEntity.createdDate = DateFormat.toDate();
         repository.save(invoiceEntity);
     }
 
@@ -35,8 +35,8 @@ public class InvoiceServiceRepository implements IQueryInvoiceRepository , IGene
 
     @Override
     public void generateInvoice(InvoiceEntity invoiceEntity) {
-        invoiceEntity.setId(UUID.randomUUID().toString());
-        invoiceEntity.setCreatedDate(DateFormat.toDate());
+        invoiceEntity.id = UUID.randomUUID().toString();
+        invoiceEntity.createdDate = DateFormat.toDate();
         repository.save( invoiceEntity );
     }
 }

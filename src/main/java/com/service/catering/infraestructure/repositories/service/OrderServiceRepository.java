@@ -22,8 +22,8 @@ public class OrderServiceRepository implements IQueryOrderRepository {
     public OrderRepository repository;
 
     public void newContract(OrderEntity orderEntity ) throws Exception{
-        orderEntity.setId(UUID.randomUUID().toString());
-        orderEntity.setCreatedDate(DateFormat.toDate());
+        orderEntity.id = UUID.randomUUID().toString();
+        orderEntity.createdDate = DateFormat.toDate();
         repository.save(orderEntity);
     }
 

@@ -34,9 +34,24 @@ public class CustomerController {
         try {
             customerDtos = customerService.getCustomers();
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<List<CustomerDto>>(customerDtos, HttpStatus.OK);
+    }
+
+    @GetMapping( "/customer/id/{id}" )
+    public ResponseEntity<CustomerDto> getCustomers( @PathVariable String id ){
+        CustomerDto customerDto = null;
+        try {
+            customerDto = customerService.getCustomer( id );
+            if ( customerDto == null )
+                return new ResponseEntity<CustomerDto>(customerDto, HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<CustomerDto>(customerDto, HttpStatus.OK);
     }
 
 }

@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class PaymentMethod {
 
-    private String id;
+    public String id;
 
 }

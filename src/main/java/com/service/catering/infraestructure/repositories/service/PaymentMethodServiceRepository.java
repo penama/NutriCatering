@@ -17,8 +17,8 @@ public class PaymentMethodServiceRepository implements IQueryPaymentMethodReposi
     public PaymentMethodRepository repository;
 
     public void newPaymentMethod(PaymentMethodEntity paymentMethodEntity ) throws Exception{
-        paymentMethodEntity.setId(UUID.randomUUID().toString());
-        paymentMethodEntity.setCreatedDate(DateFormat.toDate());
+        paymentMethodEntity.id = UUID.randomUUID().toString();
+        paymentMethodEntity.createdDate = DateFormat.toDate();
         repository.save(paymentMethodEntity);
     }
 

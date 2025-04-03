@@ -1,12 +1,8 @@
 package com.service.catering.application.utils;
 
 
-import com.service.catering.application.model.contract.CateringPlan;
-import com.service.catering.application.model.contract.ContractDto;
-import com.service.catering.application.model.contract.Customer;
 import com.service.catering.application.model.order.Contract;
 import com.service.catering.application.model.order.OrderDto;
-import com.service.catering.domain.model.ContractEntity;
 import com.service.catering.domain.model.OrderEntity;
 
 public class OrderUtil {

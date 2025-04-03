@@ -20,7 +20,7 @@ public class PaymentMethodService extends BaseService {
 
     public void newPaymentMethod(PaymentMethodDto paymentMethodDto) throws Exception {
         PaymentMethodEntity paymentMethodEntity = PaymentMethodUtil.paymentMethodDtoToPaymentMethodEntity( paymentMethodDto );
-        paymentMethodEntity.setStatus(PaymentMethodStatus.ACTIVE.name());
+        paymentMethodEntity.status = PaymentMethodStatus.ACTIVE.name();
 //        CommandEntitysEvent commandEntitysEvent = new CommandEntitysEvent( this, paymentMethodEntity);
 //        applicationEventPublisher.publishEvent( commandEntitysEvent );
         commandHandler( this, paymentMethodEntity );

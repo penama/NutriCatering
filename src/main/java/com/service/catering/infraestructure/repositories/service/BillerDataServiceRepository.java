@@ -22,8 +22,8 @@ public class BillerDataServiceRepository implements IQueryBillerDataRepository, 
     public BillerDataRepository repository;
 
     public void newBillerData(BillerDataEntity billerDataEntity ) throws Exception{
-        billerDataEntity.setId(UUID.randomUUID().toString());
-        billerDataEntity.setCreatedDate(DateFormat.toDate());
+        billerDataEntity.id = UUID.randomUUID().toString();
+        billerDataEntity.createdDate = DateFormat.toDate();
         repository.save(billerDataEntity);
     }
 
@@ -39,8 +39,8 @@ public class BillerDataServiceRepository implements IQueryBillerDataRepository, 
 
     @Override
     public void updateBillersData(BillerDataEntity billerDataEntity) {
-        System.out.println( "nit "+ billerDataEntity.getNit() + " email: "+ billerDataEntity.getEmail() );
-        billerDataEntity.setCreatedDate(DateFormat.toDate());
+        System.out.println( "nit "+ billerDataEntity.nit + " email: "+ billerDataEntity.email );
+        billerDataEntity.createdDate = DateFormat.toDate();
         repository.save( billerDataEntity );
     }
 }

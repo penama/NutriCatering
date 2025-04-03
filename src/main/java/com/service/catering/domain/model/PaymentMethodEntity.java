@@ -17,4 +17,5 @@ public class PaymentMethodEntity {
     public String status;
     public String createdDate;
 
+
 }

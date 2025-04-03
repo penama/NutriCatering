@@ -19,8 +19,8 @@ public class ContractServiceRepository implements IQueryContractRepository {
     public ContractRepository repository;
 
     public void newContract(ContractEntity contractEntity ) throws Exception{
-        contractEntity.setId(UUID.randomUUID().toString());
-        contractEntity.setCreatedDate(DateFormat.toDate());
+        contractEntity.id = UUID.randomUUID().toString();
+        contractEntity.createdDate = DateFormat.toDate();
         repository.save(contractEntity);
     }
 

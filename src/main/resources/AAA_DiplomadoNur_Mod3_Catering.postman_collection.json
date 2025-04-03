@@ -1,0 +1,2219 @@
+{
+	"info": {
+		"_postman_id": "20c281e9-1a43-43ef-9a51-50e1628af27c",
+		"name": "AAA_DiplomadoNur_Mod3_Catering",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10095470"
+	},
+	"item": [
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "New",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let fname = pm.variables.replaceIn(\"{{$randomFirstName}}\");\r",
+									"\r",
+									"let lodash = require('lodash');\r",
+									"const randomNo = lodash.random(0, 2);\r",
+									"pm.environment.set( \"es_error\", randomNo )\r",
+									"if (randomNo == 0) {        \r",
+									"    pm.environment.set( \"customer_name\", '' )\r",
+									"    pm.environment.set( \"customer_id\", 0 )\r",
+									"} else {    \r",
+									"    pm.environment.set( \"customer_name\", fname )\r",
+									"    pm.environment.set( \"customer_id\", 0 )\r",
+									"}\r",
+									"console.log( fname + \" \" + randomNo );\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"pm.test(\"Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"console.log( pm.request.body )"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{customer_name}}\",\r\n    \"address\": \"{{$guid}}\",\r\n    \"phone\": \"{{random_number}}\",\r\n    \"birtDate\": \"10/10/2000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/api/v1/catering/customer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"catering",
+								"customer"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"marco\",\r\n    \"address\": \"Los Lotes\",\r\n    \"phone\": \"7304618\",\r\n    \"birtDate\": \"10/10/2000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8090/api/v1/catering/customer",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"api",
+										"v1",
+										"catering",
+										"customer"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "0"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 17 Dec 2024 02:38:07 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Usuarios",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"\r",
+									"const name = pm.environment.get(\"customer_name\");\r",
+									"const es_error = pm.environment.get(\"es_error\");\r",
+									"console.log( name )\r",
+									"pm.test( name + \" Customer encontrado en response\", function () {    \r",
+									"    var jsonArr = pm.response.json();\r",
+									"    console.log( jsonArr );\r",
+									"    const filteredArr = jsonArr.filter(item => item.name === name);\r",
+									"    console.log( filteredArr);     \r",
+									"    console.log( filteredArr[0] )\r",
+									"    if (es_error == 0) {        \r",
+									"        pm.expect(filteredArr.length).to.eql(0);\r",
+									"        pm.environment.set( \"customer_id\", 0 );\r",
+									"        pm.expect( es_error ).to.eql( 0 );\r",
+									"    } else {\r",
+									"        pm.expect(filteredArr.length).to.eql(1);\r",
+									"        pm.environment.set( \"customer_id\", filteredArr[0].id );                \r",
+									"    }\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/v1/catering/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"catering",
+								"customers"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Usuarios",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8090/api/v1/catering/customers",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"api",
+										"v1",
+										"catering",
+										"customers"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 17 Dec 2024 02:38:13 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"0cfc6177-77d6-43ee-8ae4-94e7364e648f\",\n        \"name\": \"marco\",\n        \"address\": \"Los Lotes\",\n        \"phone\": \"7304618\",\n        \"birtDate\": \"10/10/2000\",\n        \"createdDate\": \"2024-12-16 22:38:07\",\n        \"status\": \"ACTIVE\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Usuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"pm.test(\"Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"console.log( pm.response.body );\r",
+									"1178014"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const customer_id = pm.environment.get( \"customer_id\" );\r",
+									"const es_error = pm.environment.get( \"es_error\" );\r",
+									"if (es_error == 0) {\r",
+									"    console.log( \"El campo nombre esta con valor nulo, aplica el error.\" )\r",
+									"    console.log( pm.request.url );\r",
+									"} else {\r",
+									"    const url = pm.request.url.toJSON();\r",
+									"    const index = url.variable.findIndex(item => item.key === 'id');\r",
+									"    url.variable[index].value = customer_id; \r",
+									"    pm.request.url = url;         \r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/v1/catering/customer/id/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"catering",
+								"customer",
+								"id",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "a1e8977b-d54f-4a7c-8069-115a84968011"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Usuarios",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8090/api/v1/catering/customers",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"api",
+										"v1",
+										"catering",
+										"customers"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 17 Dec 2024 02:38:13 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"0cfc6177-77d6-43ee-8ae4-94e7364e648f\",\n        \"name\": \"marco\",\n        \"address\": \"Los Lotes\",\n        \"phone\": \"7304618\",\n        \"birtDate\": \"10/10/2000\",\n        \"createdDate\": \"2024-12-16 22:38:07\",\n        \"status\": \"ACTIVE\"\n    }\n]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "PaymentMethod",
+			"item": [
+				{
+					"name": "PaymentMethod Efectivo",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let fname = \"Efectivo\";\r",
+									"\r",
+									"let lodash = require('lodash');\r",
+									"const randomNo = lodash.random(0, 1);\r",
+									"pm.environment.set( \"es_error\", randomNo )\r",
+									"if (randomNo == 0) {        \r",
+									"    pm.environment.set( \"paymentMethod_name\", '' )    \r",
+									"} else {    \r",
+									"    pm.environment.set( \"paymentMethod_name\", fname )    \r",
+									"}\r",
+									"console.log( fname + \" \" + randomNo );\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"pm.test(\"Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"console.log( pm.request.body )"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \r\n    \"name\": \"{{paymentMethod_name}}\",\r\n    \"label\": \"EFECT\",\r\n    \"description\": \"Pago en efectivo\",\r\n    \"type\": \"EFECTIVO\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/api/v1/catering/paymentMethod",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"catering",
+								"paymentMethod"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "PaymentMethod Efectivo",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{    \r\n    \"name\": \"Efectivo\",\r\n    \"label\": \"EFECT\",\r\n    \"description\": \"Pago en efectivo\",\r\n    \"type\": \"EFECTIVO\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8090/api/v1/catering/paymentMethod",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"api",
+										"v1",
+										"catering",
+										"paymentMethod"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "0"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 17 Dec 2024 01:35:25 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "PaymentMethod QR",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"QR\",\r\n    \"label\": \"Pago QR\",\r\n    \"description\": \"Pago en QR\",\r\n    \"type\": \"TRANSFERENCIA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/api/v1/catering/paymentMethod",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"catering",
+								"paymentMethod"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "PaymentMethod QR",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"QR\",\r\n    \"label\": \"Pago QR\",\r\n    \"description\": \"Pago en QR\",\r\n    \"type\": \"TRANSFERENCIA\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8090/api/v1/catering/paymentMethod",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"api",
+										"v1",
+										"catering",
+										"paymentMethod"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "0"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 17 Dec 2024 01:37:01 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "PaymentMethod",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const es_error = pm.environment.get(\"es_error\");\r",
+									"\r",
+									"pm.test( es_error + \" No registro el método de pago.\", function () {        \r",
+									"        pm.expect( es_error ).to.eql( 0 );\r",
+									"});\r",
+									"\r",
+									"pm.test( es_error + \" resgistro correcto\", function () {            \r",
+									"        pm.expect( es_error ).to.eql( 1 ); \r",
+									"        var jsonArr = pm.response.json();   \r",
+									"        pm.environment.set( \"paymentMethod_id\", jsonArr[0].id );\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/v1/catering/paymentMethods",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"catering",
+								"paymentMethods"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "PaymentMethod",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8090/api/v1/catering/paymentMethods",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"api",
+										"v1",
+										"catering",
+										"paymentMethods"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 17 Dec 2024 01:37:45 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"0f585ebf-63ce-4bab-a063-4bc4b495293c\",\n        \"name\": \"Efectivo\",\n        \"label\": \"EFECT\",\n        \"description\": \"Pago en efectivo\",\n        \"type\": \"EFECTIVO\",\n        \"status\": \"ACTIVE\",\n        \"createdDate\": \"2024-12-16 21:35:25\"\n    },\n    {\n        \"id\": \"de3cd412-7e12-44cc-a7e2-3f0673bae115\",\n        \"name\": \"QR\",\n        \"label\": \"Pago QR\",\n        \"description\": \"Pago en QR\",\n        \"type\": \"TRANSFERENCIA\",\n        \"status\": \"ACTIVE\",\n        \"createdDate\": \"2024-12-16 21:37:01\"\n    }\n]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Contract",
+			"item": [
+				{
+					"name": "Create Contract",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const body = {\r",
+									"    \"description\": \"contrato de catering por 10 meses\",\r",
+									"    \"cateringPlan\": {\r",
+									"        \"id\": \"{{$guid}}\"\r",
+									"    },\r",
+									"    \"customer\": {\r",
+									"        \"id\": \"c9d4ac7b-657c-4dd4-87a8-fe02887e2563\"\r",
+									"    },\r",
+									"    \"totalAmount\": \"5000\",\r",
+									"    \"quotas\": \"5\"\r",
+									"}; \r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"contrato de catering por 10 meses\",\r\n    \"cateringPlan\": {\r\n        \"id\": \"{{$guid}}\"\r\n    },\r\n    \"customer\": {\r\n        \"id\": \"c9d4ac7b-657c-4dd4-87a8-fe02887e2563\"\r\n    },\r\n    \"totalAmount\": \"5000\",\r\n    \"quotas\": \"5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/api/v1/catering/contract",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"catering",
+								"contract"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Craate Contract",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"description\": \"contrato de catering por 10 meses\",\r\n    \"cateringPlan\": {\r\n        \"id\": \"{{$guid}}\"\r\n    },\r\n    \"customer\": {\r\n        \"id\": \"ac5441df-9e26-4857-8692-a582fd88b28e\"\r\n    },\r\n    \"totalAmount\": \"5000\",\r\n    \"quotas\": \"5\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8090/api/v1/catering/contract",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"api",
+										"v1",
+										"catering",
+										"contract"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "0"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 17 Dec 2024 04:31:01 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Create Contract Prueba",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const customerId = pm.environment.get( \"customer_id\" );\r",
+									"const body_customer = \" \\\"customer\\\": { \\\"id\\\": \\\"\" + customerId + \"\\\" }, \";\r",
+									"const body_customer_vacio = \"\";\r",
+									"pm.environment.set( \"contract_customerId\", customerId );\r",
+									"let lodash = require('lodash');\r",
+									"const randomNo = lodash.random(0, 1);\r",
+									"pm.environment.set( \"es_error\", randomNo )\r",
+									"if (randomNo == 0) {        \r",
+									"    pm.environment.set( \"contract_customer\", body_customer_vacio )    \r",
+									"} else {    \r",
+									"    pm.environment.set( \"contract_customer\", body_customer )    \r",
+									"}\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"contrato de catering por 10 meses\",\r\n    \"cateringPlan\": {\r\n        \"id\": \"{{$guid}}\"\r\n    },\r\n    {{contract_customer}}\r\n    \"totalAmount\": \"5000\",\r\n    \"quotas\": \"5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/api/v1/catering/contract",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"catering",
+								"contract"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Craate Contract",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"description\": \"contrato de catering por 10 meses\",\r\n    \"cateringPlan\": {\r\n        \"id\": \"{{$guid}}\"\r\n    },\r\n    \"customer\": {\r\n        \"id\": \"ac5441df-9e26-4857-8692-a582fd88b28e\"\r\n    },\r\n    \"totalAmount\": \"5000\",\r\n    \"quotas\": \"5\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8090/api/v1/catering/contract",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"api",
+										"v1",
+										"catering",
+										"contract"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "0"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 17 Dec 2024 04:31:01 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Get Contracts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"\r",
+									"const contract_customerId = pm.environment.get(\"contract_customerId\");\r",
+									"const es_error = pm.environment.get(\"es_error\");\r",
+									"console.log( contract_customerId )\r",
+									"const jsonArr = pm.response.json();\r",
+									"    //console.log( jsonArr[0].id );\r",
+									"    //const jsonobj = JSON.\r",
+									"pm.test( contract_customerId + \" CustomerId encontrado en response\", function () {    \r",
+									"    const jsonArr = pm.response.json();\r",
+									"    console.log( \"antes del array primera vez\" );\r",
+									"    console.log( jsonArr );\r",
+									"    const filteredArr = jsonArr.filter(item => item.customer.id === contract_customerId);\r",
+									"    console.log( \"2da vez\" );\r",
+									"    console.log( filteredArr);  \r",
+									"    const json = filteredArr;   \r",
+									"    //console.log( \"test - \" + json[0].id )\r",
+									"    if (es_error == 0) {        \r",
+									"        pm.expect(filteredArr.length).to.eql(0);\r",
+									"        pm.expect( es_error ).to.eql( 0 );\r",
+									"    } else {\r",
+									"        pm.expect(filteredArr.length).to.eql(1);                \r",
+									"        pm.environment.set(\"contract_id\", filteredArr[0].id);\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/v1/catering/contracts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"catering",
+								"contracts"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Contract Copy",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8090/api/v1/catering/contracts",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"api",
+										"v1",
+										"catering",
+										"contracts"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 17 Dec 2024 04:21:52 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"2d78b547-0ebe-4225-904e-96e2ad0db7b8\",\n        \"description\": \"contrato de catering por 5 meses\",\n        \"creationDate\": \"2024-12-17 00:21:04\",\n        \"status\": \"ACTIVE\",\n        \"cateringPlan\": {\n            \"id\": \"fb0e773e-6935-4859-b5ed-fc2a5a138db8\"\n        },\n        \"customer\": {\n            \"id\": \"27b4ac16-bd18-4da2-95c9-1366c3d94ec9\"\n        },\n        \"totalAmount\": 1000,\n        \"quotas\": 5\n    },\n    {\n        \"id\": \"0b5f4a6c-9d73-42c5-bd73-df7542778fd3\",\n        \"description\": \"contrato de catering por 10 meses\",\n        \"creationDate\": \"2024-12-17 00:21:44\",\n        \"status\": \"ACTIVE\",\n        \"cateringPlan\": {\n            \"id\": \"00f261cb-39ad-45ee-9123-3b54475dafa4\"\n        },\n        \"customer\": {\n            \"id\": \"27b4ac16-bd18-4da2-95c9-1366c3d94ec9\"\n        },\n        \"totalAmount\": 5000,\n        \"quotas\": 5\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get Contract",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"\r",
+									"const contract_id = pm.environment.get(\"contract_id\");\r",
+									"const es_error = pm.environment.get(\"es_error\");\r",
+									"console.log( contract_id )\r",
+									"pm.test( contract_id + \" ContractId encontrado en response\", function () {    \r",
+									"    var jsonArr = pm.response.json();\r",
+									"    console.log( jsonArr );\r",
+									"    // const filteredArr = jsonArr.filter(item => item.id === contract_id);\r",
+									"    //console.log( filteredArr);     \r",
+									"    //console.log( filteredArr[0] )\r",
+									"    if (es_error == 0) {        \r",
+									"        pm.expect(jsonArr).to.NaN;\r",
+									"        pm.expect( es_error ).to.eql( 0 );\r",
+									"    } else {\r",
+									"        pm.expect(jsonArr.id).to.eql( contract_id );                \r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/v1/catering/contract/:contractId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"catering",
+								"contract",
+								":contractId"
+							],
+							"variable": [
+								{
+									"key": "contractId",
+									"value": "{{contract_id}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Craate Contract Copy",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8090/api/v1/catering/contract/:contractId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"api",
+										"v1",
+										"catering",
+										"contract",
+										":contractId"
+									],
+									"variable": [
+										{
+											"key": "contractId",
+											"value": "2d78b547-0ebe-4225-904e-96e2ad0db7b8"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 17 Dec 2024 04:22:04 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"2d78b547-0ebe-4225-904e-96e2ad0db7b8\",\n    \"description\": \"contrato de catering por 5 meses\",\n    \"creationDate\": \"2024-12-17 00:21:04\",\n    \"status\": \"ACTIVE\",\n    \"cateringPlan\": {\n        \"id\": \"fb0e773e-6935-4859-b5ed-fc2a5a138db8\"\n    },\n    \"customer\": {\n        \"id\": \"27b4ac16-bd18-4da2-95c9-1366c3d94ec9\"\n    },\n    \"totalAmount\": 1000,\n    \"quotas\": 5\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Contract CustomerId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"\r",
+									"const contract_customerId = pm.environment.get(\"contract_customerId\");\r",
+									"const es_error = pm.environment.get(\"es_error\");\r",
+									"console.log( contract_customerId )\r",
+									"pm.test( contract_customerId + \" CustomerId encontrado en response\", function () {    \r",
+									"    var jsonArr = pm.response.json();\r",
+									"    console.log( jsonArr );\r",
+									"    //const filteredArr = jsonArr.filter(item => item.id === contract_id);\r",
+									"    //console.log( filteredArr);     \r",
+									"    //console.log( filteredArr[0] )\r",
+									"    if (es_error == 0) {        \r",
+									"        pm.expect(jsonArr).to.NaN;\r",
+									"        pm.expect( es_error ).to.eql( 0 );\r",
+									"    } else {\r",
+									"        pm.expect(jsonArr[0].customer.id).to.eql( contract_customerId );                \r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/v1/catering/customer/:customerId/contracts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"catering",
+								"customer",
+								":customerId",
+								"contracts"
+							],
+							"variable": [
+								{
+									"key": "customerId",
+									"value": "{{contract_customerId}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Contract Copy",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8090/api/v1/catering/customer/:customerId/contracts",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"api",
+										"v1",
+										"catering",
+										"customer",
+										":customerId",
+										"contracts"
+									],
+									"variable": [
+										{
+											"key": "customerId",
+											"value": "ac5441df-9e26-4857-8692-a582fd88b28e"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 17 Dec 2024 04:31:08 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"4528ec01-d433-4311-8b27-aa26739780ae\",\n        \"description\": \"contrato de catering por 10 meses\",\n        \"creationDate\": \"2024-12-17 00:31:01\",\n        \"status\": \"ACTIVE\",\n        \"cateringPlan\": {\n            \"id\": \"9addaf51-4d4d-416f-a8cd-487e6c57d7d6\"\n        },\n        \"customer\": {\n            \"id\": \"ac5441df-9e26-4857-8692-a582fd88b28e\"\n        },\n        \"totalAmount\": 5000,\n        \"quotas\": 5\n    }\n]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Get Orders",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"\r",
+									"const contract_id = pm.environment.get(\"contract_id\");\r",
+									"const es_error = pm.environment.get(\"es_error\");\r",
+									"console.log( contract_id )\r",
+									"pm.test( contract_id + \" ContractId encontrado en response\", function () {    \r",
+									"    var jsonArr = pm.response.json();\r",
+									"    console.log( jsonArr );\r",
+									"    //const filteredArr = jsonArr.filter(item => item.id === contract_id);\r",
+									"    //console.log( filteredArr);     \r",
+									"    //console.log( filteredArr[0] )\r",
+									"    if (es_error == 0) {        \r",
+									"        pm.expect(jsonArr).to.NaN;\r",
+									"        pm.expect( es_error ).to.eql( 0 );\r",
+									"    } else {\r",
+									"        pm.expect(jsonArr[0].contract.id).to.eql( contract_id );                \r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/v1/catering/orders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"catering",
+								"orders"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Orders",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8090/api/v1/catering/orders",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"api",
+										"v1",
+										"catering",
+										"orders"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 17 Dec 2024 04:31:55 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"f36aefa4-1221-4eb6-bb1f-349b00e63d80\",\n        \"description\": \"contrato de catering por 10 meses - 0\",\n        \"creationDate\": \"2024-12-17 00:31:01\",\n        \"status\": \"ACTIVE\",\n        \"amount\": 1000,\n        \"contract\": {\n            \"id\": \"4528ec01-d433-4311-8b27-aa26739780ae\"\n        }\n    },\n    {\n        \"id\": \"e3de4288-1c67-4845-9c81-b9fef94c37c9\",\n        \"description\": \"contrato de catering por 10 meses - 1\",\n        \"creationDate\": \"2024-12-17 00:31:01\",\n        \"status\": \"ACTIVE\",\n        \"amount\": 1000,\n        \"contract\": {\n            \"id\": \"4528ec01-d433-4311-8b27-aa26739780ae\"\n        }\n    },\n    {\n        \"id\": \"cd5fd748-316a-4fca-961f-32e9b05afbf8\",\n        \"description\": \"contrato de catering por 10 meses - 2\",\n        \"creationDate\": \"2024-12-17 00:31:01\",\n        \"status\": \"ACTIVE\",\n        \"amount\": 1000,\n        \"contract\": {\n            \"id\": \"4528ec01-d433-4311-8b27-aa26739780ae\"\n        }\n    },\n    {\n        \"id\": \"8b5f6426-ce6d-4cf3-bb02-85d8d3053fbf\",\n        \"description\": \"contrato de catering por 10 meses - 3\",\n        \"creationDate\": \"2024-12-17 00:31:01\",\n        \"status\": \"ACTIVE\",\n        \"amount\": 1000,\n        \"contract\": {\n            \"id\": \"4528ec01-d433-4311-8b27-aa26739780ae\"\n        }\n    },\n    {\n        \"id\": \"65bea6cf-47e8-4c67-b5f3-7fbc0e4db30e\",\n        \"description\": \"contrato de catering por 10 meses - 4\",\n        \"creationDate\": \"2024-12-17 00:31:01\",\n        \"status\": \"ACTIVE\",\n        \"amount\": 1000,\n        \"contract\": {\n            \"id\": \"4528ec01-d433-4311-8b27-aa26739780ae\"\n        }\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get Orders ContractId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"\r",
+									"const contract_id = pm.environment.get(\"contract_id\");\r",
+									"const es_error = pm.environment.get(\"es_error\");\r",
+									"console.log( contract_id )\r",
+									"pm.test( contract_id + \" ContractId encontrado en response\", function () {    \r",
+									"    var jsonArr = pm.response.json();\r",
+									"    console.log( jsonArr );\r",
+									"    //const filteredArr = jsonArr.filter(item => item.id === contract_id);\r",
+									"    //console.log( filteredArr);     \r",
+									"    //console.log( filteredArr[0] )\r",
+									"    if (es_error == 0) {        \r",
+									"        pm.expect(jsonArr).to.NaN;\r",
+									"        pm.expect( es_error ).to.eql( 0 );\r",
+									"    } else {\r",
+									"        pm.expect(jsonArr[0].contract.id).to.eql( contract_id );                \r",
+									"        pm.environment.set(\"order_id\", jsonArr[0].id);\r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/v1/catering/orders/:contractId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"catering",
+								"orders",
+								":contractId"
+							],
+							"variable": [
+								{
+									"key": "contractId",
+									"value": "{{contract_id}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Orders ContractId",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8090/api/v1/catering/orders/:contractId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"api",
+										"v1",
+										"catering",
+										"orders",
+										":contractId"
+									],
+									"variable": [
+										{
+											"key": "contractId",
+											"value": "4528ec01-d433-4311-8b27-aa26739780ae"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 17 Dec 2024 04:32:51 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"f36aefa4-1221-4eb6-bb1f-349b00e63d80\",\n        \"description\": \"contrato de catering por 10 meses - 0\",\n        \"creationDate\": \"2024-12-17 00:31:01\",\n        \"status\": \"ACTIVE\",\n        \"amount\": 1000,\n        \"contract\": {\n            \"id\": \"4528ec01-d433-4311-8b27-aa26739780ae\"\n        }\n    },\n    {\n        \"id\": \"e3de4288-1c67-4845-9c81-b9fef94c37c9\",\n        \"description\": \"contrato de catering por 10 meses - 1\",\n        \"creationDate\": \"2024-12-17 00:31:01\",\n        \"status\": \"ACTIVE\",\n        \"amount\": 1000,\n        \"contract\": {\n            \"id\": \"4528ec01-d433-4311-8b27-aa26739780ae\"\n        }\n    },\n    {\n        \"id\": \"cd5fd748-316a-4fca-961f-32e9b05afbf8\",\n        \"description\": \"contrato de catering por 10 meses - 2\",\n        \"creationDate\": \"2024-12-17 00:31:01\",\n        \"status\": \"ACTIVE\",\n        \"amount\": 1000,\n        \"contract\": {\n            \"id\": \"4528ec01-d433-4311-8b27-aa26739780ae\"\n        }\n    },\n    {\n        \"id\": \"8b5f6426-ce6d-4cf3-bb02-85d8d3053fbf\",\n        \"description\": \"contrato de catering por 10 meses - 3\",\n        \"creationDate\": \"2024-12-17 00:31:01\",\n        \"status\": \"ACTIVE\",\n        \"amount\": 1000,\n        \"contract\": {\n            \"id\": \"4528ec01-d433-4311-8b27-aa26739780ae\"\n        }\n    },\n    {\n        \"id\": \"65bea6cf-47e8-4c67-b5f3-7fbc0e4db30e\",\n        \"description\": \"contrato de catering por 10 meses - 4\",\n        \"creationDate\": \"2024-12-17 00:31:01\",\n        \"status\": \"ACTIVE\",\n        \"amount\": 1000,\n        \"contract\": {\n            \"id\": \"4528ec01-d433-4311-8b27-aa26739780ae\"\n        }\n    }\n]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Payment",
+			"item": [
+				{
+					"name": "Payment",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set( \"payment_nit\", \"101983493\");\r",
+									"pm.environment.set( \"payment_razonsocial\", \"Juan Perez\");\r",
+									"\r",
+									"const orderId = pm.environment.get( \"order_id\");\r",
+									"const body_order = \"\\\"order\\\":{\\\"id\\\": \\\"\" + orderId + \"\\\" },\";\r",
+									"const body_order_vacio = \"\";\r",
+									"pm.environment.set( \"payment_orderId\", orderId );\r",
+									"let lodash = require('lodash');\r",
+									"const randomNo = lodash.random(0, 1);\r",
+									"pm.environment.set( \"es_error\", randomNo )\r",
+									"if (randomNo == 0) {        \r",
+									"    pm.environment.set( \"payment_order\", body_order_vacio )    \r",
+									"} else {    \r",
+									"    pm.environment.set( \"payment_order\", body_order )    \r",
+									"}\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \r\n    \"paymentMethod\": {\r\n        \"id\": \"{{paymentMethod_id}}\"\r\n    },\r\n    \"price\": {\r\n        \"amount\": 100.0,\r\n        \"currency\": \"BOB\"\r\n    },\r\n    {{payment_order}}\r\n    \"billingInvoice\": {\r\n        \"customerId\": \"{{customer_id}}\",\r\n        \"contract\": \"{{contract_id}}\",\r\n        \"billerData\": {\r\n            \"socialReason\": \"{{payment_razonsocial}}\",\r\n            \"nit\": \"{{payment_nit}}\",\r\n            \"email\": \"jaun.perez@gmail.com\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/api/v1/catering/payment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"catering",
+								"payment"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Payment",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{    \r\n    \"paymentMethod\": {\r\n        \"id\": \"6e1fd9c7-c5a0-4094-88ec-a5cc47dee333\"\r\n    },\r\n    \"price\": {\r\n        \"amount\": 20.0,\r\n        \"currency\": \"BOB\"\r\n    },\r\n    \"order\":{\r\n        \"id\": \"d8286daa-5e52-4f47-b3c2-f2c807f37a5e\"\r\n    },     \r\n    \"billingInvoice\": {\r\n        \"customerId\": \"234234\",\r\n        \"contract\": \"35343\",\r\n        \"billerData\": {\r\n            \"socialReason\": \"Juan Perez\",\r\n            \"nit\": \"101983493\",\r\n            \"email\": \"jaun.perez@gmail.com\"\r\n        }\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8090/api/v1/catering/payment",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"api",
+										"v1",
+										"catering",
+										"payment"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "0"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 17 Dec 2024 05:07:09 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Payments",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"\r",
+									"const payment_orderId = pm.environment.get(\"payment_orderId\");\r",
+									"const es_error = pm.environment.get(\"es_error\");\r",
+									"console.log( payment_orderId )\r",
+									"pm.test( payment_orderId + \" orderId encontrado en response\", function () {    \r",
+									"    var jsonArr = pm.response.json();\r",
+									"    console.log( jsonArr );\r",
+									"    const filteredArr = jsonArr.filter(item => item.order.id === payment_orderId);\r",
+									"    console.log( filteredArr);     \r",
+									"    console.log( filteredArr[0] )\r",
+									"    if (es_error == 0) {        \r",
+									"        pm.expect(filteredArr.length).to.eql(0);\r",
+									"        pm.expect( es_error ).to.eql( 0 );\r",
+									"    } else {\r",
+									"        pm.expect(filteredArr.length).to.be.greaterThan(0);                \r",
+									"        pm.environment.set(\"payment_id\", filteredArr[0].id);\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/v1/catering/payments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"catering",
+								"payments"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Payment Copy",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8090/api/v1/catering/payments",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"api",
+										"v1",
+										"catering",
+										"payments"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 17 Dec 2024 05:07:15 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"f671cdc7-8eaa-4771-aaf1-51aad2b9f238\",\n        \"createdDate\": \"2024-12-17 01:07:09\",\n        \"status\": \"PAID\",\n        \"paymentMethod\": {\n            \"id\": \"6e1fd9c7-c5a0-4094-88ec-a5cc47dee333\"\n        },\n        \"price\": {\n            \"amount\": 20,\n            \"currency\": \"BOB\"\n        },\n        \"order\": {\n            \"id\": \"d8286daa-5e52-4f47-b3c2-f2c807f37a5e\"\n        },\n        \"billingInvoice\": null\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Payments OrderId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"\r",
+									"const payment_orderId = pm.environment.get(\"payment_orderId\");\r",
+									"const es_error = pm.environment.get(\"es_error\");\r",
+									"console.log( payment_orderId )\r",
+									"pm.test( payment_orderId + \" orderId encontrado en response\", function () {    \r",
+									"    var jsonArr = pm.response.json();\r",
+									"    console.log( jsonArr );\r",
+									"    const filteredArr = jsonArr.filter(item => item.order.id === payment_orderId);\r",
+									"    console.log( filteredArr);     \r",
+									"    console.log( filteredArr[0] )\r",
+									"    if (es_error == 0) {        \r",
+									"        pm.expect(filteredArr.length).to.eql(0);\r",
+									"        pm.expect( es_error ).to.eql( 0 );\r",
+									"    } else {\r",
+									"        pm.expect(filteredArr.length).to.be.greaterThan(0);                \r",
+									"        pm.environment.set(\"payment_id\", filteredArr[0].id);\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/v1/catering/order/:orderId/payments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"catering",
+								"order",
+								":orderId",
+								"payments"
+							],
+							"variable": [
+								{
+									"key": "orderId",
+									"value": "{{order_id}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Payments Copy",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8090/api/v1/catering/order/:orderId/payments",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"api",
+										"v1",
+										"catering",
+										"order",
+										":orderId",
+										"payments"
+									],
+									"variable": [
+										{
+											"key": "orderId",
+											"value": "d8286daa-5e52-4f47-b3c2-f2c807f37a5e"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 17 Dec 2024 05:07:46 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"f671cdc7-8eaa-4771-aaf1-51aad2b9f238\",\n        \"createdDate\": \"2024-12-17 01:07:09\",\n        \"status\": \"PAID\",\n        \"paymentMethod\": {\n            \"id\": \"6e1fd9c7-c5a0-4094-88ec-a5cc47dee333\"\n        },\n        \"price\": {\n            \"amount\": 20,\n            \"currency\": \"BOB\"\n        },\n        \"order\": {\n            \"id\": \"d8286daa-5e52-4f47-b3c2-f2c807f37a5e\"\n        },\n        \"billingInvoice\": null\n    }\n]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "BillerData",
+			"item": [
+				{
+					"name": "BillersData",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"\r",
+									"const payment_nit = pm.environment.get(\"payment_nit\");\r",
+									"const customer_id = pm.environment.get(\"customer_id\");\r",
+									"\r",
+									"const es_error = pm.environment.get(\"es_error\");\r",
+									"console.log( payment_nit )\r",
+									"pm.test( payment_nit + \" orderId encontrado en response\", function () {    \r",
+									"    var jsonArr = pm.response.json();\r",
+									"    console.log( jsonArr );\r",
+									"    const filteredArr = jsonArr.filter(item => item.customer.id === customer_id);\r",
+									"    console.log( filteredArr);     \r",
+									"    console.log( filteredArr[0] )\r",
+									"    if (es_error == 0) {        \r",
+									"        pm.expect(filteredArr.length).to.eql(0);\r",
+									"        pm.expect( es_error ).to.eql( 0 );\r",
+									"    } else {\r",
+									"        pm.expect(filteredArr[0].nit).to.eql( payment_nit );                        \r",
+									"    }\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/v1/catering/billersData",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"catering",
+								"billersData"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Craate Contract Copy",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8090/api/v1/catering/contract/:contractId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"api",
+										"v1",
+										"catering",
+										"contract",
+										":contractId"
+									],
+									"variable": [
+										{
+											"key": "contractId",
+											"value": "2d78b547-0ebe-4225-904e-96e2ad0db7b8"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 17 Dec 2024 04:22:04 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"2d78b547-0ebe-4225-904e-96e2ad0db7b8\",\n    \"description\": \"contrato de catering por 5 meses\",\n    \"creationDate\": \"2024-12-17 00:21:04\",\n    \"status\": \"ACTIVE\",\n    \"cateringPlan\": {\n        \"id\": \"fb0e773e-6935-4859-b5ed-fc2a5a138db8\"\n    },\n    \"customer\": {\n        \"id\": \"27b4ac16-bd18-4da2-95c9-1366c3d94ec9\"\n    },\n    \"totalAmount\": 1000,\n    \"quotas\": 5\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Invoice",
+			"item": [
+				{
+					"name": "Invoices",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"\r",
+									"const payment_nit = pm.environment.get(\"payment_nit\");\r",
+									"const customer_id = pm.environment.get(\"customer_id\");\r",
+									"\r",
+									"const es_error = pm.environment.get(\"es_error\");\r",
+									"console.log( payment_nit )\r",
+									"pm.test( payment_nit + \" orderId encontrado en response\", function () {    \r",
+									"    var jsonArr = pm.response.json();\r",
+									"    console.log( jsonArr );\r",
+									"    const filteredArr = jsonArr.filter(item => item.customerNit === payment_nit);\r",
+									"    console.log( filteredArr);     \r",
+									"    console.log( filteredArr[0] )\r",
+									"    if (es_error == 0) {        \r",
+									"        pm.expect(filteredArr.length).to.eql(0);\r",
+									"        pm.expect( es_error ).to.eql( 0 );\r",
+									"    } else {\r",
+									"        pm.expect(filteredArr.length).to.be.greaterThan(0);                        \r",
+									"    }\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/v1/catering/invoices",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"catering",
+								"invoices"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Craate Contract Copy",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8090/api/v1/catering/contract/:contractId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8090",
+									"path": [
+										"api",
+										"v1",
+										"catering",
+										"contract",
+										":contractId"
+									],
+									"variable": [
+										{
+											"key": "contractId",
+											"value": "2d78b547-0ebe-4225-904e-96e2ad0db7b8"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 17 Dec 2024 04:22:04 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"2d78b547-0ebe-4225-904e-96e2ad0db7b8\",\n    \"description\": \"contrato de catering por 5 meses\",\n    \"creationDate\": \"2024-12-17 00:21:04\",\n    \"status\": \"ACTIVE\",\n    \"cateringPlan\": {\n        \"id\": \"fb0e773e-6935-4859-b5ed-fc2a5a138db8\"\n    },\n    \"customer\": {\n        \"id\": \"27b4ac16-bd18-4da2-95c9-1366c3d94ec9\"\n    },\n    \"totalAmount\": 1000,\n    \"quotas\": 5\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "customer_name",
+			"value": "sd",
+			"type": "string"
+		},
+		{
+			"key": "customer_phone",
+			"value": "7701",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "es_error",
+			"value": "0",
+			"type": "string"
+		},
+		{
+			"key": "customer_id",
+			"value": "0",
+			"type": "string"
+		}
+	]
+}
