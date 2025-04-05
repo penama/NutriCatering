@@ -45,7 +45,7 @@ jobs:
     - name: Test
       run: mvn test
     - name: Coverage
-      run: mvn clean verify
+      run: mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Pcoverage
     - name: Package
       run: mvn package -DskipTests
     #- name: Build with Maven
