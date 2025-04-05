@@ -28,6 +28,7 @@ public class ContractService extends BaseService {
 
     @Transactional( propagation = Propagation.REQUIRED)
     public void newContract(ContractDto  contractDto) throws Exception {
+		// probandos.
         ContractEntity contractEntity = ContractUtil.contractDtoToContractEntity( contractDto );
         contractEntity.setStatus(ContractStatus.ACTIVE.name());
         commandHandler( this, contractEntity );
