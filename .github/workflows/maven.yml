@@ -44,6 +44,8 @@ jobs:
       run: mvn clean compile
     - name: Test
       run: mvn test
+    - name: Coverage
+      run: mvn clean verify
     - name: Package
       run: mvn package -DskipTests
     #- name: Build with Maven
