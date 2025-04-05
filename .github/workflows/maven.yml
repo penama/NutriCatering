@@ -49,11 +49,14 @@ jobs:
     - name: Coverage Sonar
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: mvn -Dsonar.coverage.jacoco.xmlReportPaths=../target/site/jacoco/jacoco.xml \
-        org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-        -Dsonar.projectKey=penama_NutriCatering \
-        -Dsonar.organization=penama \
-        -Dsonar.host.url=https://sonarcloud.io    
+      run: |
+        mvn verify \
+          -Dsonar.projectKey=penama_NutriCatering \
+          -Dsonar.organization=penama \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
+          -Dsonar.coverage.jacoco.xmlReportPaths=../target/site/jacoco/jacoco.xml \
+          org.sonarsource.scanner.maven:sonar-maven-plugin:3.11.0.3922:sonar
     - name: Package
       run: mvn package -DskipTests
     #- name: Build with Maven
