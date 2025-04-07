@@ -50,6 +50,7 @@ public class ContractService extends BaseService {
         for (ContractEntity contractEntity : contractEntities) {
             contractDtos.add( ContractUtil.contractEntityToContractDto(contractEntity) );
         }
+		// prueba.
         return contractDtos;
     }
 
