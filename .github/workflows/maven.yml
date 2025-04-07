@@ -54,7 +54,7 @@ jobs:
           -Dsonar.projectKey=penama_NutriCatering \
           -Dsonar.organization=penama \
           -Dsonar.host.url=https://sonarcloud.io \
-          -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
+          -Dsonar.token=${{ secrets.SONAR_TOKEN }} \
           -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \
           org.sonarsource.scanner.maven:sonar-maven-plugin:3.11.0.3922:sonar
     - name: Package
