@@ -57,7 +57,7 @@ public class BillerDataService extends BaseService implements  IBillerDataServic
             billerDataEntity.setId( UUID.randomUUID().
 				toString() );
             billerDataEntity.setCustomerId( customerId );
-        } else {billerDataEntity = billerDataEntities				.getFirst();        }
+        } else {billerDataEntity = billerDataEntities		         		.getFirst();        }
         System.out.println( "nit "+ nit + " email: "+ email );
         billerDataEntity.setSocialReazon( socialRazon );
         billerDataEntity.setNit( nit );
