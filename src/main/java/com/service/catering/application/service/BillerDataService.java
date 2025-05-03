@@ -30,12 +30,19 @@ public class BillerDataService extends BaseService implements  IBillerDataServic
     }
 
     public List<BillerDataDto> getBillersData() throws Exception {
-        List<BillerDataEntity> billerDataEntities = iQueryBillerDataRepository.queryBillersData();
+        List<BillerDataEntity> billerDataEntities = iQueryBillerDataRepository.
+			queryBillersData();
         List<BillerDataDto> billerDataDtos = new ArrayList<>();
         for (BillerDataEntity billerDataEntity : billerDataEntities) {
-            billerDataDtos.add( BillerDataUtil.billerDataEntityToBillerDataDto(billerDataEntity) );
+            billerDataDtos.
+				add(
+					BillerDataUtil.
+						billerDataEntityToBillerDataDto(
+							billerDataEntity
+																) );
         }
-        return billerDataDtos;
+        return
+			billerDataDtos;
     }
 
     public List<BillerDataDto> getBillerDataByCustomerId( String customerId ) throws Exception {
@@ -49,15 +56,16 @@ public class BillerDataService extends BaseService implements  IBillerDataServic
 
     @Override
     @Transactional( propagation = Propagation.MANDATORY)
-    public void updateBillerData(String customerId, String socialRazon, String nit, String email) throws Exception {
+	public void updateBillerData(String customerId, String socialRazon, String nit, String email) throws Exception {
         List<BillerDataEntity> billerDataEntities = iQueryBillerDataRepository.queryBillerDataCustomerId( customerId );
         BillerDataEntity billerDataEntity = null;
         if ( billerDataEntities == null || billerDataEntities.isEmpty() ){
             billerDataEntity = new BillerDataEntity();
-            billerDataEntity.setId( UUID.randomUUID().
-				toString() );
+            billerDataEntity.setId( UUID.randomUUID().toString() );
             billerDataEntity.setCustomerId( customerId );
-        } else {billerDataEntity = billerDataEntities		         		.getFirst();        }
+        } else {
+			billerDataEntity = billerDataEntities.getFirst();
+		}
         System.out.println( "nit "+ nit + " email: "+ email );
         billerDataEntity.setSocialReazon( socialRazon );
         billerDataEntity.setNit( nit );
