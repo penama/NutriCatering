@@ -1,4 +1,7 @@
 #!/bin/sh
+echo "Formateando código..."
+./mvnw spotless:apply
+
 echo "🔍 Ejecutando pruebas unitarias antes del commit..."
 echo "ruta: $(pwd) "
 # Ejecutar pruebas unitarias con Maven
