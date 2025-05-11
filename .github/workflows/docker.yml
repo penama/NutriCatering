@@ -2,12 +2,10 @@ name: Docker build
 
 on:
   push:
-    branches:
-      - develop
+    branches: [ "modulo5-gitHubActions", "develop" ]
   pull_request:
     types: [opened, reopened]
-    branches:
-      - 'develop'
+    branches: [ "modulo5-gitHubActions", "develop" ]
 jobs:
   build:
     name: Build with Docker
