@@ -3,7 +3,7 @@ name: Docker build
 on:
   push:
     branches:
-    - develop
+    - modulo5
 #  pull_request:
 #    types: [opened, reopened]
 
