@@ -89,6 +89,25 @@
             <scope>runtime</scope>
         </dependency>
 
+		<!-- Sentry SDK para Spring Boot -->
+		<dependency>
+			<groupId>io.sentry</groupId>
+			<artifactId>sentry-spring-boot-starter</artifactId>
+			<version>7.9.0</version>
+		</dependency>
+
+		<!-- Sentry para Logback (si usas logback) -->
+		<dependency>
+			<groupId>io.sentry</groupId>
+			<artifactId>sentry-logback</artifactId>
+			<version>7.9.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.sentry</groupId>
+			<artifactId>sentry-spring-boot-starter-jakarta</artifactId>
+			<version>7.9.0</version>
+		</dependency>
 
         <!-- Adds validation support for entity classes -->
         <dependency>
@@ -126,6 +145,15 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>com.service.catering.CateringApplication</mainClass> <!-- Cambia esto a tu clase main -->
+					<arguments>
+						<argument>-javaagent:${project.basedir}/libs/sentry-opentelemetry-agent-7.9.0.jar</argument>
+						<argument>-Dsentry.auto-init=false</argument>
+						<argument>-jar</argument>
+						<argument>target/NutriCatering-0.0.1-SNAPSHOT.jar</argument>
+					</arguments>
+				</configuration>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
@@ -218,6 +246,43 @@
 <!--						</goals>-->
 <!--					</execution>-->
 <!--				</executions>-->
+			</plugin>
+
+
+			<plugin>
+				<groupId>io.sentry</groupId>
+				<artifactId>sentry-maven-plugin</artifactId>
+				<version>0.4.0</version>
+				<extensions>true</extensions>
+				<configuration>
+					<!-- for showing output of sentry-cli -->
+					<debugSentryCli>true</debugSentryCli>
+
+					<org>independiente-h2</org>
+
+					<project>nutri</project>
+
+					<!-- in case you're self hosting, provide the URL here -->
+					<!--<url>http://localhost:8000/</url>-->
+
+					<!-- provide your auth token via SENTRY_AUTH_TOKEN environment variable -->
+					<authToken>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</authToken>
+					<debugSentryCli>true</debugSentryCli>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<!-- Generates a source bundle and uploads it to Sentry -->
+							<!-- This enables source context, allowing you to see your source code as part of your stack traces in Sentry -->
+							<!-- Learn more about this feature in its dedicated "Source Context" docs page -->
+							<goal>uploadSourceBundle</goal>
+							<!--  Validates Sentry SDK dependency versions. -->
+							<!--  Mixing SDK dependency versions can result in build or run time errors. -->
+							<!--  If mixed versions are detected, the build will fail. -->
+							<goal>validateSdkDependencyVersions</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 
 
