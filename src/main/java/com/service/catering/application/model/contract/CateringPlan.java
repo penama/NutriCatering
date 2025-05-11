@@ -5,6 +5,5 @@ import lombok.Data;
 @Data
 public class CateringPlan {
 
-    public String id;
-
+  public String id;
 }

@@ -5,11 +5,10 @@ import lombok.Data;
 @Data
 public class OrderDto {
 
-    public String id;
-    public String description;
-    public String creationDate;
-    public String status;
-    public float amount;
-    public Contract contract;
-
+  public String id;
+  public String description;
+  public String creationDate;
+  public String status;
+  public float amount;
+  public Contract contract;
 }

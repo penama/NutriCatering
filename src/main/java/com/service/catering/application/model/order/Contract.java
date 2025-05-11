@@ -5,6 +5,5 @@ import lombok.Data;
 @Data
 public class Contract {
 
-    public String id;
-
+  public String id;
 }
