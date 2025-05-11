@@ -4,8 +4,6 @@ on:
   push:
     tags:
     - stage-*
-    branches:
-    - modulo5-gitHubActions
 
 jobs:
   build:
