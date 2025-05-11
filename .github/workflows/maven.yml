@@ -10,9 +10,10 @@ name: Java CI with Maven - Build y Package
 
 on:
   push:
-    branches: [ "modulo5-SonarQ" ]
+    branches: [ "develop" ]
   pull_request:
-    branches: [ "modulo5-SonarQ" ]
+    branches: [ "develop" ]
+
 
 jobs:
   build:

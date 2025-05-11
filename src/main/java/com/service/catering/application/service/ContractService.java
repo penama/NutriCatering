@@ -56,4 +56,5 @@ public class ContractService extends BaseService {
     if (contractEntity == null) throw new Exception(contractId + " Contract Not Found");
     return ContractUtil.contractEntityToContractDto(contractEntity);
   }
+
 }
