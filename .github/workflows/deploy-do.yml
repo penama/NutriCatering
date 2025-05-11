@@ -2,11 +2,8 @@ name: Staging to digitalocean
 
 on:
   push:
-    branches: [ "modulo5-gitHubActions" ]
     tags:
     - stage-*
-  pull_request:
-    branches: [ "modulo5-gitHubActions" ]
 
 jobs:
   build:
@@ -51,4 +48,4 @@ jobs:
          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
       - name: Provision Droplet and deploy container
-        run: doctl compute droplet create "NutriCenter" --image docker-20-04 --size s-1vcpu-1gb --region nyc1 --user-data-file deploy.sh --wait
+        run: doctl compute droplet create "$GIT_TAG" --image docker-22-04 --size s-1vcpu-1gb --region nyc1 --user-data-file deploy.sh --wait

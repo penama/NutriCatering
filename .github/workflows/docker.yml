@@ -2,10 +2,11 @@ name: Docker build
 
 on:
   push:
-    branches: [ "modulo5-gitHubActions" ]
+    branches:
+    - modulo5-gitHubActions
   pull_request:
     types: [opened, reopened]
-    branches: [ "modulo5-gitHubActions" ]
+
 jobs:
   build:
     name: Build with Docker
@@ -14,8 +15,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Build with Maven
-        run: ./mvnw clean package -DskipTests
+#      - name: Build with Maven
+#        run: ./mvnw clean package -DskipTests
 
       - name: Building the image from the Dockerfile
         uses: ./.github/action-docker
