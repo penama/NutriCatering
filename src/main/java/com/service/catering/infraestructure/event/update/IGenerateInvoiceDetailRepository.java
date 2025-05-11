@@ -4,6 +4,5 @@ import com.service.catering.domain.model.InvoiceDetailEntity;
 
 public interface IGenerateInvoiceDetailRepository {
 
-    public void generateInvoiceDetail( InvoiceDetailEntity invoiceDetailEntity ) throws Exception;
-
+  public void generateInvoiceDetail(InvoiceDetailEntity invoiceDetailEntity) throws Exception;
 }

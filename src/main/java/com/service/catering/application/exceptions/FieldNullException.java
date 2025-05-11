@@ -7,6 +7,5 @@ import lombok.Data;
 @AllArgsConstructor
 public class FieldNullException extends Exception {
 
-    String message;
-
+  String message;
 }

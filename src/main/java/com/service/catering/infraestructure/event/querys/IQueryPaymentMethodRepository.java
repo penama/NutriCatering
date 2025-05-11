@@ -1,11 +1,10 @@
 package com.service.catering.infraestructure.event.querys;
 
-import com.service.catering.domain.model.PaymentMethodEntity;
-
 import java.util.List;
+
+import com.service.catering.domain.model.PaymentMethodEntity;
 
 public interface IQueryPaymentMethodRepository {
 
-    public List<PaymentMethodEntity> queryPaymentMethod();
-
+  public List<PaymentMethodEntity> queryPaymentMethod();
 }
