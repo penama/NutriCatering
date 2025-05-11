@@ -2,10 +2,10 @@ name: Staging to digitalocean
 
 on:
   push:
-    tags:
-    - stage-*
-    branches:
-    - master
+#    tags:
+#    - stage-*
+#    branches:
+#    - master
 
 jobs:
   build:
