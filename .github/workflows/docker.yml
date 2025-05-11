@@ -3,15 +3,15 @@ name: Docker build
 on:
   pull_request:
     types: [opened, reopened]
-    branches:    
-      - 'master'
+    branches:
+      - 'modulo5-gitHubActions'
 jobs:
   build:
     name: Build with Docker
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2      
+      - uses: actions/checkout@v2
 
       - name: Building the image from the Dockerfile
         uses: ./.github/action-docker

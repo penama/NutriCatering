@@ -5,7 +5,7 @@ on:
     tags:
     - stage-*
   pull_request:
-    branches: [ "master" ]
+    branches: [ "modulo5-gitHubActions" ]
 
 jobs:
   build:
