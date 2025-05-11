@@ -54,7 +54,7 @@ public class ContractService extends BaseService {
   public ContractDto getContract(String contractId) throws Exception {
     ContractEntity contractEntity = iQueryContractRepository.queryContractId(contractId);
     if (contractEntity == null) {
-      throw new Exception(contractId + " Contract Not Found");
+      throw new Exception(contractId + " Contract Not Found..");
     }
     return ContractUtil.contractEntityToContractDto(contractEntity);
   }
