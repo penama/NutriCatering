@@ -2,11 +2,11 @@ name: Staging to digitalocean
 
 on:
   push:
-    branches: [ "modulo5-gitHubActions", "develop" ]
+    branches: [ "modulo5-gitHubActions" ]
     tags:
     - stage-*
   pull_request:
-    branches: [ "modulo5-gitHubActions", "develop" ]
+    branches: [ "modulo5-gitHubActions" ]
 
 jobs:
   build:

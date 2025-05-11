@@ -12,8 +12,6 @@ on:
   push:
     branches:
         - modulo5-gitHubActions
-  pull_request:
-    branches: [ "develop" ]
 
 jobs:
   build:
