@@ -4,8 +4,8 @@ on:
   push:
 #    tags:
 #    - stage-*
-#    branches:
-#    - master
+    branches:
+    - modulo4
 
 jobs:
   build:
