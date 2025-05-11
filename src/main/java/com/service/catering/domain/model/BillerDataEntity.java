@@ -3,20 +3,15 @@ package com.service.catering.domain.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
-@Entity( name = "BillerData")
+@Entity(name = "BillerData")
 @Data
 public class BillerDataEntity {
 
-    @Id
-    public String id;
-    public String socialReazon;
-    public String nit;
-    public String email;
-    public String customerId;
-    public String createdDate;
-
-
+  @Id public String id;
+  public String socialReazon;
+  public String nit;
+  public String email;
+  public String customerId;
+  public String createdDate;
 }

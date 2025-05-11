@@ -8,14 +8,11 @@ import lombok.Data;
 @Entity(name = "PaymentMethod")
 public class PaymentMethodEntity {
 
-    @Id
-    public String id;
-    public String name;
-    public String label;
-    public String descripcion;
-    public String type;
-    public String status;
-    public String createdDate;
-
-
+  @Id public String id;
+  public String name;
+  public String label;
+  public String descripcion;
+  public String type;
+  public String status;
+  public String createdDate;
 }

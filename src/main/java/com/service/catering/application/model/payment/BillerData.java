@@ -5,8 +5,7 @@ import lombok.Data;
 @Data
 public class BillerData {
 
-    public String socialReason;
-    public String nit;
-    public String email;
-
+  public String socialReason;
+  public String nit;
+  public String email;
 }

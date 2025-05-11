@@ -5,8 +5,7 @@ import lombok.Data;
 @Data
 public class BillingInvoice {
 
-    public String customerId;
-    public String contract;
-    public BillerData billerData;
-
+  public String customerId;
+  public String contract;
+  public BillerData billerData;
 }
