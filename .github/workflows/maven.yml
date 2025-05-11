@@ -8,12 +8,9 @@
 
 name: Java CI with Maven - Build y Package
 
-on:
-  push:
-    branches: [ "develop" ]
+on:  
   pull_request:
     branches: [ "develop" ]
-
 
 jobs:
   build:
