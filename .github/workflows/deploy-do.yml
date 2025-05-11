@@ -16,8 +16,8 @@ jobs:
     steps:
       - name: Checkout files
         uses: actions/checkout@v2
-      - name: Build with Maven
-        run: ${{ github.workspace }}/mvnw clean package -DskipTests
+      - name: Build project with Maven
+        run: mvn clean package -DskipTests
       - name: Copy Docker file
         run: cp ${{ github.workspace }}/docker-deploy/Dockerfile ${{ github.workspace }}/Dockerfile
       - name: Build and push Docker images
