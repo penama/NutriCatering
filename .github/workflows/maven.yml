@@ -6,32 +6,30 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Java CI with Maven - Build y Package
+name: Java CI with Maven - Build - Unit Test - SonarQ
 
 on:
   push:
     branches:
-        - modulo5-gitHubActions
-  pull_request:
-    branches: [ "develop" ]
+      - modulo5-gitHubActions
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
 
-    services:
-      postgres:
-        image: postgres:12.2
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: NutriCenter
-        ports:
-        # will assign a random free host port
-          - 5432/tcp
-        # needed because the postgres container does not provide a healthcheck
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+#    services:
+#      postgres:
+#        image: postgres:12.2
+#        env:
+#          POSTGRES_USER: postgres
+#          POSTGRES_PASSWORD: postgres
+#          POSTGRES_DB: NutriCenter
+#        ports:
+#        # will assign a random free host port
+#          - 5432/tcp
+#        # needed because the postgres container does not provide a healthcheck
+#        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
     - uses: actions/checkout@v4
@@ -58,8 +56,8 @@ jobs:
           -Dsonar.token=${{ secrets.SONAR_TOKEN }} \
           -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \
           org.sonarsource.scanner.maven:sonar-maven-plugin:3.11.0.3922:sonar
-    - name: Package
-      run: mvn package -DskipTests
+#    - name: Package
+#      run: mvn package -DskipTests
     #- name: Build with Maven
     #  run: mvn -B package --file pom.xml
 
