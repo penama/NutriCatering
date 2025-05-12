@@ -24,7 +24,7 @@ jobs:
       - name: Extract short SHA
         id: vars
         run: |
-          VERSION="v1.0.1"  # Cambia esto manualmente o genera dinámicamente
+          VERSION="NutriCenter-v1.0.1"  # Cambia esto manualmente o genera dinámicamente
           SHORT_SHA=$(echo "${GITHUB_SHA}" | cut -c1-7)
           echo "DOCKER_TAG=${VERSION}-${SHORT_SHA}" >> $GITHUB_ENV
       - name: Show Docker Tag
@@ -41,6 +41,15 @@ jobs:
 #          tag_with_ref: true
 #          tag_with_sha: true
           tags: ${{ env.DOCKER_TAG }}
+      - name: Get latest Docker image tag from Docker Hub
+        id: docker_tag
+        run: |
+          LATEST_TAG=$(curl -s "https://hub.docker.com/r/augustomarco/nutricenter/tags?page_size=1" | jq -r '.results[0].name')
+          echo "Latest Docker tag: $LATEST_TAG"
+          echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
+      - name: Show LATEST Tag DockerHub
+        run: |
+          echo "Tag: $LATEST_TAG"
 
 #  deploy:
 #    needs: build
