@@ -47,7 +47,7 @@ jobs:
       run: mvn test
     - name: Coverage Local
       run: mvn clean verify
-    - name: Coverage Sonar
+    - name: Coverage Sonarr
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
