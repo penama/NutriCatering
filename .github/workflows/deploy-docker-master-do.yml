@@ -49,9 +49,15 @@ jobs:
         with:
          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
-      - name: Show Docker Tag
+      - name: Get latest Docker image tag from Docker Hub
+        id: docker_tag
         run: |
-          echo "Tag: $DOCKER_TAG"
+          LATEST_TAG=$(curl -s "https://hub.docker.com/r/augustomarco/nutricenter/tags?page_size=1" | jq -r '.results[0].name')
+          echo "Latest Docker tag: $LATEST_TAG"
+          echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
+      - name: Show LATEST Tag DockerHub
+        run: |
+          echo "Tag: $LATEST_TAG"
 
       - name: Provision Droplet and deploy container
-        run: doctl compute droplet create "$DOCKER_TAG" --image docker-20-04 --size s-1vcpu-1gb --region nyc1 --user-data-file deploy.sh --wait
+        run: doctl compute droplet create "$LATEST_TAG" --image docker-20-04 --size s-1vcpu-1gb --region nyc1 --user-data-file deploy.sh --wait
