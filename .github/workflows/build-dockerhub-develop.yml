@@ -23,7 +23,10 @@ jobs:
         run: mvn clean package -DskipTests
       - name: Extract short SHA
         id: vars
-        run: echo "GIT_HASH=$(echo ${GITHUB_SHA::7})" >> $GITHUB_ENV
+        run: |
+            VERSION="v1.0.1"  # Cambia esto manualmente o desde otro origen
+            SHORT_SHA=$(echo "${GITHUB_SHA}" | cut -c1-7)
+            echo "DOCKER_TAG=${VERSION}-${SHORT_SHA}" >> $GITHUB_ENV
       - name: Copy Docker file
         run: cp ${{ github.workspace }}/docker-deploy/Dockerfile ${{ github.workspace }}/Dockerfile
       - name: Build and push Docker images
@@ -32,8 +35,8 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
           repository: augustomarco/nutricenter
-          tag_with_ref: true
-          tag_with_sha: true
+#          tag_with_ref: true
+#          tag_with_sha: true
           tags: ${{ env.GIT_HASH }}
 
 #  deploy:
