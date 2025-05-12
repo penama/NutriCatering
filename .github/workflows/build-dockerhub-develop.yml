@@ -44,7 +44,7 @@ jobs:
       - name: Get latest Docker image tag from Docker Hub
         id: docker_tag
         run: |
-          LATEST_TAG=$(curl -s "https://hub.docker.com/r/augustomarco/nutricenter/tags?page_size=1" | jq -r '.results[0].name')
+          LATEST_TAG=$(curl -s "https://hub.docker.com/v2/repositories/augustomarco/nutricenter/tags?page_size=1" | jq -r '.results[0].name')
           echo "Latest Docker tag: $LATEST_TAG"
           echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
       - name: Show LATEST Tag DockerHub
