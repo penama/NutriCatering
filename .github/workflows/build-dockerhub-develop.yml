@@ -24,9 +24,12 @@ jobs:
       - name: Extract short SHA
         id: vars
         run: |
-            VERSION="v1.0.1"  # Cambia esto manualmente o desde otro origen
-            SHORT_SHA=$(echo "${GITHUB_SHA}" | cut -c1-7)
-            echo "DOCKER_TAG=${VERSION}-${SHORT_SHA}" >> $GITHUB_ENV
+          VERSION="v1.0.1"  # Cambia esto manualmente o genera dinámicamente
+          SHORT_SHA=$(echo "${GITHUB_SHA}" | cut -c1-7)
+          echo "DOCKER_TAG=${VERSION}-${SHORT_SHA}" >> $GITHUB_ENV
+      - name: Show Docker Tag
+        run: |
+          echo "Tag: $DOCKER_TAG"
       - name: Copy Docker file
         run: cp ${{ github.workspace }}/docker-deploy/Dockerfile ${{ github.workspace }}/Dockerfile
       - name: Build and push Docker images
@@ -37,7 +40,7 @@ jobs:
           repository: augustomarco/nutricenter
 #          tag_with_ref: true
 #          tag_with_sha: true
-          tags: ${{ env.GIT_HASH }}
+          tags: ${{ env.DOCKER_TAG }}
 
 #  deploy:
 #    needs: build
