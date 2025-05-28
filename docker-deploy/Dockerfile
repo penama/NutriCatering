@@ -9,4 +9,5 @@ ENV SPRING_PROFILES_ACTIVE=dev
 
 EXPOSE ${SERVER_PORT}
 
+
 ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=${SPRING_PROFILES_ACTIVE}", "-Dserver.port=${SERVER_PORT}", "app.jar"]
