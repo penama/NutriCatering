@@ -13,7 +13,7 @@ import jakarta.annotation.PostConstruct;
 public class AzureServiceBusConsumer {
 
   // private final ServiceBusConfig serviceBusConfig;
-
+  /*
   private final String connectionString =
       "Endpoint=sb://catering-bus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccesKey;SharedAccessKey=wLkgujkP3kSlY+JN55IRVorHNQzqiDcmv+ASbP4l2Ao=;EntityPath=contractcreated";
   private final String topicName = "contractcreated";
@@ -128,4 +128,6 @@ public class AzureServiceBusConsumer {
   private void processError(ServiceBusErrorContext context) {
     System.err.printf("Error occurred while processing: %s%n", context.getException().getMessage());
   }
+
+   */
 }
