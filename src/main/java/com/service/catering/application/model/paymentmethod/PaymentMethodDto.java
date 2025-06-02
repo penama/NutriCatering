@@ -21,7 +21,7 @@ public class PaymentMethodDto {
 
   public void setName(String name) {
     if (name == null || name.trim().isEmpty())
-      throw new RuntimeException("Field name is null o Empty...");
+      throw new RuntimeException("Field fullName is null o Empty...");
     this.name = name;
   }
 
@@ -50,7 +50,7 @@ public class PaymentMethodDto {
 
   public void setCreatedDate(String createdDate) {
     if (createdDate == null || createdDate.isEmpty())
-      throw new RuntimeException("Field createdDate is null o Empty...");
+      throw new RuntimeException("Field createdAt is null o Empty...");
     this.createdDate = createdDate;
   }
 }

@@ -24,7 +24,7 @@ public class InvoiceDetailService extends BaseService implements IInvoiceDetailS
   //    @Transactional( propagation = Propagation.REQUIRED)
   //    public void newInvoiceDetail(InvoiceDetail invoiceDetail) throws Exception {
   //        ContractEntity contractEntity = ContractUtil.contractDtoToContractEntity( contractDto );
-  //        contractEntity.setStatus(ContractStatus.ACTIVE.name());
+  //        contractEntity.setStatus(ContractStatus.ACTIVE.fullName());
   //        commandHandler( this, contractEntity );
   //    }
 

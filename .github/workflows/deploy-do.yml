@@ -41,7 +41,7 @@ jobs:
       - name: Checkout files
         uses: actions/checkout@v2
 
-      - name: Get tag name
+      - name: Get tag fullName
         uses: olegtarasov/get-tag@v2.1
 
       - name: Install doctl

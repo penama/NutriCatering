@@ -9,12 +9,14 @@ public class CustomerUtil {
   public static CustomerEntity customerDtoToCustomerEntity(CustomerDto customerDto) {
     CustomerEntity customerEntity = new CustomerEntity();
     customerEntity.setId(customerDto.getId());
-    customerEntity.setName(customerDto.getName());
+    customerEntity.setFullname(customerDto.getFullName());
+    customerEntity.setUserName(customerDto.getUserName());
     customerEntity.setAddress(customerDto.getAddress());
     customerEntity.setPhone(customerDto.getPhone());
+    customerEntity.setEmail(customerDto.getEmail());
     customerEntity.setBirtDate(customerDto.getBirtDate());
     customerEntity.setStatus(customerDto.getStatus());
-    customerEntity.setCreatedDate(customerDto.getCreatedDate());
+    customerEntity.setCreatedAt(customerDto.getCreatedAt());
     return customerEntity;
   }
 
@@ -22,12 +24,14 @@ public class CustomerUtil {
       throws FieldNullException {
     CustomerDto customerDto = new CustomerDto();
     customerDto.setId(customerEntity.getId());
-    customerDto.setName(customerEntity.getName());
+    customerDto.setFullName(customerEntity.getFullname());
+    customerDto.setUserName(customerEntity.getUserName());
     customerDto.setAddress(customerEntity.getAddress());
     customerDto.setPhone(customerEntity.getPhone());
+    customerDto.setEmail(customerEntity.getEmail());
     customerDto.setBirtDate(customerEntity.getBirtDate());
     customerDto.setStatus(customerEntity.getStatus());
-    customerDto.setCreatedDate(customerEntity.getCreatedDate());
+    customerDto.setCreatedAt(customerEntity.getCreatedAt());
     return customerDto;
   }
 }

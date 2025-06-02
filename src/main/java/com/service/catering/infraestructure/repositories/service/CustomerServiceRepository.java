@@ -9,17 +9,19 @@ import org.springframework.stereotype.Service;
 
 import com.service.catering.domain.model.CustomerEntity;
 import com.service.catering.infraestructure.event.querys.IQueryCustomerRepository;
+import com.service.catering.infraestructure.event.update.ICreatedCustomerRepository;
 import com.service.catering.infraestructure.repositories.interfaces.CustomerRepository;
 import com.service.catering.infraestructure.utils.DateFormat;
 
 @Service
-public class CustomerServiceRepository implements IQueryCustomerRepository {
+public class CustomerServiceRepository
+    implements IQueryCustomerRepository, ICreatedCustomerRepository {
 
   @Autowired public CustomerRepository repository;
 
   public void newCustomer(CustomerEntity customerEntity) throws Exception {
     customerEntity.id = UUID.randomUUID().toString();
-    customerEntity.createdDate = DateFormat.toDate();
+    customerEntity.createdAt = DateFormat.toDate();
     repository.save(customerEntity);
   }
 
@@ -33,5 +35,10 @@ public class CustomerServiceRepository implements IQueryCustomerRepository {
     Optional<CustomerEntity> byId = repository.findById(id);
     //        System.out.println( "presente: " + byId.isPresent() );
     return (byId.isPresent() ? byId.get() : null);
+  }
+
+  @Override
+  public void eventCustomerCreated(CustomerEntity customerEntity) {
+    repository.save(customerEntity);
   }
 }

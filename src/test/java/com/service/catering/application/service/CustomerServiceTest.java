@@ -36,7 +36,7 @@ public class CustomerServiceTest {
   public void testNewCustomer() throws Exception {
 
     CustomerDto customerDto = new CustomerDto();
-    customerDto.name = "Changos";
+    customerDto.fullName = "Changos";
     customerDto.id = UUID.randomUUID().toString();
     customerDto.status = CustomerStatus.ACTIVE.name();
 
@@ -59,7 +59,7 @@ public class CustomerServiceTest {
   public void testGetCustomers() throws Exception {
 
     CustomerDto customerDto = new CustomerDto();
-    customerDto.name = "Changos";
+    customerDto.fullName = "Changos";
     customerDto.id = UUID.randomUUID().toString();
     customerDto.status = CustomerStatus.ACTIVE.name();
 
@@ -87,7 +87,7 @@ public class CustomerServiceTest {
   public void testGetCustomerById() throws Exception {
 
     CustomerDto customerDto = new CustomerDto();
-    customerDto.name = "Changos";
+    customerDto.fullName = "Changos";
     customerDto.id = UUID.randomUUID().toString();
     customerDto.status = CustomerStatus.ACTIVE.name();
 
@@ -113,7 +113,7 @@ public class CustomerServiceTest {
   public void testGetCustomerByIdNull() throws Exception {
 
     CustomerDto customerDto = new CustomerDto();
-    customerDto.name = "Changos";
+    customerDto.fullName = "Changos";
     customerDto.id = UUID.randomUUID().toString();
     customerDto.status = CustomerStatus.ACTIVE.name();
 
