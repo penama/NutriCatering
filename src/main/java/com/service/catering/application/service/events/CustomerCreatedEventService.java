@@ -1,12 +1,12 @@
 package com.service.catering.application.service.events;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.service.catering.application.model.customer.CustomerStatus;
 import com.service.catering.application.model.event.EventDto;
 import com.service.catering.domain.model.CustomerEntity;
 import com.service.catering.infraestructure.event.update.ICreatedCustomerRepository;
-import org.springframework.stereotype.Service;
 
 @Service
 public class CustomerCreatedEventService {

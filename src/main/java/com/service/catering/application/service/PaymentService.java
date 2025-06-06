@@ -3,7 +3,6 @@ package com.service.catering.application.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.service.catering.application.service.events.ContractDispatchedForRecipeProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -12,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.service.catering.application.model.invoice.InvoiceDetail;
 import com.service.catering.application.model.invoice.InvoiceDto;
 import com.service.catering.application.model.payment.*;
+import com.service.catering.application.service.events.ContractDispatchedForRecipeProducerService;
 import com.service.catering.application.service.interfaces.IBillerDataServiceUpdateData;
 import com.service.catering.application.service.interfaces.IInvoiceServiceGenerate;
 import com.service.catering.application.service.interfaces.IOrderServiceUpdateStatus;
@@ -30,7 +30,8 @@ public class PaymentService extends BaseService {
 
   @Autowired private IInvoiceServiceGenerate iInvoiceServiceGenerate;
 
-  @Autowired private ContractDispatchedForRecipeProducerService contractDispatchedForRecipeProducerService;
+  @Autowired
+  private ContractDispatchedForRecipeProducerService contractDispatchedForRecipeProducerService;
 
   @Transactional(propagation = Propagation.REQUIRED)
   public void newPayment(PaymentDto paymentDto) throws Exception {
@@ -66,7 +67,7 @@ public class PaymentService extends BaseService {
 
     iInvoiceServiceGenerate.generateInvoice(invoiceDto);
 
-	  contractDispatchedForRecipeProducerService.contractDispatchedForRecipeProducer( paymentEntity );
+    contractDispatchedForRecipeProducerService.contractDispatchedForRecipeProducer(paymentEntity);
   }
 
   public List<PaymentDto> getPayments() throws Exception {

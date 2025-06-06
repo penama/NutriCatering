@@ -10,9 +10,11 @@ import lombok.Data;
 public class ProducerEntity {
 
   @Id public String id;
-  @Column( length = 1000)
+
+  @Column(length = 1000)
   public String body;
+
   public String status;
   public String processedDate;
-	public String createdDate;
+  public String createdDate;
 }

@@ -76,7 +76,7 @@ public class OrderService extends BaseService
   @Transactional(propagation = Propagation.MANDATORY)
   public void generateOrdersForContract(String contractId) throws Exception {
     ContractEntity contractEntity = iQueryContractRepository.queryContractId(contractId);
-    //if (contractEntity.getQuotas() == 1) return;
+    // if (contractEntity.getQuotas() == 1) return;
     float amount = contractEntity.getAmount() / contractEntity.getQuotas();
     for (int i = 0; i < contractEntity.getQuotas(); i++) {
       OrderDto orderDto = new OrderDto();
