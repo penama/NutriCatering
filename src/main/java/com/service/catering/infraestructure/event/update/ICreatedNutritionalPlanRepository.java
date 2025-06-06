@@ -4,5 +4,5 @@ import com.service.catering.domain.model.NutritionalPlanEntity;
 
 public interface ICreatedNutritionalPlanRepository {
 
-  public void eventNutritionalPlanrCreated(NutritionalPlanEntity nutritionalPlanEntity);
+  public void eventNutritionalPlanCreated(NutritionalPlanEntity nutritionalPlanEntity);
 }

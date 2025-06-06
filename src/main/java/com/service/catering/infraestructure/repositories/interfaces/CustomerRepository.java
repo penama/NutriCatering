@@ -9,6 +9,6 @@ import com.service.catering.domain.model.CustomerEntity;
 @Repository
 public interface CustomerRepository extends JpaRepository<CustomerEntity, String> {
 
-  @Query("update Customer c set c.address = ?2 WHERE c.customerId = ?1")
+  @Query("update Customer c set c.address = ?2 WHERE c.id = ?1")
   public void updateCustomerAddressId(String customerId, String address);
 }

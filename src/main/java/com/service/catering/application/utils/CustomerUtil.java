@@ -9,7 +9,7 @@ public class CustomerUtil {
   public static CustomerEntity customerDtoToCustomerEntity(CustomerDto customerDto) {
     CustomerEntity customerEntity = new CustomerEntity();
     customerEntity.setId(customerDto.getId());
-    customerEntity.setFullname(customerDto.getFullName());
+    customerEntity.setFullName(customerDto.getFullName());
     customerEntity.setUserName(customerDto.getUserName());
     customerEntity.setAddress(customerDto.getAddress());
     customerEntity.setPhone(customerDto.getPhone());
@@ -24,7 +24,7 @@ public class CustomerUtil {
       throws FieldNullException {
     CustomerDto customerDto = new CustomerDto();
     customerDto.setId(customerEntity.getId());
-    customerDto.setFullName(customerEntity.getFullname());
+    customerDto.setFullName(customerEntity.getFullName());
     customerDto.setUserName(customerEntity.getUserName());
     customerDto.setAddress(customerEntity.getAddress());
     customerDto.setPhone(customerEntity.getPhone());

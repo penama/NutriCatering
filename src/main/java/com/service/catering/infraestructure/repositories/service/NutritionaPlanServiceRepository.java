@@ -13,7 +13,7 @@ public class NutritionaPlanServiceRepository implements ICreatedNutritionalPlanR
   @Autowired public NutritionalPlanRepository repository;
 
   @Override
-  public void eventNutritionalPlanrCreated(NutritionalPlanEntity nutritionalPlanEntity) {
+  public void eventNutritionalPlanCreated(NutritionalPlanEntity nutritionalPlanEntity) {
     repository.save(nutritionalPlanEntity);
   }
 }

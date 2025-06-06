@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class CustomerEntity {
 
   @Id public String id;
-  public String fullname;
+  public String fullName;
   public String userName;
   public String address;
   public String phone;
