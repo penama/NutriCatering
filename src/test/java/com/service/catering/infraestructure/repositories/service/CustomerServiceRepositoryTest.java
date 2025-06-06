@@ -42,7 +42,7 @@ public class CustomerServiceRepositoryTest {
     customerEntityMock.setBirtDate(birtDate);
     customerEntityMock.setPhone(phone);
     customerEntityMock.setStatus(CustomerStatus.ACTIVE.name());
-    customerEntityMock.setCreatedDate("16/02/2025");
+    customerEntityMock.setCreatedAt("16/02/2025");
 
     List<CustomerEntity> listCustomer = new ArrayList<>();
     listCustomer.add(customerEntityMock);

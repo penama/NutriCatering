@@ -7,20 +7,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity(name = "Customer")
+@Entity(name = "CustomerAddress")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomerEntity {
+public class CustomerAddressEntity {
 
   @Id public String id;
-  public String fullName;
-  public String userName;
-  public String address;
-  public String phone;
-  public String email;
-  public String birtDate;
-  public String createdAt;
-  public String status;
+  public String customerId;
+  public String Street;
+  public String City;
+  public String Latituded;
+  public String Longitud;
+  public String deliveryDate;
 }

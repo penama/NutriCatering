@@ -4,16 +4,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Data;
 
-@Entity(name = "Contract")
+@Entity(name = "NutritionalPlan")
 @Data
-public class ContractEntity {
+public class NutritionalPlanEntity {
 
   @Id public String id;
-  public String description;
-  public String nutritionalPlanId;
+  public String planDetails;
+  public String nutritionistId;
   public String customerId;
-  public int quotas;
-  public float amount;
+  public boolean isDelivered;
+  public String analysisResultIds;
   public String createdDate;
-  public String status;
 }

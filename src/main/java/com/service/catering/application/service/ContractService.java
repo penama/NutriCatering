@@ -3,6 +3,8 @@ package com.service.catering.application.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.service.catering.application.service.events.ContractCreatedProducerService;
+import com.service.catering.infraestructure.repositories.service.ContractServiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -22,6 +24,8 @@ public class ContractService extends BaseService {
 
   @Autowired private IOrderServiceCreateByContract iOrderServiceCreateByContract;
 
+  @Autowired private ContractCreatedProducerService contractCreatedProducerService;
+
   @Transactional(propagation = Propagation.REQUIRED)
   public void newContract(ContractDto contractDto) throws Exception {
     // probandos.
@@ -30,6 +34,8 @@ public class ContractService extends BaseService {
     commandHandler(this, contractEntity);
     // creando las ordenes.
     iOrderServiceCreateByContract.generateOrdersForContract(contractEntity.getId());
+	// enviar evento de contrato creado.
+	  contractCreatedProducerService.contractCreatedProducer( contractEntity );
   }
 
   public List<ContractDto> getContracts() throws Exception {
@@ -58,4 +64,15 @@ public class ContractService extends BaseService {
     }
     return ContractUtil.contractEntityToContractDto(contractEntity);
   }
+
+//	public void newContractEventNutritionalPlan(ContractDto contractDto) throws Exception {
+//		// probandos.
+//		ContractEntity contractEntity = ContractUtil.contractDtoToContractEntity(contractDto);
+//		contractEntity.setStatus(ContractStatus.ACTIVE.name());
+//		contractServiceRepository.newContract( contractEntity );
+//		// creando las ordenes.
+//		iOrderServiceCreateByContract.generateOrdersForContract(contractEntity.getId());
+//		// enviar evento de contrato creado.
+//	}
+
 }

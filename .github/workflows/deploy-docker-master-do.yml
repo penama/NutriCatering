@@ -12,18 +12,18 @@ jobs:
 #    runs-on: ubuntu-latest
 #
 #    steps:
-#      - name: Checkout files
+#      - fullName: Checkout files
 #        uses: actions/checkout@v2
-#      - name: Set up JDK 21
+#      - fullName: Set up JDK 21
 #        uses: actions/setup-java@v3
 #        with:
 #          java-version: '21'
 #          distribution: 'temurin'
-#      - name: Build project with Maven
+#      - fullName: Build project with Maven
 #        run: mvn clean package -DskipTests
-#      - name: Copy Docker file
+#      - fullName: Copy Docker file
 #        run: cp ${{ github.workspace }}/docker-deploy/Dockerfile ${{ github.workspace }}/Dockerfile
-#      - name: Build and push Docker images
+#      - fullName: Build and push Docker images
 #        uses: docker/build-push-action@v1
 #        with:
 #          username: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -41,7 +41,7 @@ jobs:
       - name: Checkout files
         uses: actions/checkout@v2
 
-      - name: Get tag name
+      - name: Get tag fullName
         uses: olegtarasov/get-tag@v2.1
 
       - name: Install doctl

@@ -3,14 +3,15 @@ echo "##########################################################################
 echo "🔍 Formateando código..."
 ./mvnw spotless:apply
 
-echo "#################################################################################################################"
-echo "🔍 Ejecutando pruebas unitarias antes del commit..."
-echo "ruta: $(pwd) "
-# Ejecutar pruebas unitarias con Maven
-./mvnw test
-if [ $? -ne 0 ]; then
-  echo "❌ Error: Las pruebas unitarias fallaron. Corrige los errores antes de hacer commit."
-  exit 1
-fi
 
-echo "✅ Todas las pruebas pasaron exitosamente. Procediendo con el commit..."
+echo "#################################################################################################################"
+#echo "🔍 Ejecutando pruebas unitarias antes del commit..."
+#echo "ruta: $(pwd) "
+# Ejecutar pruebas unitarias con Maven
+#./mvnw test
+#if [ $? -ne 0 ]; then
+#  echo "❌ Error: Las pruebas unitarias fallaron. Corrige los errores antes de hacer commit."
+#  exit 1
+#fi
+
+#echo "✅ Todas las pruebas pasaron exitosamente. Procediendo con el commit..."

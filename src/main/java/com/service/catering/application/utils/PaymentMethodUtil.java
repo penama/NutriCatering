@@ -14,7 +14,7 @@ public class PaymentMethodUtil {
     paymentMethodEntity.setLabel(paymentMethodDto.getLabel());
     paymentMethodEntity.setDescripcion(paymentMethodDto.getDescription());
     paymentMethodEntity.setType(PaymentMethodType.valueOf(paymentMethodDto.getType()).name());
-    //        paymentMethodEntity.setStatus(PaymentMethodStatus.ACTIVE.name());
+    //        paymentMethodEntity.setStatus(PaymentMethodStatus.ACTIVE.fullName());
     return paymentMethodEntity;
   }
 

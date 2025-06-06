@@ -22,7 +22,7 @@ public class CustomerUtilTest {
   @Test
   public void testCustomerDtoToCustomerEntity() {
     CustomerDto customerDto = new CustomerDto();
-    customerDto.name = "Changos";
+    customerDto.fullName = "Changos";
     customerDto.id = UUID.randomUUID().toString();
     customerDto.status = CustomerStatus.ACTIVE.name();
 
@@ -41,7 +41,7 @@ public class CustomerUtilTest {
   @Test
   public void testCustomerEntityToCustomerDto() throws Exception {
     CustomerDto customerDto = new CustomerDto();
-    customerDto.name = "Changos";
+    customerDto.fullName = "Changos";
     customerDto.id = UUID.randomUUID().toString();
     customerDto.status = CustomerStatus.ACTIVE.name();
 

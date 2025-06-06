@@ -11,7 +11,7 @@ public class ContractUtil {
     ContractEntity contractEntity = new ContractEntity();
     contractEntity.setId(contractDto.getId());
     contractEntity.setDescription(contractDto.getDescription());
-    contractEntity.setCateringPlanId(contractDto.getCateringPlan().getId());
+    contractEntity.setNutritionalPlanId(contractDto.getCateringPlan().getId());
     contractEntity.setCustomerId(contractDto.getCustomer().getId());
     contractEntity.setAmount(contractDto.getTotalAmount());
     contractEntity.setQuotas(contractDto.getQuotas());
@@ -25,7 +25,7 @@ public class ContractUtil {
     contractDto.setId(contractEntity.getId());
     contractDto.setDescription(contractEntity.getDescription());
     CateringPlan cateringPlan = new CateringPlan();
-    cateringPlan.setId(contractEntity.getCateringPlanId());
+    cateringPlan.setId(contractEntity.getNutritionalPlanId());
     contractDto.setCateringPlan(cateringPlan);
     Customer customer = new Customer();
     customer.setId(contractEntity.getCustomerId());
