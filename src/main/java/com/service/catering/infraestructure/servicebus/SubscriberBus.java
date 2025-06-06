@@ -32,7 +32,7 @@ public class SubscriberBus {
             .connectionString(connectionString)
             .processor()
             .queueName(queueName) // Usa .topicName() y .subscriptionName() si es un tópico
-			.disableAutoComplete()
+            .disableAutoComplete()
             .processMessage(this::processMessage) // Método que procesa cada mensaje
             .processError(this::handleError) // Manejo de errores
             .buildProcessorClient();

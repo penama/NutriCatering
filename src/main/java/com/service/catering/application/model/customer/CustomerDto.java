@@ -29,24 +29,24 @@ public class CustomerDto {
   }
 
   public void setFullName(String fullName) throws FieldNullException {
-//    System.out.println("nombre " + fullName);
-//    if (fullName == null || fullName.isEmpty()) {
-//      throw new FieldNullException("El cammpo 'fullName' no puede ser null");
-//    }
+    //    System.out.println("nombre " + fullName);
+    //    if (fullName == null || fullName.isEmpty()) {
+    //      throw new FieldNullException("El cammpo 'fullName' no puede ser null");
+    //    }
     this.fullName = fullName;
   }
 
   public void setAddress(String address) throws FieldNullException {
-//    if (address == null || address.isEmpty()) {
-//      throw new FieldNullException("El cammpo 'address' no puede ser null");
-//    }
+    //    if (address == null || address.isEmpty()) {
+    //      throw new FieldNullException("El cammpo 'address' no puede ser null");
+    //    }
     this.address = address;
   }
 
   public void setPhone(String phone) throws FieldNullException {
-//    if (phone == null || phone.isEmpty()) {
-//      throw new FieldNullException("El cammpo 'phone' no puede ser null");
-//    }
+    //    if (phone == null || phone.isEmpty()) {
+    //      throw new FieldNullException("El cammpo 'phone' no puede ser null");
+    //    }
     this.phone = phone;
   }
 
@@ -55,9 +55,9 @@ public class CustomerDto {
   }
 
   public void setBirtDate(String birtDate) throws FieldNullException {
-//    if (birtDate == null || birtDate.isEmpty()) {
-//      throw new FieldNullException("El cammpo 'birtDate' no puede ser null");
-//    }
+    //    if (birtDate == null || birtDate.isEmpty()) {
+    //      throw new FieldNullException("El cammpo 'birtDate' no puede ser null");
+    //    }
     this.birtDate = birtDate;
   }
 
