@@ -82,6 +82,13 @@
             <scope>runtime</scope>
         </dependency>
 
+		<!-- azure service bus -->
+		<dependency>
+			<groupId>com.azure</groupId>
+			<artifactId>azure-messaging-servicebus</artifactId>
+			<version>7.13.3</version>
+		</dependency>
+
         <!-- PostgreSQL database -->
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -142,6 +149,25 @@
             <artifactId>jacoco-maven-plugin</artifactId>
             <version>0.8.12</version>
         </dependency>
+
+<!--		<dependency>-->
+<!--			<groupId>com.azure</groupId>-->
+<!--			<artifactId>azure-messaging-servicebus</artifactId>-->
+<!--			<version>7.15.0</version>-->
+<!--			<scope>compile</scope>-->
+<!--		</dependency>-->
+
+		<!-- Añade esto (Event Hubs) -->
+		<dependency>
+			<groupId>com.azure</groupId>
+			<artifactId>azure-messaging-eventhubs</artifactId>
+			<version>5.15.0</version>
+		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>com.azure</groupId>-->
+<!--			<artifactId>azure-messaging-eventhubs-checkpointstore-blob</artifactId>-->
+<!--			<version>1.16.1</version>-->
+<!--		</dependency>-->
 
 
     </dependencies>

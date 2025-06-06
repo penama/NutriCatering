@@ -37,7 +37,7 @@ public class ContractServiceRepositoryTest {
     contractEntityMock.createdDate = "16/02/2025";
     contractEntityMock.status = ContractStatus.ACTIVE.name();
     contractEntityMock.amount = 10;
-    contractEntityMock.cateringPlanId = UUID.randomUUID().toString();
+    contractEntityMock.nutritionalPlanId = UUID.randomUUID().toString();
     contractEntityMock.description = "descripción del contrato.";
     contractEntityMock.quotas = 2;
 

@@ -36,13 +36,13 @@ public class CustomerServiceTest {
   public void testNewCustomer() throws Exception {
 
     CustomerDto customerDto = new CustomerDto();
-    customerDto.name = "Changos";
+    customerDto.fullName = "Changos";
     customerDto.id = UUID.randomUUID().toString();
     customerDto.status = CustomerStatus.ACTIVE.name();
 
     CustomerEntity customerEntity = new CustomerEntity();
     customerEntity.setId(UUID.randomUUID().toString());
-    customerEntity.setName("Changos");
+    customerEntity.setFullName("Changos");
     customerEntity.setStatus(CustomerStatus.ACTIVE.name());
 
     // Simulación de métodos estáticos con mockStatic()
@@ -59,13 +59,13 @@ public class CustomerServiceTest {
   public void testGetCustomers() throws Exception {
 
     CustomerDto customerDto = new CustomerDto();
-    customerDto.name = "Changos";
+    customerDto.fullName = "Changos";
     customerDto.id = UUID.randomUUID().toString();
     customerDto.status = CustomerStatus.ACTIVE.name();
 
     CustomerEntity customerEntity = new CustomerEntity();
     customerEntity.setId(UUID.randomUUID().toString());
-    customerEntity.setName("Changos");
+    customerEntity.setFullName("Changos");
     customerEntity.setStatus(CustomerStatus.ACTIVE.name());
 
     List<CustomerEntity> customerEntityList = Arrays.asList(customerEntity);
@@ -87,13 +87,13 @@ public class CustomerServiceTest {
   public void testGetCustomerById() throws Exception {
 
     CustomerDto customerDto = new CustomerDto();
-    customerDto.name = "Changos";
+    customerDto.fullName = "Changos";
     customerDto.id = UUID.randomUUID().toString();
     customerDto.status = CustomerStatus.ACTIVE.name();
 
     CustomerEntity customerEntity = new CustomerEntity();
     customerEntity.setId(UUID.randomUUID().toString());
-    customerEntity.setName("Changos");
+    customerEntity.setFullName("Changos");
     customerEntity.setStatus(CustomerStatus.ACTIVE.name());
 
     //        List<CustomerEntity> customerEntityList = Arrays.asList( customerEntity );
@@ -113,13 +113,13 @@ public class CustomerServiceTest {
   public void testGetCustomerByIdNull() throws Exception {
 
     CustomerDto customerDto = new CustomerDto();
-    customerDto.name = "Changos";
+    customerDto.fullName = "Changos";
     customerDto.id = UUID.randomUUID().toString();
     customerDto.status = CustomerStatus.ACTIVE.name();
 
     CustomerEntity customerEntity = new CustomerEntity();
     customerEntity.setId(UUID.randomUUID().toString());
-    customerEntity.setName("Changos");
+    customerEntity.setFullName("Changos");
     customerEntity.setStatus(CustomerStatus.ACTIVE.name());
 
     //        List<CustomerEntity> customerEntityList = Arrays.asList( customerEntity );

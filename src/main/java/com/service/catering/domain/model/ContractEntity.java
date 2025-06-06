@@ -10,7 +10,7 @@ public class ContractEntity {
 
   @Id public String id;
   public String description;
-  public String cateringPlanId;
+  public String nutritionalPlanId;
   public String customerId;
   public int quotas;
   public float amount;

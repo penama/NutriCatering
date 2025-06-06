@@ -22,13 +22,13 @@ public class CustomerUtilTest {
   @Test
   public void testCustomerDtoToCustomerEntity() {
     CustomerDto customerDto = new CustomerDto();
-    customerDto.name = "Changos";
+    customerDto.fullName = "Changos";
     customerDto.id = UUID.randomUUID().toString();
     customerDto.status = CustomerStatus.ACTIVE.name();
 
     CustomerEntity customerEntity = new CustomerEntity();
     customerEntity.setId(UUID.randomUUID().toString());
-    customerEntity.setName("Changos");
+    customerEntity.setFullName("Changos");
     customerEntity.setStatus(CustomerStatus.ACTIVE.name());
 
     CustomerUtil contractUtil = new CustomerUtil();
@@ -41,13 +41,13 @@ public class CustomerUtilTest {
   @Test
   public void testCustomerEntityToCustomerDto() throws Exception {
     CustomerDto customerDto = new CustomerDto();
-    customerDto.name = "Changos";
+    customerDto.fullName = "Changos";
     customerDto.id = UUID.randomUUID().toString();
     customerDto.status = CustomerStatus.ACTIVE.name();
 
     CustomerEntity customerEntity = new CustomerEntity();
     customerEntity.setId(UUID.randomUUID().toString());
-    customerEntity.setName("Changos");
+    customerEntity.setFullName("Changos");
     customerEntity.setStatus(CustomerStatus.ACTIVE.name());
     customerEntity.setAddress("por ahi");
     customerEntity.setBirtDate("20/02/2020");

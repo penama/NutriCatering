@@ -308,7 +308,7 @@ public class OrderServiceTest {
     contractEntityMock.status = ContractStatus.ACTIVE.name();
     ;
     contractEntityMock.quotas = 1;
-    contractEntityMock.cateringPlanId = UUID.randomUUID().toString();
+    contractEntityMock.nutritionalPlanId = UUID.randomUUID().toString();
     contractEntityMock.customerId = UUID.randomUUID().toString();
     contractEntityMock.amount = 60;
     contractEntityMock.id = UUID.randomUUID().toString();
@@ -332,7 +332,7 @@ public class OrderServiceTest {
     contractEntityMock.status = ContractStatus.ACTIVE.name();
     ;
     contractEntityMock.quotas = 6;
-    contractEntityMock.cateringPlanId = UUID.randomUUID().toString();
+    contractEntityMock.nutritionalPlanId = UUID.randomUUID().toString();
     contractEntityMock.customerId = UUID.randomUUID().toString();
     contractEntityMock.amount = 10;
     contractEntityMock.id = UUID.randomUUID().toString();

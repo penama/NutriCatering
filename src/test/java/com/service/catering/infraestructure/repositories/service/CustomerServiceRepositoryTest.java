@@ -37,18 +37,18 @@ public class CustomerServiceRepositoryTest {
 
     CustomerEntity customerEntityMock = new CustomerEntity();
     customerEntityMock.setId(UUID.randomUUID().toString());
-    customerEntityMock.setName(nombre);
+    customerEntityMock.setFullName(nombre);
     customerEntityMock.setAddress(address);
     customerEntityMock.setBirtDate(birtDate);
     customerEntityMock.setPhone(phone);
     customerEntityMock.setStatus(CustomerStatus.ACTIVE.name());
-    customerEntityMock.setCreatedDate("16/02/2025");
+    customerEntityMock.setCreatedAt("16/02/2025");
 
     List<CustomerEntity> listCustomer = new ArrayList<>();
     listCustomer.add(customerEntityMock);
 
     CustomerEntity customerEntity = new CustomerEntity();
-    customerEntity.setName(nombre);
+    customerEntity.setFullName(nombre);
     customerEntity.setAddress(address);
     customerEntity.setBirtDate(birtDate);
     customerEntity.setPhone(phone);

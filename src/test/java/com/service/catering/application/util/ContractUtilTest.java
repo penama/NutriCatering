@@ -43,7 +43,7 @@ public class ContractUtilTest {
     contractEntityMock.id = UUID.randomUUID().toString();
     contractEntityMock.customerId = UUID.randomUUID().toString();
     contractEntityMock.status = ContractStatus.ACTIVE.name();
-    contractEntityMock.cateringPlanId = UUID.randomUUID().toString();
+    contractEntityMock.nutritionalPlanId = UUID.randomUUID().toString();
     contractEntityMock.createdDate = "21/02/2025";
     contractEntityMock.quotas = 4;
     contractEntityMock.description = "Test";
@@ -76,7 +76,7 @@ public class ContractUtilTest {
     contractEntityMock.id = UUID.randomUUID().toString();
     contractEntityMock.customerId = UUID.randomUUID().toString();
     contractEntityMock.status = ContractStatus.ACTIVE.name();
-    contractEntityMock.cateringPlanId = UUID.randomUUID().toString();
+    contractEntityMock.nutritionalPlanId = UUID.randomUUID().toString();
     contractEntityMock.createdDate = "21/02/2025";
     contractEntityMock.quotas = 4;
     contractEntityMock.description = "Test";

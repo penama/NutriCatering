@@ -15,10 +15,12 @@ import lombok.NoArgsConstructor;
 public class CustomerEntity {
 
   @Id public String id;
-  public String name;
+  public String fullName;
+  public String userName;
   public String address;
   public String phone;
+  public String email;
   public String birtDate;
-  public String createdDate;
+  public String createdAt;
   public String status;
 }
