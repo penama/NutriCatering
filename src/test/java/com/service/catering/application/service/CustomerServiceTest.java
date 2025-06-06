@@ -42,7 +42,7 @@ public class CustomerServiceTest {
 
     CustomerEntity customerEntity = new CustomerEntity();
     customerEntity.setId(UUID.randomUUID().toString());
-    customerEntity.setName("Changos");
+    customerEntity.setFullName("Changos");
     customerEntity.setStatus(CustomerStatus.ACTIVE.name());
 
     // Simulación de métodos estáticos con mockStatic()
@@ -65,7 +65,7 @@ public class CustomerServiceTest {
 
     CustomerEntity customerEntity = new CustomerEntity();
     customerEntity.setId(UUID.randomUUID().toString());
-    customerEntity.setName("Changos");
+    customerEntity.setFullName("Changos");
     customerEntity.setStatus(CustomerStatus.ACTIVE.name());
 
     List<CustomerEntity> customerEntityList = Arrays.asList(customerEntity);
@@ -93,7 +93,7 @@ public class CustomerServiceTest {
 
     CustomerEntity customerEntity = new CustomerEntity();
     customerEntity.setId(UUID.randomUUID().toString());
-    customerEntity.setName("Changos");
+    customerEntity.setFullName("Changos");
     customerEntity.setStatus(CustomerStatus.ACTIVE.name());
 
     //        List<CustomerEntity> customerEntityList = Arrays.asList( customerEntity );
@@ -119,7 +119,7 @@ public class CustomerServiceTest {
 
     CustomerEntity customerEntity = new CustomerEntity();
     customerEntity.setId(UUID.randomUUID().toString());
-    customerEntity.setName("Changos");
+    customerEntity.setFullName("Changos");
     customerEntity.setStatus(CustomerStatus.ACTIVE.name());
 
     //        List<CustomerEntity> customerEntityList = Arrays.asList( customerEntity );

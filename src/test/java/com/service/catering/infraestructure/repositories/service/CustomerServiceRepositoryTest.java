@@ -37,7 +37,7 @@ public class CustomerServiceRepositoryTest {
 
     CustomerEntity customerEntityMock = new CustomerEntity();
     customerEntityMock.setId(UUID.randomUUID().toString());
-    customerEntityMock.setName(nombre);
+    customerEntityMock.setFullName(nombre);
     customerEntityMock.setAddress(address);
     customerEntityMock.setBirtDate(birtDate);
     customerEntityMock.setPhone(phone);
@@ -48,7 +48,7 @@ public class CustomerServiceRepositoryTest {
     listCustomer.add(customerEntityMock);
 
     CustomerEntity customerEntity = new CustomerEntity();
-    customerEntity.setName(nombre);
+    customerEntity.setFullName(nombre);
     customerEntity.setAddress(address);
     customerEntity.setBirtDate(birtDate);
     customerEntity.setPhone(phone);
