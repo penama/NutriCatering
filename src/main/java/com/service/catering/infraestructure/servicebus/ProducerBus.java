@@ -1,7 +1,6 @@
 package com.service.catering.infraestructure.servicebus;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 
 import com.azure.messaging.servicebus.ServiceBusClientBuilder;
 import com.azure.messaging.servicebus.ServiceBusMessage;
@@ -9,7 +8,7 @@ import com.azure.messaging.servicebus.ServiceBusSenderClient;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.service.catering.application.model.event.EventDto;
 
-//@Service
+// @Service
 public class ProducerBus { // implements IProducerBus {
 
   private final ServiceBusSenderClient sender;
@@ -28,7 +27,7 @@ public class ProducerBus { // implements IProducerBus {
     this.objectMapper = objectMapper;
   }
 
-  //@Override
+  // @Override
   public void sendMessage(EventDto eventDto) {
     try {
       String json = objectMapper.writeValueAsString(eventDto);

@@ -2,14 +2,13 @@ package com.service.catering.infraestructure.servicebus;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 
 import com.azure.messaging.servicebus.*;
 import com.service.catering.application.service.events.SubscribersEventService;
 
 import jakarta.annotation.PostConstruct;
 
-//@Service
+// @Service
 public class SubscriberBus {
 
   @Value("${azure.eventhub.connection-string}")
