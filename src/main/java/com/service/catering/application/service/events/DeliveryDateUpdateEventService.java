@@ -1,11 +1,11 @@
 package com.service.catering.application.service.events;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.service.catering.application.model.event.EventDto;
 import com.service.catering.domain.model.CustomerAddressEntity;
 import com.service.catering.infraestructure.event.update.ICreatedCustomerAddressRepository;
-import org.springframework.stereotype.Service;
 
 @Service
 public class DeliveryDateUpdateEventService {

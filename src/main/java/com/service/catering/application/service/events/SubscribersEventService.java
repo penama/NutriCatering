@@ -16,37 +16,32 @@ public class SubscribersEventService {
   public static final String EVENT_USER_ADRESS_UPDATED = "USER_ADRESS_UPDATED";
   public static final String EVENT_DELIVERY_DATE_UPDATED = "DELIVERY_DATE_UPDATED";
 
-  @Autowired
-  private CustomerCreatedEventService customerCreatedEventService;
-  @Autowired
-  private NutritionalPlanCreatedEventService nutritionalPlanCreatedEventService;
-  @Autowired
-  private CustomerAddressUpdateEventService customerAddressUpdateEventService;
-  @Autowired
-  private DeliveryDateUpdateEventService deliveryDateUpdateEventService;
+  @Autowired private CustomerCreatedEventService customerCreatedEventService;
+  @Autowired private NutritionalPlanCreatedEventService nutritionalPlanCreatedEventService;
+  @Autowired private CustomerAddressUpdateEventService customerAddressUpdateEventService;
+  @Autowired private DeliveryDateUpdateEventService deliveryDateUpdateEventService;
 
   public void procesarMensaje(String mensaje) {
 
     ObjectMapper mapper = new ObjectMapper();
     mapper.registerModule(new JavaTimeModule());
-	  EventDto event = null;
-	  try {
-		  event = mapper.readValue(mensaje, EventDto.class);
-	  } catch (JsonProcessingException e) {
-		  e.printStackTrace();
-	  }
+    EventDto event = null;
+    try {
+      event = mapper.readValue(mensaje, EventDto.class);
+    } catch (JsonProcessingException e) {
+      e.printStackTrace();
+    }
 
-	  if (event.getEventType().equalsIgnoreCase(EVENT_USER_CREATED))
+    if (event.getEventType().equalsIgnoreCase(EVENT_USER_CREATED))
       customerCreatedEventService.customerCreatedEvent(event);
     else if (event.getEventType().equalsIgnoreCase(EVENT_NUTRITIONAL_PLAN_CREATED))
       nutritionalPlanCreatedEventService.customerCreatedEvent(event);
-	else if (event.getEventType().equalsIgnoreCase(EVENT_USER_ADRESS_UPDATED))
+    else if (event.getEventType().equalsIgnoreCase(EVENT_USER_ADRESS_UPDATED))
       customerAddressUpdateEventService.customerAddressUpdatedEvent(event);
-	else if (event.getEventType().equalsIgnoreCase(EVENT_DELIVERY_DATE_UPDATED))
+    else if (event.getEventType().equalsIgnoreCase(EVENT_DELIVERY_DATE_UPDATED))
       deliveryDateUpdateEventService.deliveryDateUpdateUpdateEvent(event);
-	else{
-		System.out.println( "Evento no mapeado: " + mensaje );
-	}
-
+    else {
+      System.out.println("Evento no mapeado: " + mensaje);
+    }
   }
 }
