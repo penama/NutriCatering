@@ -28,7 +28,7 @@ public class CustomerUtilTest {
 
     CustomerEntity customerEntity = new CustomerEntity();
     customerEntity.setId(UUID.randomUUID().toString());
-    customerEntity.setName("Changos");
+    customerEntity.setFullName("Changos");
     customerEntity.setStatus(CustomerStatus.ACTIVE.name());
 
     CustomerUtil contractUtil = new CustomerUtil();
@@ -47,7 +47,7 @@ public class CustomerUtilTest {
 
     CustomerEntity customerEntity = new CustomerEntity();
     customerEntity.setId(UUID.randomUUID().toString());
-    customerEntity.setName("Changos");
+    customerEntity.setFullName("Changos");
     customerEntity.setStatus(CustomerStatus.ACTIVE.name());
     customerEntity.setAddress("por ahi");
     customerEntity.setBirtDate("20/02/2020");
