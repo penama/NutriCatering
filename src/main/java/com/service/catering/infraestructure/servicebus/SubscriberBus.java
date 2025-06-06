@@ -9,7 +9,7 @@ import com.service.catering.application.service.events.SubscribersEventService;
 
 import jakarta.annotation.PostConstruct;
 
-@Service
+//@Service
 public class SubscriberBus {
 
   @Value("${azure.eventhub.connection-string}")
