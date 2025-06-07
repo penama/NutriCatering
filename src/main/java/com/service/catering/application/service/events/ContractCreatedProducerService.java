@@ -11,7 +11,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.service.catering.application.model.event.EventDto;
 import com.service.catering.domain.model.ContractEntity;
+import com.service.catering.domain.model.NutritionalPlanEntity;
 import com.service.catering.domain.model.ProducerEntity;
+import com.service.catering.infraestructure.repositories.interfaces.NutritionalPlanRepository;
 import com.service.catering.infraestructure.repositories.service.ProducerServiceRepository;
 import com.service.catering.infraestructure.utils.DateFormat;
 
@@ -22,6 +24,7 @@ public class ContractCreatedProducerService {
   EventDto eventDto = null;
 
   @Autowired ProducerServiceRepository producerServiceRepository;
+  @Autowired NutritionalPlanRepository nutritionalPlanRepository;
 
   public void contractCreatedProducer(ContractEntity contractEntity) {
     eventDto = new EventDto();
@@ -29,15 +32,19 @@ public class ContractCreatedProducerService {
     eventDto.setEventVersion("1.0");
     eventDto.setTimestamp(DateFormat.toDate());
     eventDto.setSource("contract-service");
-    Map<String, String> body = new HashMap<>();
+    Map<String, Object> body = new HashMap<>();
     body.put("id", contractEntity.getId());
     body.put("createdAt", contractEntity.getCreatedDate());
     body.put("clientId", contractEntity.getCustomerId());
     body.put("nutritionalPlanId", contractEntity.getNutritionalPlanId());
+    NutritionalPlanEntity nutritionalPlanEntity =
+        nutritionalPlanRepository.getReferenceById(contractEntity.nutritionalPlanId);
+    body.put("planDetails", nutritionalPlanEntity.getPlanDetails());
     eventDto.setBody(body);
     // iProducerBus.sendMessage( eventDto );
     ObjectMapper mapper = new ObjectMapper();
     mapper.registerModule(new JavaTimeModule());
+
     // EventDto event = mapper.writeValueAsString( eventDto );
 
     ProducerEntity producerEntity = new ProducerEntity();

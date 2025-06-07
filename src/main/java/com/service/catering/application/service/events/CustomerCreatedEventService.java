@@ -21,11 +21,11 @@ public class CustomerCreatedEventService {
 
   public void customerCreatedEvent(EventDto eventDto) {
     CustomerEntity customerEntity = new CustomerEntity();
-    customerEntity.setId(eventDto.getBody().get(ID));
-    customerEntity.setUserName(eventDto.getBody().get(USERNAME));
-    customerEntity.setEmail(eventDto.getBody().get(EMAIL));
-    customerEntity.setFullName(eventDto.getBody().get(FULLNAME));
-    customerEntity.setCreatedAt(eventDto.getBody().get(CREATEDAT));
+    customerEntity.setId(eventDto.getBody().get(ID).toString());
+    customerEntity.setUserName(eventDto.getBody().get(USERNAME).toString());
+    customerEntity.setEmail(eventDto.getBody().get(EMAIL).toString());
+    customerEntity.setFullName(eventDto.getBody().get(FULLNAME).toString());
+    customerEntity.setCreatedAt(eventDto.getBody().get(CREATEDAT).toString());
 
     customerEntity.setStatus(CustomerStatus.ACTIVE.name());
     iCreatedCustomerRepository.eventCustomerCreated(customerEntity);

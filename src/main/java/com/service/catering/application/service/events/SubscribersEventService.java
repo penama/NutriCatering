@@ -13,8 +13,8 @@ public class SubscribersEventService {
 
   public static final String EVENT_USER_CREATED = "USER_CREATED";
   public static final String EVENT_NUTRITIONAL_PLAN_CREATED = "NUTRITIONAL_PLAN_CREATED";
-  public static final String EVENT_USER_ADRESS_UPDATED = "USER_ADRESS_UPDATED";
-  public static final String EVENT_DELIVERY_DATE_UPDATED = "DELIVERY_DATE_UPDATED";
+  public static final String EVENT_USER_ADRESS_UPDATED = "USER_ADDRESS_UPDATE";
+  public static final String EVENT_DELIVERY_DATE_UPDATED = "DELIVERY_DATE_UPDATE";
 
   @Autowired private CustomerCreatedEventService customerCreatedEventService;
   @Autowired private NutritionalPlanCreatedEventService nutritionalPlanCreatedEventService;
