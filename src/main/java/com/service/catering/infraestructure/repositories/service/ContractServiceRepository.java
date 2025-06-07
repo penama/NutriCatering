@@ -36,4 +36,9 @@ public class ContractServiceRepository implements IQueryContractRepository {
   public ContractEntity queryContractId(String contractId) {
     return repository.findById(contractId).get();
   }
+
+	public void updateContract(ContractEntity contractEntity) {
+		repository.save(contractEntity);
+	}
+
 }

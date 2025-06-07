@@ -1,5 +1,6 @@
 package com.service.catering.domain.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Data;
@@ -16,4 +17,5 @@ public class ContractEntity {
   public float amount;
   public String createdDate;
   public String status;
+  public boolean notifedDispatchedForRecipe;
 }
