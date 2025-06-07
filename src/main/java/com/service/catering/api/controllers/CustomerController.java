@@ -18,13 +18,15 @@ public class CustomerController {
 
   @PostMapping("/customer")
   public ResponseEntity newCustomer(@RequestBody CustomerDto customerDto) {
+    CustomerDto customerDtoResponse = null;
     try {
-      customerService.newCustomer(customerDto);
+      customerDtoResponse = customerService.newCustomer2(customerDto);
+      // customerService.newCustomer(customerDto);
     } catch (Exception e) {
       e.printStackTrace();
       return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
     }
-    return new ResponseEntity(HttpStatus.OK);
+    return new ResponseEntity(customerDtoResponse, HttpStatus.OK);
   }
 
   @GetMapping("/customers")

@@ -16,4 +16,5 @@ public class ContractEntity {
   public float amount;
   public String createdDate;
   public String status;
+  public boolean notifedDispatchedForRecipe;
 }

@@ -26,13 +26,15 @@ public class NutritionalPlanCreatedEventService {
 
   public void customerCreatedEvent(EventDto eventDto) {
     NutritionalPlanEntity nutritionalPlanEntity = new NutritionalPlanEntity();
-    nutritionalPlanEntity.setId(eventDto.getBody().get(ID));
-    nutritionalPlanEntity.setCustomerId(eventDto.getBody().get(CUSTOMER_ID));
-    nutritionalPlanEntity.setNutritionistId(eventDto.getBody().get(NUTRICIONISTA));
+    nutritionalPlanEntity.setId(eventDto.getBody().get(ID).toString());
+    nutritionalPlanEntity.setCustomerId(eventDto.getBody().get(CUSTOMER_ID).toString());
+    nutritionalPlanEntity.setNutritionistId(eventDto.getBody().get(NUTRICIONISTA).toString());
     nutritionalPlanEntity.setDelivered(
-        Boolean.parseBoolean(eventDto.getBody().get(IS_DEVELIVERED)));
-    nutritionalPlanEntity.setNutritionistId(eventDto.getBody().get(ANALYSIS_RESULT_IDS));
-    nutritionalPlanEntity.setPlanDetails(eventDto.getBody().get(PLAN_DETAILS));
+        Boolean.parseBoolean(eventDto.getBody().get(IS_DEVELIVERED).toString()));
+    // List<String> nutritionistId = Arrays.copyOf( eventDto.getBody().get(ANALYSIS_RESULT_IDS), 2
+    // );
+    nutritionalPlanEntity.setNutritionistId(eventDto.getBody().get(ANALYSIS_RESULT_IDS).toString());
+    nutritionalPlanEntity.setPlanDetails(eventDto.getBody().get(PLAN_DETAILS).toString());
 
     iCreatedNutritionalPlanRepository.eventNutritionalPlanCreated(nutritionalPlanEntity);
 
