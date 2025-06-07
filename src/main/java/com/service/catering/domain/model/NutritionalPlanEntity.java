@@ -10,8 +10,10 @@ import lombok.Data;
 public class NutritionalPlanEntity {
 
   @Id public String id;
-  @Column( name = "planDetails", length = 1000)
+
+  @Column(name = "planDetails", length = 1000)
   public String planDetails;
+
   public String nutritionistId;
   public String customerId;
   public boolean isDelivered;

@@ -11,9 +11,6 @@ import com.service.catering.application.service.ContractService;
 import com.service.catering.domain.model.NutritionalPlanEntity;
 import com.service.catering.infraestructure.event.update.ICreatedNutritionalPlanRepository;
 
-import java.util.Arrays;
-import java.util.List;
-
 @Service
 public class NutritionalPlanCreatedEventService {
 
@@ -34,8 +31,9 @@ public class NutritionalPlanCreatedEventService {
     nutritionalPlanEntity.setNutritionistId(eventDto.getBody().get(NUTRICIONISTA).toString());
     nutritionalPlanEntity.setDelivered(
         Boolean.parseBoolean(eventDto.getBody().get(IS_DEVELIVERED).toString()));
-	//List<String> nutritionistId = Arrays.copyOf( eventDto.getBody().get(ANALYSIS_RESULT_IDS), 2 );
-    nutritionalPlanEntity.setNutritionistId(eventDto.getBody().get(ANALYSIS_RESULT_IDS).toString() );
+    // List<String> nutritionistId = Arrays.copyOf( eventDto.getBody().get(ANALYSIS_RESULT_IDS), 2
+    // );
+    nutritionalPlanEntity.setNutritionistId(eventDto.getBody().get(ANALYSIS_RESULT_IDS).toString());
     nutritionalPlanEntity.setPlanDetails(eventDto.getBody().get(PLAN_DETAILS).toString());
 
     iCreatedNutritionalPlanRepository.eventNutritionalPlanCreated(nutritionalPlanEntity);
