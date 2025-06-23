@@ -20,6 +20,8 @@ public class CommandEntitysEventListener implements ApplicationListener<CommandE
 
   @Autowired private OrderServiceRepository orderServiceRepository;
 
+  @Autowired private BillerDataServiceRepository billerDataServiceRepository;
+
   @Override
   public void onApplicationEvent(CommandEntitysEvent event) {
     if (event.getData() instanceof PaymentEntity) {
@@ -57,6 +59,14 @@ public class CommandEntitysEventListener implements ApplicationListener<CommandE
     if (event.getData() instanceof OrderEntity) {
       try {
         orderServiceRepository.newContract((OrderEntity) event.getData());
+      } catch (Exception e) {
+        e.printStackTrace();
+        throw new RuntimeException(e);
+      }
+    }
+    if (event.getData() instanceof BillerDataEntity) {
+      try {
+        billerDataServiceRepository.newBillerData((BillerDataEntity) event.getData());
       } catch (Exception e) {
         e.printStackTrace();
         throw new RuntimeException(e);
