@@ -2,6 +2,7 @@ package com.service.catering.api.controllers;
 
 import java.util.List;
 
+import com.service.catering.application.model.error.ErrorDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +13,7 @@ import com.service.catering.application.service.OrderService;
 
 @RestController
 @RequestMapping("/api/v1/catering")
-public class OrderController {
+public class OrderController extends BaseController{
 
   @Autowired private OrderService orderService;
 
@@ -22,7 +23,8 @@ public class OrderController {
     try {
       orderDtos = orderService.getOrders(contractId);
     } catch (Exception e) {
-      return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+		log.error( this.getClass(), e.getMessage(), e );
+		return new ResponseEntity( new ErrorDto( e.getMessage() ), HttpStatus.INTERNAL_SERVER_ERROR);
     }
     return new ResponseEntity<List<OrderDto>>(orderDtos, HttpStatus.OK);
   }

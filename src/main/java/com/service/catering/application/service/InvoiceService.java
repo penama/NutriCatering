@@ -21,7 +21,7 @@ import com.service.catering.infraestructure.event.update.IGenerateInvoiceDetailR
 import com.service.catering.infraestructure.event.update.IGenerateInvoiceRepository;
 
 @Service
-public class InvoiceService extends BaseService implements IInvoiceServiceGenerate {
+public class InvoiceService extends BaseCommandHandler implements IInvoiceServiceGenerate {
 
   @Autowired private IQueryInvoiceRepository iQueryInvoiceRepository;
 

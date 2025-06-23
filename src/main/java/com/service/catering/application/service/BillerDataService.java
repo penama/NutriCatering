@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.service.catering.application.model.error.ExceptionDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -17,7 +18,7 @@ import com.service.catering.infraestructure.event.querys.IQueryBillerDataReposit
 import com.service.catering.infraestructure.event.update.IUpdateBillerDataRepository;
 
 @Service
-public class BillerDataService extends BaseService implements IBillerDataServiceUpdateData {
+public class BillerDataService extends BaseCommandHandler implements IBillerDataServiceUpdateData {
 
   @Autowired private IQueryBillerDataRepository iQueryBillerDataRepository;
 
@@ -28,6 +29,16 @@ public class BillerDataService extends BaseService implements IBillerDataService
         BillerDataUtil.BillerDataDtoTobillerDataEntity(billerDataDto);
     commandHandler(this, billerDataEntity);
   }
+
+	public BillerDataDto newBillerData2(BillerDataDto billerDataDto) throws Exception {
+		BillerDataEntity billerDataEntity = null;
+		BillerDataDto billerDataDtoNew = null;
+		  billerDataEntity = BillerDataUtil.BillerDataDtoTobillerDataEntity(billerDataDto);
+		  commandHandler(this, billerDataEntity);
+		  billerDataDtoNew = BillerDataUtil.billerDataEntityToBillerDataDto( billerDataEntity );
+
+	  return billerDataDtoNew;
+	}
 
   public List<BillerDataDto> getBillersData() throws Exception {
     List<BillerDataEntity> billerDataEntities = iQueryBillerDataRepository.queryBillersData();

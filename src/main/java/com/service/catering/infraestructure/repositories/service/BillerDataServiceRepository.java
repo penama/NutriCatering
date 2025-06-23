@@ -36,7 +36,6 @@ public class BillerDataServiceRepository
 
   @Override
   public void updateBillersData(BillerDataEntity billerDataEntity) {
-    System.out.println("nit " + billerDataEntity.nit + " email: " + billerDataEntity.email);
     billerDataEntity.createdDate = DateFormat.toDate();
     repository.save(billerDataEntity);
   }

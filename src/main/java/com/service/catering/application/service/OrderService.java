@@ -22,7 +22,7 @@ import com.service.catering.infraestructure.event.querys.IQueryOrderRepository;
 import com.service.catering.infraestructure.event.querys.IQueryPaymentRepository;
 
 @Service
-public class OrderService extends BaseService
+public class OrderService extends BaseCommandHandler
     implements IOrderServiceUpdateStatus, IOrderServiceCreateByContract {
 
   @Autowired private IQueryOrderRepository iQueryOrderRepository;
