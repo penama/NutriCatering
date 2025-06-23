@@ -7,6 +7,5 @@ import lombok.Data;
 @AllArgsConstructor
 public class ErrorDto {
 
-	private String message;
-
+  private String message;
 }

@@ -27,9 +27,9 @@ public class ContractService extends BaseCommandHandler {
 
   @Transactional(propagation = Propagation.REQUIRED)
   public ContractDto newContract2(ContractDto contractDto) throws Exception {
-	// validar campos mandatorios.
+    // validar campos mandatorios.
 
-	// probandos.
+    // probandos.
     ContractEntity contractEntity = ContractUtil.contractDtoToContractEntity(contractDto);
     contractEntity.setStatus(ContractStatus.ACTIVE.name());
     commandHandler(this, contractEntity);
@@ -38,20 +38,20 @@ public class ContractService extends BaseCommandHandler {
     // enviar evento de contrato creado.
     contractCreatedProducerService.contractCreatedProducer(contractEntity);
 
-	return ContractUtil.contractEntityToContractDto( contractEntity );
+    return ContractUtil.contractEntityToContractDto(contractEntity);
   }
 
-	@Transactional(propagation = Propagation.REQUIRED)
-	public void newContract(ContractDto contractDto) throws Exception {
-		// probandos.
-		ContractEntity contractEntity = ContractUtil.contractDtoToContractEntity(contractDto);
-		contractEntity.setStatus(ContractStatus.ACTIVE.name());
-		commandHandler(this, contractEntity);
-		// creando las ordenes.
-		iOrderServiceCreateByContract.generateOrdersForContract(contractEntity.getId());
-		// enviar evento de contrato creado.
-		contractCreatedProducerService.contractCreatedProducer(contractEntity);
-	}
+  @Transactional(propagation = Propagation.REQUIRED)
+  public void newContract(ContractDto contractDto) throws Exception {
+    // probandos.
+    ContractEntity contractEntity = ContractUtil.contractDtoToContractEntity(contractDto);
+    contractEntity.setStatus(ContractStatus.ACTIVE.name());
+    commandHandler(this, contractEntity);
+    // creando las ordenes.
+    iOrderServiceCreateByContract.generateOrdersForContract(contractEntity.getId());
+    // enviar evento de contrato creado.
+    contractCreatedProducerService.contractCreatedProducer(contractEntity);
+  }
 
   public List<ContractDto> getContracts() throws Exception {
     List<ContractEntity> contractEntities = iQueryContractRepository.queryContracts();

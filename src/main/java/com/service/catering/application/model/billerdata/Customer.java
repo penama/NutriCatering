@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 public class Customer {
-  @NotBlank( message = "CustomerId es mandatorio" )
+  @NotBlank(message = "CustomerId es mandatorio")
   public String id;
 }

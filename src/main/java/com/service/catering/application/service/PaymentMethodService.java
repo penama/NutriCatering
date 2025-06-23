@@ -27,13 +27,13 @@ public class PaymentMethodService extends BaseCommandHandler {
     commandHandler(this, paymentMethodEntity);
   }
 
-	public PaymentMethodDto newPaymentMethod2(PaymentMethodDto paymentMethodDto) throws Exception {
-		PaymentMethodEntity paymentMethodEntity =
-			PaymentMethodUtil.paymentMethodDtoToPaymentMethodEntity(paymentMethodDto);
-		paymentMethodEntity.status = PaymentMethodStatus.ACTIVE.name();
-		commandHandler(this, paymentMethodEntity);
-		return PaymentMethodUtil.paymentEntityToPaymentMethodDto( paymentMethodEntity );
-	}
+  public PaymentMethodDto newPaymentMethod2(PaymentMethodDto paymentMethodDto) throws Exception {
+    PaymentMethodEntity paymentMethodEntity =
+        PaymentMethodUtil.paymentMethodDtoToPaymentMethodEntity(paymentMethodDto);
+    paymentMethodEntity.status = PaymentMethodStatus.ACTIVE.name();
+    commandHandler(this, paymentMethodEntity);
+    return PaymentMethodUtil.paymentEntityToPaymentMethodDto(paymentMethodEntity);
+  }
 
   public List<PaymentMethodDto> getPaymentMethods() throws Exception {
     List<PaymentMethodEntity> paymentMethodEntities =

@@ -2,7 +2,6 @@ package com.service.catering.application.service.events;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,8 +37,11 @@ public class ContractCreatedProducerService {
     body.put("createdAt", contractEntity.getCreatedDate());
     body.put("clientId", contractEntity.getCustomerId());
     body.put("nutritionalPlanId", contractEntity.getNutritionalPlanId());
-    NutritionalPlanEntity nutritionalPlanEntity = nutritionalPlanRepository.findById(contractEntity.nutritionalPlanId).orElse(null);
-    body.put("planDetails", ( nutritionalPlanEntity == null ? "null" : nutritionalPlanEntity.getPlanDetails() ) );
+    NutritionalPlanEntity nutritionalPlanEntity =
+        nutritionalPlanRepository.findById(contractEntity.nutritionalPlanId).orElse(null);
+    body.put(
+        "planDetails",
+        (nutritionalPlanEntity == null ? "null" : nutritionalPlanEntity.getPlanDetails()));
     eventDto.setBody(body);
     // iProducerBus.sendMessage( eventDto );
     ObjectMapper mapper = new ObjectMapper();

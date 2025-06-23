@@ -70,44 +70,44 @@ public class PaymentService extends BaseCommandHandler {
     contractDispatchedForRecipeProducerService.contractDispatchedForRecipeProducer(paymentEntity);
   }
 
-	@Transactional(propagation = Propagation.REQUIRED)
-	public PaymentDto newPayment2(PaymentDto paymentDto) throws Exception {
-		PaymentEntity paymentEntity = PaymentUtil.paymentDtoToPaymentEntity(paymentDto);
-		paymentEntity.setStatus(PaymentStatus.PAID.name());
-		commandHandler(this, paymentEntity);
-		iOrderServiceUpdateStatus.actualizarStatus(paymentEntity.getOrderId());
-		iBillerDataServiceUpdateData.updateBillerData(
-			paymentDto.getBillingInvoice().getCustomerId(),
-			paymentDto.getBillingInvoice().getBillerData().getSocialReason(),
-			paymentDto.getBillingInvoice().getBillerData().getNit(),
-			paymentDto.getBillingInvoice().getBillerData().getEmail());
+  @Transactional(propagation = Propagation.REQUIRED)
+  public PaymentDto newPayment2(PaymentDto paymentDto) throws Exception {
+    PaymentEntity paymentEntity = PaymentUtil.paymentDtoToPaymentEntity(paymentDto);
+    paymentEntity.setStatus(PaymentStatus.PAID.name());
+    commandHandler(this, paymentEntity);
+    iOrderServiceUpdateStatus.actualizarStatus(paymentEntity.getOrderId());
+    iBillerDataServiceUpdateData.updateBillerData(
+        paymentDto.getBillingInvoice().getCustomerId(),
+        paymentDto.getBillingInvoice().getBillerData().getSocialReason(),
+        paymentDto.getBillingInvoice().getBillerData().getNit(),
+        paymentDto.getBillingInvoice().getBillerData().getEmail());
 
-		InvoiceDto invoiceDto = new InvoiceDto();
-		invoiceDto.setCustomerSocialReason(
-			paymentDto.getBillingInvoice().getBillerData().getSocialReason());
-		invoiceDto.setCustomerNit(paymentDto.getBillingInvoice().getBillerData().getNit());
-		invoiceDto.setCustomerEmail(paymentDto.getBillingInvoice().getBillerData().getEmail());
-		invoiceDto.setTotal(paymentDto.getPrice().getAmount());
-		invoiceDto.setPaymentId(paymentDto.getId());
-		invoiceDto.setCurrency(paymentDto.getPrice().getCurrency());
+    InvoiceDto invoiceDto = new InvoiceDto();
+    invoiceDto.setCustomerSocialReason(
+        paymentDto.getBillingInvoice().getBillerData().getSocialReason());
+    invoiceDto.setCustomerNit(paymentDto.getBillingInvoice().getBillerData().getNit());
+    invoiceDto.setCustomerEmail(paymentDto.getBillingInvoice().getBillerData().getEmail());
+    invoiceDto.setTotal(paymentDto.getPrice().getAmount());
+    invoiceDto.setPaymentId(paymentDto.getId());
+    invoiceDto.setCurrency(paymentDto.getPrice().getCurrency());
 
-		InvoiceDetail invoiceDetail = new InvoiceDetail();
-		invoiceDetail.setAmount(1);
-		invoiceDetail.setConcepts("PlanCatering");
-		invoiceDetail.setDescription("PlanCatering");
-		invoiceDetail.setCurrency(paymentDto.getPrice().getCurrency());
-		invoiceDetail.setDiscount(0);
-		invoiceDetail.setUnitPrice(paymentDto.getPrice().getAmount());
-		invoiceDetail.setSubtotal(paymentDto.getPrice().getAmount());
+    InvoiceDetail invoiceDetail = new InvoiceDetail();
+    invoiceDetail.setAmount(1);
+    invoiceDetail.setConcepts("PlanCatering");
+    invoiceDetail.setDescription("PlanCatering");
+    invoiceDetail.setCurrency(paymentDto.getPrice().getCurrency());
+    invoiceDetail.setDiscount(0);
+    invoiceDetail.setUnitPrice(paymentDto.getPrice().getAmount());
+    invoiceDetail.setSubtotal(paymentDto.getPrice().getAmount());
 
-		invoiceDto.addInvoiceDetail(invoiceDetail);
+    invoiceDto.addInvoiceDetail(invoiceDetail);
 
-		iInvoiceServiceGenerate.generateInvoice(invoiceDto);
+    iInvoiceServiceGenerate.generateInvoice(invoiceDto);
 
-		contractDispatchedForRecipeProducerService.contractDispatchedForRecipeProducer(paymentEntity);
+    contractDispatchedForRecipeProducerService.contractDispatchedForRecipeProducer(paymentEntity);
 
-		return PaymentUtil.paymentEntityToPaymentDto( paymentEntity );
-	}
+    return PaymentUtil.paymentEntityToPaymentDto(paymentEntity);
+  }
 
   public List<PaymentDto> getPayments() throws Exception {
     List<PaymentEntity> paymentEntities = iQueryPaymentRepository.queryPayment();

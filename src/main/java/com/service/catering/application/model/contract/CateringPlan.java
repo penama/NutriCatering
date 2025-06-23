@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 public class CateringPlan {
 
-	@NotBlank( message = "CateringPlan es mandatorio" )
+  @NotBlank(message = "CateringPlan es mandatorio")
   public String id;
 }
