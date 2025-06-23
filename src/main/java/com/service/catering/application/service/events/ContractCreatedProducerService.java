@@ -38,8 +38,10 @@ public class ContractCreatedProducerService {
     body.put("clientId", contractEntity.getCustomerId());
     body.put("nutritionalPlanId", contractEntity.getNutritionalPlanId());
     NutritionalPlanEntity nutritionalPlanEntity =
-        nutritionalPlanRepository.getReferenceById(contractEntity.nutritionalPlanId);
-    body.put("planDetails", nutritionalPlanEntity.getPlanDetails());
+        nutritionalPlanRepository.findById(contractEntity.nutritionalPlanId).orElse(null);
+    body.put(
+        "planDetails",
+        (nutritionalPlanEntity == null ? "null" : nutritionalPlanEntity.getPlanDetails()));
     eventDto.setBody(body);
     // iProducerBus.sendMessage( eventDto );
     ObjectMapper mapper = new ObjectMapper();

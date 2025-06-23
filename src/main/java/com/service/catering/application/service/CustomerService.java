@@ -13,7 +13,7 @@ import com.service.catering.domain.model.CustomerEntity;
 import com.service.catering.infraestructure.event.querys.IQueryCustomerRepository;
 
 @Service
-public class CustomerService extends BaseService {
+public class CustomerService extends BaseCommandHandler {
 
   @Autowired private IQueryCustomerRepository iQueryCustomerRepository;
 

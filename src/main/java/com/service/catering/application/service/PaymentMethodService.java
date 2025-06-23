@@ -13,7 +13,7 @@ import com.service.catering.domain.model.PaymentMethodEntity;
 import com.service.catering.infraestructure.event.querys.IQueryPaymentMethodRepository;
 
 @Service
-public class PaymentMethodService extends BaseService {
+public class PaymentMethodService extends BaseCommandHandler {
 
   @Autowired private IQueryPaymentMethodRepository iQueryPaymentMethodRepository;
 
@@ -25,6 +25,14 @@ public class PaymentMethodService extends BaseService {
     // paymentMethodEntity);
     //        applicationEventPublisher.publishEvent( commandEntitysEvent );
     commandHandler(this, paymentMethodEntity);
+  }
+
+  public PaymentMethodDto newPaymentMethod2(PaymentMethodDto paymentMethodDto) throws Exception {
+    PaymentMethodEntity paymentMethodEntity =
+        PaymentMethodUtil.paymentMethodDtoToPaymentMethodEntity(paymentMethodDto);
+    paymentMethodEntity.status = PaymentMethodStatus.ACTIVE.name();
+    commandHandler(this, paymentMethodEntity);
+    return PaymentMethodUtil.paymentEntityToPaymentMethodDto(paymentMethodEntity);
   }
 
   public List<PaymentMethodDto> getPaymentMethods() throws Exception {

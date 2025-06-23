@@ -17,13 +17,29 @@ import com.service.catering.domain.model.ContractEntity;
 import com.service.catering.infraestructure.event.querys.IQueryContractRepository;
 
 @Service
-public class ContractService extends BaseService {
+public class ContractService extends BaseCommandHandler {
 
   @Autowired private IQueryContractRepository iQueryContractRepository;
 
   @Autowired private IOrderServiceCreateByContract iOrderServiceCreateByContract;
 
   @Autowired private ContractCreatedProducerService contractCreatedProducerService;
+
+  @Transactional(propagation = Propagation.REQUIRED)
+  public ContractDto newContract2(ContractDto contractDto) throws Exception {
+    // validar campos mandatorios.
+
+    // probandos.
+    ContractEntity contractEntity = ContractUtil.contractDtoToContractEntity(contractDto);
+    contractEntity.setStatus(ContractStatus.ACTIVE.name());
+    commandHandler(this, contractEntity);
+    // creando las ordenes.
+    iOrderServiceCreateByContract.generateOrdersForContract(contractEntity.getId());
+    // enviar evento de contrato creado.
+    contractCreatedProducerService.contractCreatedProducer(contractEntity);
+
+    return ContractUtil.contractEntityToContractDto(contractEntity);
+  }
 
   @Transactional(propagation = Propagation.REQUIRED)
   public void newContract(ContractDto contractDto) throws Exception {

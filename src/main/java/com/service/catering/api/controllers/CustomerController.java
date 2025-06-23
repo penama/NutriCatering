@@ -8,11 +8,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.service.catering.application.model.customer.CustomerDto;
+import com.service.catering.application.model.error.ErrorDto;
 import com.service.catering.application.service.CustomerService;
 
 @RestController
 @RequestMapping("/api/v1/catering")
-public class CustomerController {
+public class CustomerController extends BaseController {
 
   @Autowired private CustomerService customerService;
 
@@ -21,10 +22,9 @@ public class CustomerController {
     CustomerDto customerDtoResponse = null;
     try {
       customerDtoResponse = customerService.newCustomer2(customerDto);
-      // customerService.newCustomer(customerDto);
     } catch (Exception e) {
-      e.printStackTrace();
-      return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+      log.error(this.getClass(), e.getMessage(), e);
+      return new ResponseEntity(new ErrorDto(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
     }
     return new ResponseEntity(customerDtoResponse, HttpStatus.OK);
   }
@@ -35,8 +35,8 @@ public class CustomerController {
     try {
       customerDtos = customerService.getCustomers();
     } catch (Exception e) {
-      e.printStackTrace();
-      return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+      log.error(this.getClass(), e.getMessage(), e);
+      return new ResponseEntity(new ErrorDto(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
     }
     return new ResponseEntity<List<CustomerDto>>(customerDtos, HttpStatus.OK);
   }
@@ -49,8 +49,8 @@ public class CustomerController {
       if (customerDto == null)
         return new ResponseEntity<CustomerDto>(customerDto, HttpStatus.NOT_FOUND);
     } catch (Exception e) {
-      e.printStackTrace();
-      return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+      log.error(this.getClass(), e.getMessage(), e);
+      return new ResponseEntity(new ErrorDto(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
     }
     return new ResponseEntity<CustomerDto>(customerDto, HttpStatus.OK);
   }

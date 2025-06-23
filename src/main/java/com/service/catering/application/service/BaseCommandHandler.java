@@ -5,7 +5,7 @@ import org.springframework.context.ApplicationEventPublisher;
 
 import com.service.catering.infraestructure.event.command.CommandEntitysEvent;
 
-public abstract class BaseService {
+public abstract class BaseCommandHandler {
 
   @Autowired protected ApplicationEventPublisher applicationEventPublisher;
 

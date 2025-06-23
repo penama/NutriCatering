@@ -8,23 +8,28 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.service.catering.application.model.billerdata.BillerDataDto;
+import com.service.catering.application.model.error.ErrorDto;
 import com.service.catering.application.service.BillerDataService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/catering")
-public class BillerDataController {
+public class BillerDataController extends BaseController {
 
   @Autowired private BillerDataService billerDataService;
 
   @PostMapping("/billerData")
-  public ResponseEntity newBillerData(@RequestBody BillerDataDto billerDataDto) {
+  public ResponseEntity newBillerData(@Valid @RequestBody BillerDataDto billerDataDto) {
+    BillerDataDto billerDataDtoNew = null;
     try {
-      billerDataService.newBillerData(billerDataDto);
+      billerDataDtoNew = billerDataService.newBillerData2(billerDataDto);
     } catch (Exception e) {
-      e.printStackTrace();
-      return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+      ErrorDto errorDto = new ErrorDto(e.getMessage());
+      log.error(this.getClass(), e.getMessage(), e);
+      return ResponseEntity.internalServerError().body(errorDto);
     }
-    return new ResponseEntity(HttpStatus.OK);
+    return new ResponseEntity(billerDataDtoNew, HttpStatus.OK);
   }
 
   @GetMapping("/billersData")
@@ -33,7 +38,8 @@ public class BillerDataController {
     try {
       billerDataDtos = billerDataService.getBillersData();
     } catch (Exception e) {
-      return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+      log.error(this.getClass(), e.getMessage(), e);
+      return new ResponseEntity(new ErrorDto(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
     }
     return new ResponseEntity<List<BillerDataDto>>(billerDataDtos, HttpStatus.OK);
   }

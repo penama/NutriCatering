@@ -7,24 +7,26 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.service.catering.application.model.error.ErrorDto;
 import com.service.catering.application.model.payment.PaymentDto;
 import com.service.catering.application.service.PaymentService;
 
 @RestController
 @RequestMapping("/api/v1/catering")
-public class PaymentController {
+public class PaymentController extends BaseController {
 
   @Autowired private PaymentService paymentService;
 
   @PostMapping("/payment")
   public ResponseEntity newPayment(@RequestBody PaymentDto paymentDto) {
+    PaymentDto paymentDtoNew = null;
     try {
-      paymentService.newPayment(paymentDto);
+      paymentDtoNew = paymentService.newPayment2(paymentDto);
     } catch (Exception e) {
-      e.printStackTrace();
-      return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+      log.error(this.getClass(), e.getMessage(), e);
+      return new ResponseEntity(new ErrorDto(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
     }
-    return new ResponseEntity(HttpStatus.OK);
+    return new ResponseEntity(paymentDtoNew, HttpStatus.OK);
   }
 
   @GetMapping("/payments")
@@ -33,7 +35,8 @@ public class PaymentController {
     try {
       paymentDtos = paymentService.getPayments();
     } catch (Exception e) {
-      return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+      log.error(this.getClass(), e.getMessage(), e);
+      return new ResponseEntity(new ErrorDto(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
     }
     return new ResponseEntity<List<PaymentDto>>(paymentDtos, HttpStatus.OK);
   }
@@ -44,7 +47,8 @@ public class PaymentController {
     try {
       paymentDtos = paymentService.getPaymentsByOrderId(orderId);
     } catch (Exception e) {
-      return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+      log.error(this.getClass(), e.getMessage(), e);
+      return new ResponseEntity(new ErrorDto(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
     }
     return new ResponseEntity<List<PaymentDto>>(paymentDtos, HttpStatus.OK);
   }

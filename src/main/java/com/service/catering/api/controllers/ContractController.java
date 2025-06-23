@@ -8,46 +8,37 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.service.catering.application.model.contract.ContractDto;
+import com.service.catering.application.model.error.ErrorDto;
 import com.service.catering.application.service.ContractService;
 
-import io.sentry.Sentry;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/catering")
-public class ContractController {
+public class ContractController extends BaseController {
 
   @Autowired private ContractService contractService;
 
   @PostMapping("/contract")
-  public ResponseEntity newContract(@RequestBody ContractDto contractDto) {
+  public ResponseEntity newContract(@Valid @RequestBody ContractDto contractDto) {
+    ContractDto contractDtoNew = null;
     try {
-      Sentry.captureMessage("Create newContract");
-      contractService.newContract(contractDto);
+      contractDtoNew = contractService.newContract2(contractDto);
     } catch (Exception e) {
-      Sentry.captureException(e);
-      e.printStackTrace();
-      return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+      log.error(this.getClass(), e.getMessage(), e);
+      return new ResponseEntity(new ErrorDto(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
     }
-    return new ResponseEntity(HttpStatus.OK);
+    return new ResponseEntity(contractDtoNew, HttpStatus.OK);
   }
 
   @GetMapping("/contracts")
   public ResponseEntity<List<ContractDto>> getContracts() {
     List<ContractDto> contractDtos = null;
-
     try {
-      throw new Exception("This is a test.");
-    } catch (Exception e) {
-      Sentry.captureException(e);
-      e.printStackTrace();
-    }
-
-    try {
-      Sentry.captureMessage("list Contracts");
       contractDtos = contractService.getContracts();
     } catch (Exception e) {
-      Sentry.captureException(e);
-      return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+      log.error(this.getClass(), e.getMessage(), e);
+      return new ResponseEntity(new ErrorDto(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
     }
     return new ResponseEntity<List<ContractDto>>(contractDtos, HttpStatus.OK);
   }
@@ -56,11 +47,10 @@ public class ContractController {
   public ResponseEntity<ContractDto> getContractId(@PathVariable String contractId) {
     ContractDto contractDto = null;
     try {
-      Sentry.captureMessage("get Contract ID");
       contractDto = contractService.getContract(contractId);
     } catch (Exception e) {
-      Sentry.captureException(e);
-      return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+      log.error(this.getClass(), e.getMessage(), e);
+      return new ResponseEntity(new ErrorDto(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
     }
     return new ResponseEntity<ContractDto>(contractDto, HttpStatus.OK);
   }
@@ -68,12 +58,12 @@ public class ContractController {
   @GetMapping("/customer/{customerId}/contracts")
   public ResponseEntity<List<ContractDto>> getContractsByCustomerId(
       @PathVariable String customerId) {
-    Sentry.captureMessage("get Contract for Customer ID");
     List<ContractDto> contractDtos = null;
     try {
       contractDtos = contractService.getContractsByCustomerId(customerId);
     } catch (Exception e) {
-      return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+      log.error(this.getClass(), e.getMessage(), e);
+      return new ResponseEntity(new ErrorDto(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
     }
     return new ResponseEntity<List<ContractDto>>(contractDtos, HttpStatus.OK);
   }
