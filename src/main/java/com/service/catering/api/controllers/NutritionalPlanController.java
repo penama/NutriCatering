@@ -1,14 +1,15 @@
 package com.service.catering.api.controllers;
 
-import com.service.catering.application.model.nutritionalplan.NutritionalPlanDto;
-import com.service.catering.application.model.error.ErrorDto;
-import com.service.catering.application.service.NutritionalPlanService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import com.service.catering.application.model.error.ErrorDto;
+import com.service.catering.application.model.nutritionalplan.NutritionalPlanDto;
+import com.service.catering.application.service.NutritionalPlanService;
 
 @RestController
 @RequestMapping("/api/v1/catering")
@@ -18,9 +19,9 @@ public class NutritionalPlanController extends BaseController {
 
   @PostMapping("/nutritionalplan")
   public ResponseEntity newNutritionalPlan(@RequestBody NutritionalPlanDto nutritionalPlanDto) {
-	  NutritionalPlanDto nutritionalPlanDtoNew = null;
+    NutritionalPlanDto nutritionalPlanDtoNew = null;
     try {
-		nutritionalPlanDtoNew = nutritionalPlanService.newNutritionalPlan( nutritionalPlanDto );
+      nutritionalPlanDtoNew = nutritionalPlanService.newNutritionalPlan(nutritionalPlanDto);
     } catch (Exception e) {
       log.error(this.getClass(), e.getMessage(), e);
       return new ResponseEntity(new ErrorDto(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -32,7 +33,7 @@ public class NutritionalPlanController extends BaseController {
   public ResponseEntity<List<NutritionalPlanDto>> getNutritionalPlan() {
     List<NutritionalPlanDto> nutritionalPlanDtos = null;
     try {
-		nutritionalPlanDtos = nutritionalPlanService.getNutritionalPlan();
+      nutritionalPlanDtos = nutritionalPlanService.getNutritionalPlan();
     } catch (Exception e) {
       log.error(this.getClass(), e.getMessage(), e);
       return new ResponseEntity(new ErrorDto(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);

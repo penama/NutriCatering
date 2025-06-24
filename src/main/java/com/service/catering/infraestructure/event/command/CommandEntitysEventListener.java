@@ -74,14 +74,15 @@ public class CommandEntitysEventListener implements ApplicationListener<CommandE
         throw new RuntimeException(e);
       }
     }
-	  if (event.getData() instanceof NutritionalPlanEntity) {
-		  try {
-			  nutritionalPlanServiceRepository.newNutritionalPlan( (NutritionalPlanEntity) event.getData());
-		  } catch (Exception e) {
-			  e.printStackTrace();
-			  throw new RuntimeException(e);
-		  }
-	  }
+    if (event.getData() instanceof NutritionalPlanEntity) {
+      try {
+        nutritionalPlanServiceRepository.newNutritionalPlan(
+            (NutritionalPlanEntity) event.getData());
+      } catch (Exception e) {
+        e.printStackTrace();
+        throw new RuntimeException(e);
+      }
+    }
   }
 
   @Override
