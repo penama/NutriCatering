@@ -17,7 +17,7 @@ public class NutritionalPlanController extends BaseController {
 
   @Autowired private NutritionalPlanService nutritionalPlanService;
 
-  @PostMapping("/nutritionalplan")
+  @PostMapping("/nutriplan")
   public ResponseEntity newNutritionalPlan(@RequestBody NutritionalPlanDto nutritionalPlanDto) {
     NutritionalPlanDto nutritionalPlanDtoNew = null;
     try {
@@ -29,7 +29,7 @@ public class NutritionalPlanController extends BaseController {
     return new ResponseEntity(nutritionalPlanDtoNew, HttpStatus.OK);
   }
 
-  @GetMapping("/nutritionalplans")
+  @GetMapping("/nutriplans")
   public ResponseEntity<List<NutritionalPlanDto>> getNutritionalPlan() {
     List<NutritionalPlanDto> nutritionalPlanDtos = null;
     try {
