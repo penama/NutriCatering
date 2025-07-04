@@ -2,7 +2,7 @@ FROM openjdk:21-jdk-slim
 
 WORKDIR /app
 
-COPY target/NutriCatering-0.0.1-SNAPSHOT.jar app.jar
+COPY target/*.jar app.jar
 
 ENV SERVER_PORT=8090
 ENV SPRING_PROFILES_ACTIVE=dev
