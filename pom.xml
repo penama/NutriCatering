@@ -272,16 +272,6 @@
 						<phase>compile</phase>
 					</execution>
 				</executions>
-<!--				<executions>-->
-<!--					<execution>-->
-<!--						<id>format</id>-->
-<!--						<phase>process-sources</phase>-->
-<!--						<goals>-->
-<!--							<goal>check</goal>-->
-<!--							<goal>apply</goal>-->
-<!--						</goals>-->
-<!--					</execution>-->
-<!--				</executions>-->
 			</plugin>
 
 
@@ -320,9 +310,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
-
         </plugins>
     </build>
-
 </project>
