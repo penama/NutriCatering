@@ -5,7 +5,9 @@ import java.util.Collections;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import com.microsoft.applicationinsights.TelemetryClient;
 import org.slf4j.MDC;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.util.ContentCachingRequestWrapper;
@@ -24,6 +26,9 @@ public class LoggingInterceptor implements HandlerInterceptor {
   public LoggingInterceptor(ObjectMapper objectMapper) {
     this.objectMapper = objectMapper;
   }
+
+	@Autowired
+	private TelemetryClient telemetryClient;
 
   @Override
   public boolean preHandle(
@@ -55,8 +60,10 @@ public class LoggingInterceptor implements HandlerInterceptor {
 
     if (status >= 200 && status < 300) {
       org.slf4j.LoggerFactory.getLogger("CentralLogger").info(logEntry);
+	  telemetryClient.trackTrace("T > " + logEntry);
     } else {
       org.slf4j.LoggerFactory.getLogger("CentralLogger").error(logEntry);
+		telemetryClient.trackTrace("T > " + logEntry);
     }
 
     MDC.remove("traceId");
