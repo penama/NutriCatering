@@ -1,6 +1,5 @@
 package com.service.catering.infraestructure.servicebus;
 
-import com.service.catering.application.service.BaseService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +9,7 @@ import com.azure.messaging.eventhubs.EventHubClientBuilder;
 import com.azure.messaging.eventhubs.EventHubProducerClient;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.service.catering.application.model.event.EventDto;
+import com.service.catering.application.service.BaseService;
 
 @Service
 public class ProducerEventHub extends BaseService implements IProducerBus {
@@ -49,7 +49,7 @@ public class ProducerEventHub extends BaseService implements IProducerBus {
     }
     if (batch.getCount() > 0) {
       producer.send(batch);
-	  log.info( this.getClass(), "Evento enviado: " + json );
+      log.info(this.getClass(), "Evento enviado: " + json);
     }
   }
 }

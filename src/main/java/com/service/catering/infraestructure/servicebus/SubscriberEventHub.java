@@ -1,6 +1,5 @@
 package com.service.catering.infraestructure.servicebus;
 
-import com.service.catering.application.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -9,6 +8,7 @@ import com.azure.messaging.eventhubs.EventHubClientBuilder;
 import com.azure.messaging.eventhubs.EventHubConsumerAsyncClient;
 import com.azure.messaging.eventhubs.models.EventPosition;
 import com.azure.messaging.eventhubs.models.PartitionEvent;
+import com.service.catering.application.service.BaseService;
 import com.service.catering.application.service.events.SubscribersEventService;
 
 import jakarta.annotation.PostConstruct;
@@ -49,12 +49,12 @@ public class SubscriberEventHub extends BaseService {
 
   private void handleEvent(PartitionEvent event) {
     String body = event.getData().getBodyAsString();
-	log.info( this.getClass(), "Evento recibido: " + body );
-//    System.out.println(
-//        "Evento recibido en partición "
-//            + event.getPartitionContext().getPartitionId()
-//            + ": "
-//            + body);
+    log.info(this.getClass(), "Evento recibido: " + body);
+    //    System.out.println(
+    //        "Evento recibido en partición "
+    //            + event.getPartitionContext().getPartitionId()
+    //            + ": "
+    //            + body);
     subscribersEventService.procesarMensaje(body);
 
     // Deserialización y lógica de dominio va acá
