@@ -7,9 +7,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.service.catering.application.model.event.EventDto;
+import com.service.catering.application.service.BaseService;
 
 @Service
-public class SubscribersEventService {
+public class SubscribersEventService extends BaseService {
 
   public static final String EVENT_USER_CREATED = "USER_CREATED";
   public static final String EVENT_NUTRITIONAL_PLAN_CREATED = "NUTRITIONAL_PLAN_CREATED";
@@ -41,7 +42,7 @@ public class SubscribersEventService {
     else if (event.getEventType().equalsIgnoreCase(EVENT_DELIVERY_DATE_UPDATED))
       deliveryDateUpdateEventService.deliveryDateUpdateUpdateEvent(event);
     else {
-      System.out.println("Evento no mapeado: " + mensaje);
+      log.info(this.getClass(), "Evento no mapeado: " + mensaje);
     }
   }
 }
