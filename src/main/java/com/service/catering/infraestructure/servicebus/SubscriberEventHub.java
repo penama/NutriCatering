@@ -8,12 +8,13 @@ import com.azure.messaging.eventhubs.EventHubClientBuilder;
 import com.azure.messaging.eventhubs.EventHubConsumerAsyncClient;
 import com.azure.messaging.eventhubs.models.EventPosition;
 import com.azure.messaging.eventhubs.models.PartitionEvent;
+import com.service.catering.application.service.BaseService;
 import com.service.catering.application.service.events.SubscribersEventService;
 
 import jakarta.annotation.PostConstruct;
 
 @Service
-public class SubscriberEventHub {
+public class SubscriberEventHub extends BaseService {
 
   @Autowired private SubscribersEventService subscribersEventService;
   private final EventHubConsumerAsyncClient consumer;
@@ -48,11 +49,12 @@ public class SubscriberEventHub {
 
   private void handleEvent(PartitionEvent event) {
     String body = event.getData().getBodyAsString();
-    System.out.println(
-        "Evento recibido en partición "
-            + event.getPartitionContext().getPartitionId()
-            + ": "
-            + body);
+    log.info(this.getClass(), "Evento recibido: " + body);
+    //    System.out.println(
+    //        "Evento recibido en partición "
+    //            + event.getPartitionContext().getPartitionId()
+    //            + ": "
+    //            + body);
     subscribersEventService.procesarMensaje(body);
 
     // Deserialización y lógica de dominio va acá

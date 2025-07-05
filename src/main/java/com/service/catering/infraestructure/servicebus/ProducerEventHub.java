@@ -9,9 +9,10 @@ import com.azure.messaging.eventhubs.EventHubClientBuilder;
 import com.azure.messaging.eventhubs.EventHubProducerClient;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.service.catering.application.model.event.EventDto;
+import com.service.catering.application.service.BaseService;
 
 @Service
-public class ProducerEventHub implements IProducerBus {
+public class ProducerEventHub extends BaseService implements IProducerBus {
 
   private final EventHubProducerClient producer;
   private final ObjectMapper objectMapper;
@@ -48,7 +49,7 @@ public class ProducerEventHub implements IProducerBus {
     }
     if (batch.getCount() > 0) {
       producer.send(batch);
-      System.out.println("Evento enviado: " + json);
+      log.info(this.getClass(), "Evento enviado: " + json);
     }
   }
 }
