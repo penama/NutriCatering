@@ -29,13 +29,19 @@ public class LoggingInterceptor implements HandlerInterceptor {
 
   @Autowired private TelemetryClient telemetryClient;
 
-  @Override
-  public boolean preHandle(
-      HttpServletRequest request, HttpServletResponse response, Object handler) {
-    String traceId = UUID.randomUUID().toString();
-    MDC.put("traceId", traceId);
-    return true;
-  }
+//  @Override
+//  public boolean preHandle(
+//      HttpServletRequest request, HttpServletResponse response, Object handler) {
+//    String traceId = UUID.randomUUID().toString();
+//    MDC.put("traceId", traceId);
+//    return true;
+//  }
+
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+		MDC.put("traceId", request.getHeader("request-id"));
+		return true;
+	}
 
   @Override
   public void afterCompletion(

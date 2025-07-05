@@ -1,5 +1,6 @@
 package com.service.catering.application.service.events;
 
+import com.service.catering.application.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.service.catering.application.model.event.EventDto;
 
 @Service
-public class SubscribersEventService {
+public class SubscribersEventService extends BaseService {
 
   public static final String EVENT_USER_CREATED = "USER_CREATED";
   public static final String EVENT_NUTRITIONAL_PLAN_CREATED = "NUTRITIONAL_PLAN_CREATED";
@@ -41,7 +42,7 @@ public class SubscribersEventService {
     else if (event.getEventType().equalsIgnoreCase(EVENT_DELIVERY_DATE_UPDATED))
       deliveryDateUpdateEventService.deliveryDateUpdateUpdateEvent(event);
     else {
-      System.out.println("Evento no mapeado: " + mensaje);
+		log.info( this.getClass(), "Evento no mapeado: " + mensaje );
     }
   }
 }
